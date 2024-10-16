@@ -1,35 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import AppBar from './Components/Appbar';
+import ProductForm from './Components/ProductForm';
+import ProductList from './Components/ProductList';
+import { CartProvider } from './Context/CartContext';
+import Cart from './Components/Cart';
+import './Styles/App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+/* El App llamamos a los demas componentes para ser usados en la pagina */
 
+const App: React.FC = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <CartProvider>
+      <div className="App">
+        <AppBar />
+        <ProductForm />
+        <ProductList />
+        <Cart />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </CartProvider>
+  );
+};
+
 
 export default App
