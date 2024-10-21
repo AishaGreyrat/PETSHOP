@@ -5,9 +5,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { db } from '../../firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 
+/* Personalizacion del zod para mensajes */
+
 const productSchema = z.object({
   name: z.string().min(1, { message: "Se requiere el nombre del producto" }),
-  price: z.number().min(0.01, { message: "El precio debe ser superior a 0" }),
+  price: z
+    .number({ invalid_type_error: "El precio debe ser un número válido" })
+    .min(0.01, { message: "El precio debe ser superior a 0" }),
 });
 
 type ProductFormData = z.infer<typeof productSchema>;
