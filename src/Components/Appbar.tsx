@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/AppBar.css';
+import '../Styles/Appbar.css';
 
 /* Se añadieoron las rutas con el plugin de react-router-dom */
 
@@ -19,6 +19,12 @@ const AppBar: React.FC = () => {
           </li>
           <li>
             <Link to="/cart">Tu Carrito</Link>
+          </li>
+          <li>
+            <Link to="/login">Iniciar sesion</Link>
+          </li>
+          <li>
+            <Link to="/register">Registrar</Link>
           </li>
         </ul>
       </nav>
