@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .app-bar {
   background-color: #0052cc;
   padding: 1rem;
@@ -47,4 +48,53 @@
 .icon {
   height: 24px;
   cursor: pointer;
+=======
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #0052cc; /* Cambia esto según el color de fondo que desees */
+  color: white;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 50px;
+  margin-right: 10px;
+}
+
+.navbar-search {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.navbar-search input {
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: white;
+  border: 1px solid #000;
+  width: 300px; /* Ajusta el ancho según lo que necesites */
+}
+
+.navbar-icons {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+}
+
+.icon {
+  height: 24px;
+  cursor: pointer;
+}
+
+.navbar-icons a {
+  color: white;
+  text-decoration: none;
+>>>>>>> e7476820aee8a28a24cde2e97261ece6ef5ddf46
 }
