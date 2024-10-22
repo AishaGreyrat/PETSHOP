@@ -1,0 +1,5 @@
+<<<<<<< HEAD
+{"root":["./src/App.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/Components/Appbar.tsx","./src/Components/Cart.tsx","./src/Components/ProductForm.tsx","./src/Components/ProductList.tsx","./src/Components/auth.tsx","./src/Context/CartContext.tsx","./src/Reducers/cartReducer.ts","./src/Routes/ReactRouter.tsx"],"version":"5.6.3"}
+=======
+{"root":["./src/App.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/Components/Appbar.tsx","./src/Components/Cart.tsx","./src/Components/ProductForm.tsx","./src/Components/ProductList.tsx","./src/Components/auth.tsx","./src/Context/CartContext.tsx","./src/Reducers/cartReducer.ts"],"version":"5.6.3"}
+>>>>>>> e7476820aee8a28a24cde2e97261ece6ef5ddf46
