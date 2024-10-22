@@ -1,25 +1,57 @@
 import React from 'react';
-import AppBar from './Components/Appbar';
-import ProductForm from './Components/ProductForm';
-import ProductList from './Components/ProductList';
-import { CartProvider } from './Context/CartContext';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import ProductForm from '../src/Components/ProductForm';
+import ProductList from '../src/Components/ProductList';
 import Cart from './Components/Cart';
-import './Styles/App.css';
+import './Styles/AppBar.css';
 
-/* El App llamamos a los demas componentes para ser usados en la pagina */
-
-const App: React.FC = () => {
+const AppBar: React.FC = () => {
   return (
-    <CartProvider>
-      <div className="App">
-        <AppBar />
-        <ProductForm />
-        <ProductList />
-        <Cart />
+    <Router>
+       <header className="app-bar">
+      <div className="app-bar-content">
+        <div className="logo-section">
+        <img src="/assets/daysi.png" alt="Daysi Logo" className="title-image" />
+         
+        </div>
+        <div className="navbar-search">
+          <input type="text" placeholder="Buscar..." />
+        </div>
+        <nav className="navbar-icons">
+          <ul>
+          <li>
+              <Link to="/perfile">
+              <img src="/assets/perfil.svg" alt="perfile" className="icon" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/add-product">
+              <img src="/assets/add.svg" alt="add" className="icon" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/products">
+              <img src="/assets/bag.svg" alt="bag" className="icon" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/cart">
+              <img src="/assets/cart-outline.svg" alt="cart" className="icon" />
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
-    </CartProvider>
+    </header>
+
+      {/* Definir las rutas dentro del mismo archivo */}
+      <Routes>
+        <Route path="/add-product" element={<ProductForm />} />
+        <Route path="/products" element={<ProductList />} />
+        <Route path="/cart" element={<Cart />} />
+      </Routes>
+    </Router>
   );
 };
 
-
-export default App
+export default AppBar;
