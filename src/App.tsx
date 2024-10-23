@@ -1,23 +1,10 @@
 import React from 'react';
-<<<<<<< HEAD
-import ReactRouter from './Routes/ReactRouter';
-
-/* Se reestructuro el app.tsx para las rutas */
-
-const App: React.FC = () => {
-  return (
-    <div>
-      <ReactRouter />
-    </div>
-  );
-};
-
-export default App;
-=======
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ProductForm from '../src/Components/ProductForm';
 import ProductList from '../src/Components/ProductList';
 import Cart from './Components/Cart';
+import Login from './Components/Login';
+import Register from './Components/Register';
 import './Styles/AppBar.css';
 
 const AppBar: React.FC = () => {
@@ -54,6 +41,12 @@ const AppBar: React.FC = () => {
               <img src="/assets/cart-outline.svg" alt="cart" className="icon" />
               </Link>
             </li>
+            <li>
+              <Link to="login">Iniciar sesion</Link>
+            </li>
+            <li>
+              <Link to="register">Registrar</Link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -64,10 +57,11 @@ const AppBar: React.FC = () => {
         <Route path="/add-product" element={<ProductForm />} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
     </Router>
   );
 };
 
 export default AppBar;
->>>>>>> e7476820aee8a28a24cde2e97261ece6ef5ddf46
