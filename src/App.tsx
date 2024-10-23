@@ -21,8 +21,8 @@ const AppBar: React.FC = () => {
         </div>
         <nav className="navbar-icons">
           <ul>
-          <li>
-              <Link to="/perfile">
+           <li>
+              <Link to="login">
               <img src="/assets/perfil.svg" alt="perfile" className="icon" />
               </Link>
             </li>
@@ -41,9 +41,7 @@ const AppBar: React.FC = () => {
               <img src="/assets/cart-outline.svg" alt="cart" className="icon" />
               </Link>
             </li>
-            <li>
-              <Link to="login">Iniciar sesion</Link>
-            </li>
+           
             <li>
               <Link to="register">Registrar</Link>
             </li>
@@ -51,6 +49,15 @@ const AppBar: React.FC = () => {
         </nav>
       </div>
     </header>
+    
+
+    <footer class="footer">
+      <p>&copy; 2024 Petshop. Todos los derechos reservados.</p>
+      <ul>
+        <li><a href="#terms">Términos de servicio</a></li>
+        <li><a href="#contact">Contáctanos</a></li>
+      </ul>
+    </footer>
 
       {/* Definir las rutas dentro del mismo archivo */}
       <Routes>
