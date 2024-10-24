@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ HEAD
 .app-bar {
   background-color: #0052cc;
   padding: 1rem;
@@ -48,7 +48,7 @@
 .icon {
   height: 24px;
   cursor: pointer;
-=======
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -96,5 +96,5 @@
 .navbar-icons a {
   color: white;
   text-decoration: none;
->>>>>>> e7476820aee8a28a24cde2e97261ece6ef5ddf46
+
 }
