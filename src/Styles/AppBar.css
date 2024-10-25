@@ -2,9 +2,13 @@
   background-color: #0052cc;
   padding: 1rem;
   display: flex;
-  justify-content: center; /* Centra el contenido horizontalmente */
+  justify-content: space-between;
   align-items: center;
   width: 100%;
+  position: fixed; /* Asegura que el navbar quede fijo en la parte superior */
+  top: 0; /* Asegura que esté en la parte superior */
+  left: 0;
+  z-index: 1000; /* Asegura que el navbar esté por encima de otros elementos */
 }
 
 .app-bar-content {
@@ -47,4 +51,111 @@
 .icon {
   height: 24px;
   cursor: pointer;
+}
+.navbar-icons ul {
+  list-style: none;
+  display: flex; /* Esto alineará los íconos de forma horizontal */
+  gap: 1rem; /* Espacio entre los íconos */
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-icons li {
+  margin: 0;
+  display: flex;
+  align-items: center; /* Asegura que los íconos estén alineados verticalmente al centro */
+}
+
+.icon {
+  height: 35px; /* Ajusta el tamaño de los íconos si es necesario */
+  cursor: pointer;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #022D6D;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+}
+
+.footer p {
+  margin-bottom: 10px;
+}
+
+.footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.footer ul li {
+  display: inline;
+}
+
+.footer ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos del modal */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro para el modal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  max-width: 100%;
+}
+
+.close-button {
+  color: red;
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+  background-color: #0052cc;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button[type="submit"]:hover {
+  background-color: #003d99;
+}
+label {
+  color: #000;
 }
