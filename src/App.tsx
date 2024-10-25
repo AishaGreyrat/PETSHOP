@@ -14,6 +14,9 @@ const AppBar: React.FC = () => {
       <header className="app-bar">
         <div className="app-bar-content">
           <div className="logo-section">
+            <Link to="/">
+              <img src="/assets/daysi.png" alt="Daysi Logo" className="title-image" />
+            </Link>
             <img src="/assets/daysi.png" alt="Daysi Logo" className="title-image" />
           </div>
           <div className="navbar-search">
