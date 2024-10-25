@@ -27,6 +27,7 @@ const AppBar: React.FC = () => {
         </ul>
       </nav>
     </header>
+    
   );
 };
 

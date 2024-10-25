@@ -17,6 +17,7 @@ const AppBar: React.FC = () => {
             <Link to="/">
               <img src="/assets/daysi.png" alt="Daysi Logo" className="title-image" />
             </Link>
+            <img src="/assets/daysi.png" alt="Daysi Logo" className="title-image" />
           </div>
           <div className="navbar-search">
             <input type="text" placeholder="Buscar..." />
