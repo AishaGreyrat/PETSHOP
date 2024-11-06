@@ -3,8 +3,10 @@ import ImageCarousel from './Components/ImageCarousel'; // Importa el carrusel
 import './Styles/AppBar.css';
 
 import ReactRouter from './Routes/ReactRouter';
-import FileInput from './Components/fileInput';
 
+import ShopPage from './Components/ShopPage';
+
+//import FileInput from './Components/fileInput';
 
 // Correccion del codigo duplicado
 
@@ -17,8 +19,7 @@ const App: React.FC = () => {
       <ImageCarousel />
 
       {/* input del archivo separado por su propio componente */}
-      <FileInput/>
-
+      <ShopPage/>
       {/* footer */}
       <footer className="footer">
         <p>&copy; 2024 Petshop. Todos los derechos reservados.</p>
@@ -35,10 +36,4 @@ const App: React.FC = () => {
   );
 };
       
-
-      
-      
-
-
-
 export default App;

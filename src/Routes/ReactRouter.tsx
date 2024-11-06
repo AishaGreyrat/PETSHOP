@@ -6,6 +6,7 @@ import Cart from '../Components/Cart';
 import AppBar from '../Components/Appbar';
 import Login from '../Components/Login';
 import Register from '../Components/Register';
+import ShopPage from '../Components/ShopPage';
 
 /* Se creo un archivo para las rutas */
 
@@ -14,6 +15,8 @@ const ReactRouter: React.FC = () => {
       <Router>
         <AppBar />
         <Routes>
+          {/* Ruta raíz "/" */}
+          <Route path="/" element={< ShopPage/>} />
           <Route path="/add-product" element={<ProductForm />} />
           <Route path="/products" element={<ProductList />} />
           <Route path="/cart" element={<Cart />} />
