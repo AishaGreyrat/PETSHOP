@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../Styles/AppBar.css';
+import '../styles/AppBar.css';
 import SearchBar from './SearchBar';
 
 // Definir el tipo para las props de AppBar
