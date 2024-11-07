@@ -1,35 +1,67 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/AppBar.css';
+import '../Styles/AppBar.css';
+import SearchBar from './SearchBar';
 
-/* Se añadieoron las rutas con el plugin de react-router-dom */
+// Definir el tipo para las props de AppBar
+type AppBarProps = {
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  selectedCategory: string;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+};
 
-const AppBar: React.FC = () => {
+const AppBar: React.FC<AppBarProps> = ({
+  searchTerm,
+  setSearchTerm,
+  selectedCategory,
+  setSelectedCategory,
+}) => {
   return (
-    <header className="full-width-bar">
-      <h1>My E-commerce - PetShop</h1>
-      <p>¡Los mejores productos para mascotas disponibles!</p>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/add-product">Añadir Producto</Link>
-          </li>
-          <li>
-            <Link to="/products">Productos Disponibles</Link>
-          </li>
-          <li>
-            <Link to="/cart">Tu Carrito</Link>
-          </li>
-          <li>
-            <Link to="/login">Iniciar sesion</Link>
-          </li>
-          <Link to="/register">Registrar</Link>
-        </ul>
-      </nav>
+    <header className="app-bar">
+      <div className="app-bar-content">
+        <div className="logo-section">
+          <Link to="/">
+            <img src="/assets/daysi.png" alt="Daysi Logo" className="title-image" />
+          </Link>
+        </div>
+        {/* Barra de búsqueda y filtro */}
+        <SearchBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+        <nav className="navbar-icons">
+          <ul>
+            <li>
+              <Link to="/login">
+                <img src="/assets/perfil.svg" alt="perfil" className="icon" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/add-product">
+                <img src="/assets/add.svg" alt="add" className="icon" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/products">
+                <img src="/assets/bag.svg" alt="bag" className="icon" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/cart">
+                <img src="/assets/cart-outline.svg" alt="cart" className="icon" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/register">Registrar</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
-    
   );
 };
 
 export default AppBar;
-

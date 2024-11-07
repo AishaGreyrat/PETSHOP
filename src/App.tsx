@@ -1,78 +1,44 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import ProductForm from '../src/Components/ProductForm';
-import ProductList from '../src/Components/ProductList';
-import Cart from './Components/Cart';
-import Login from './Components/Login';
-import Register from './Components/Register';
+import React, { useState } from 'react';
 import ImageCarousel from './Components/ImageCarousel'; // Importa el carrusel
 import './Styles/AppBar.css';
+import ReactRouter from './Routes/ReactRouter'; // Si este es el que gestiona las rutas
+import ShopPage from './Components/ShopPage'; // Página de productos
 
-const AppBar: React.FC = () => {
+const App: React.FC = () => {
+  // Estado para el término de búsqueda y la categoría seleccionada
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+
   return (
-    <Router>
-      <header className="app-bar">
-        <div className="app-bar-content">
-          <div className="logo-section">
-            <Link to="/">
-              <img src="/assets/daysi.png" alt="Daysi Logo" className="title-image" />
-            </Link>
-            <img src="/assets/daysi.png" alt="Daysi Logo" className="title-image" />
-          </div>
-          <div className="navbar-search">
-            <input type="text" placeholder="Buscar..." />
-          </div>
-          <nav className="navbar-icons">
-            <ul>
-              <li>
-                <Link to="/login">
-                  <img src="/assets/perfil.svg" alt="perfil" className="icon" />
-                </Link>
-              </li>
-              <li>
-                <Link to="/add-product">
-                  <img src="/assets/add.svg" alt="add" className="icon" />
-                </Link>
-              </li>
-              <li>
-                <Link to="/products">
-                  <img src="/assets/bag.svg" alt="bag" className="icon" />
-                </Link>
-              </li>
-              <li>
-                <Link to="/cart">
-                  <img src="/assets/cart-outline.svg" alt="cart" className="icon" />
-                </Link>
-              </li>
-              <li>
-                <Link to="/register">Registrar</Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+    <div>
+      {/* Pasamos los estados a ReactRouter para que pueda acceder a las rutas que lo necesiten */}
+      <ReactRouter 
+        searchTerm={searchTerm} 
+        setSearchTerm={setSearchTerm} 
+        selectedCategory={selectedCategory} 
+        setSelectedCategory={setSelectedCategory} 
+      />
 
-      {/* Aquí añadimos el carrusel de imágenes */}
+      {/* Carrusel de imágenes */}
       <ImageCarousel />
 
+      {/* Página de productos */}
+      <ShopPage searchTerm={searchTerm} selectedCategory={selectedCategory} />
+
+      {/* footer */}
       <footer className="footer">
         <p>&copy; 2024 Petshop. Todos los derechos reservados.</p>
         <ul>
-          <li><a href="#terms">Términos de servicio</a></li>
-          <li><a href="#contact">Contáctanos</a></li>
+          <li>
+            <a href="#terms">Términos de servicio</a>
+          </li>
+          <li>
+            <a href="#contact">Contáctanos</a>
+          </li>
         </ul>
       </footer>
-
-      {/* Definir las rutas dentro del mismo archivo */}
-      <Routes>
-        <Route path="/add-product" element={<ProductForm />} />
-        <Route path="/products" element={<ProductList />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </Router>
+    </div>
   );
 };
 
-export default AppBar;
+export default App;

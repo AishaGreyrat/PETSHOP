@@ -10,13 +10,14 @@ type Product = {
   image?: string;
 };
 
-type ProductListProps = {
+type ShopPageProps = {
   searchTerm: string;
   selectedCategory: string;
 };
 
-const ProductList: React.FC<ProductListProps> = ({ searchTerm, selectedCategory }) => {
+const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [cart, setCart] = useState<Product[]>([]);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -38,19 +39,39 @@ const ProductList: React.FC<ProductListProps> = ({ searchTerm, selectedCategory 
     return matchesSearch && matchesCategory;
   });
 
+  const addToCart = (product: Product) => {
+    setCart((prevCart) => [...prevCart, product]);
+    alert(`${product.name} ha sido añadido al carrito`);
+  };
+
   return (
     <div>
       {/* Mostrar productos filtrados */}
-      {filteredProducts.map((product) => (
-        <div key={product.id}>
-          {product.image && <img src={product.image} alt={product.name} />}
-          <h3>{product.name}</h3>
-          <p>Precio: ${product.price.toFixed(2)}</p>
-          <p>Cantidad: {product.quantity}</p>
-        </div>
-      ))}
+      <div>
+        {filteredProducts.map((product) => (
+          <div key={product.id}>
+            {product.image && <img src={product.image} alt={product.name} />}
+            <h3>{product.name}</h3>
+            <p>Precio: ${product.price.toFixed(2)}</p>
+            <p>Cantidad: {product.quantity}</p>
+            <button onClick={() => addToCart(product)}>Agregar al carrito</button>
+          </div>
+        ))}
+      </div>
+
+      {/* Carrito */}
+      <h3>Carrito</h3>
+      {cart.length > 0 ? (
+        <ul>
+          {cart.map((item, index) => (
+            <li key={index}>{item.name} - ${item.price.toFixed(2)}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>El carrito está vacío</p>
+      )}
     </div>
   );
 };
 
-export default ProductList;
+export default ShopPage;
