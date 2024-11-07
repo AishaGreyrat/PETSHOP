@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { fetchProducts } from './ProductService';
+import { fetchProducts } from './productoService';
 
 type Product = {
   id: string;
   name: string;
   price: number;
   quantity: number;
+  category?: string;
   image?: string;
 };
 
-const ShopPage: React.FC = () => {
+type ShopPageProps = {
+  searchTerm: string;
+  selectedCategory: string;
+};
+
+const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [cart, setCart] = useState<Product[]>([]); // Estado del carrito
+  const [cart, setCart] = useState<Product[]>([]);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -26,6 +32,13 @@ const ShopPage: React.FC = () => {
     loadProducts();
   }, []);
 
+  // Filtrar productos según el término de búsqueda y la categoría seleccionada
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
+    return matchesSearch && matchesCategory;
+  });
+
   const addToCart = (product: Product) => {
     setCart((prevCart) => [...prevCart, product]);
     alert(`${product.name} ha sido añadido al carrito`);
@@ -33,8 +46,9 @@ const ShopPage: React.FC = () => {
 
   return (
     <div>
+      {/* Mostrar productos filtrados */}
       <div>
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <div key={product.id}>
             {product.image && <img src={product.image} alt={product.name} />}
             <h3>{product.name}</h3>
@@ -45,6 +59,7 @@ const ShopPage: React.FC = () => {
         ))}
       </div>
 
+      {/* Carrito */}
       <h3>Carrito</h3>
       {cart.length > 0 ? (
         <ul>

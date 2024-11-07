@@ -1,46 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import { db } from '../../firebaseConfig';
-import { collection, getDocs } from 'firebase/firestore';
-import { useCart } from '../Context/CartContext';
+import { fetchProducts } from './productoService';
 
-interface Product {
+type Product = {
   id: string;
   name: string;
   price: number;
-}
+  quantity: number;
+  category?: string;
+  image?: string;
+};
 
-const ProductList: React.FC = () => {
+type ProductListProps = {
+  searchTerm: string;
+  selectedCategory: string;
+};
+
+const ProductList: React.FC<ProductListProps> = ({ searchTerm, selectedCategory }) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const { dispatch } = useCart();
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const querySnapshot = await getDocs(collection(db, 'products'));
-      const productsData = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Product[];
-      setProducts(productsData);
+    const loadProducts = async () => {
+      try {
+        const fetchedProducts = await fetchProducts();
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error('Error al obtener los productos:', error);
+      }
     };
 
-    fetchProducts();
+    loadProducts();
   }, []);
 
-  const handleAddToCart = (product: Product) => {
-    dispatch({ type: 'ADD_ITEM', payload: product });
-  };
+  // Filtrar productos según el término de búsqueda y la categoría seleccionada
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <div>
-      <h2>Productos disponibles</h2>
-      <ul>
-        {products.map(product => (
-          <li key={product.id}>
-            {product.name} - ${product.price}
-            <button onClick={() => handleAddToCart(product)}>Añadir al carrito</button>
-          </li>
-        ))}
-      </ul>
+      {/* Mostrar productos filtrados */}
+      {filteredProducts.map((product) => (
+        <div key={product.id}>
+          {product.image && <img src={product.image} alt={product.name} />}
+          <h3>{product.name}</h3>
+          <p>Precio: ${product.price.toFixed(2)}</p>
+          <p>Cantidad: {product.quantity}</p>
+        </div>
+      ))}
     </div>
   );
 };

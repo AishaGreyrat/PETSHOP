@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { addProduct } from '../Components/productoService';
 import { useNavigate } from 'react-router-dom';
 
+// Actualizamos el esquema de validación para incluir la categoría
 const productSchema = z.object({
   name: z.string().min(1, { message: "Se requiere el nombre del producto" }),
   price: z
@@ -13,6 +14,7 @@ const productSchema = z.object({
   quantity: z
     .number({ invalid_type_error: "La cantidad debe ser un número válido" })
     .min(1, { message: "La cantidad debe ser al menos 1" }),
+  category: z.string().min(1, { message: "Se requiere la categoría" }), // Nueva propiedad de categoría
 });
 
 type ProductFormData = z.infer<typeof productSchema>;
@@ -79,14 +81,37 @@ const ProductForm: React.FC = () => {
           <input type="number" {...register('quantity', { valueAsNumber: true })} />
           {errors.quantity && <span>{errors.quantity.message}</span>}
         </div>
+
+        {/* Campo para seleccionar la categoría */}
+        <div>
+          <label>Categoría: </label>
+          <select {...register('category')}>
+            <option value="">Selecciona una categoría</option>
+            <option value="Alimentación">Alimentación</option>
+            <option value="Salud e Higiene">Salud e Higiene</option>
+            <option value="Juguetes">Juguetes</option>
+            <option value="Camas y Descanso">Camas y Descanso</option>
+            <option value="Ropa y Accesorios">Ropa y Accesorios</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Entrenamiento">Entrenamiento</option>
+            <option value="Seguridad">Seguridad</option>
+            <option value="Cuidado dental">Cuidado dental</option>
+            <option value="Limpieza y Desinfección">Limpieza y Desinfección</option>
+          </select>
+          {errors.category && <span>{errors.category.message}</span>}
+        </div>
+
+        {/* Campo para cargar la imagen */}
         <div>
           <label>Imagen del producto: </label>
           <input type="file" onChange={handleImageChange} />
           {imageBase64 && <img src={imageBase64} alt="Vista previa" style={{ width: '100px' }} />}
         </div>
+
         <button type="submit">Añadir producto</button>
       </form>
 
+      {/* Modal de confirmación */}
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
