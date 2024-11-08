@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/AppBar.css';
+import '../Styles/AppBar.css';
 import SearchBar from './SearchBar';
 
 // Definir el tipo para las props de AppBar
@@ -42,11 +42,6 @@ const AppBar: React.FC<AppBarProps> = ({
             <li>
               <Link to="/add-product">
                 <img src="/assets/add.svg" alt="add" className="icon" />
-              </Link>
-            </li>
-            <li>
-              <Link to="/products">
-                <img src="/assets/bag.svg" alt="bag" className="icon" />
               </Link>
             </li>
             <li>

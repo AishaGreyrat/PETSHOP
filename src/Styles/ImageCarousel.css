@@ -7,7 +7,8 @@
     align-items: center;
     overflow: hidden;
     position: relative;
-    margin-top: 20px; /* Espacio debajo del navbar */
+    margin-top: 149px; /* Espacio debajo del navbar */
+    
   }
   
   .carousel-image {
