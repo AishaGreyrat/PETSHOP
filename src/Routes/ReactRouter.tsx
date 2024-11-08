@@ -8,7 +8,7 @@ import Login from '../Components/Login';
 import Register from '../Components/Register';
 
 /* Se creo un archivo para las rutas */
-
+/*volver modal el loig y la parte de agregar producto tiene que tener su propio modal*/
 const ReactRouter: React.FC = () => {
     return (
       <Router>
