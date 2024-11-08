@@ -12,15 +12,15 @@ const App: React.FC = () => {
   return (
     <div>
       {/* Pasamos los estados a ReactRouter para que pueda acceder a las rutas que lo necesiten */}
-      <ReactRouter 
+     
+      {/* Carrusel de imágenes */}
+      <ImageCarousel />
+ <ReactRouter 
         searchTerm={searchTerm} 
         setSearchTerm={setSearchTerm} 
         selectedCategory={selectedCategory} 
         setSelectedCategory={setSelectedCategory} 
       />
-
-      {/* Carrusel de imágenes */}
-      <ImageCarousel />
 
       {/* Página de productos */}
       <ShopPage searchTerm={searchTerm} selectedCategory={selectedCategory} />
