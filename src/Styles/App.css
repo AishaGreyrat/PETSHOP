@@ -98,3 +98,13 @@
   text-decoration: none;
 
 }
+form {
+  margin-top: 160px;
+}
+
+
+form {
+  display: block;
+  margin-top: 0em;
+  unicode-bidi: isolate;
+}
