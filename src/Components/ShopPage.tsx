@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from './productoService';
+import { useCart } from '../Context/CartContext';
 
 type Product = {
   id: string;
@@ -17,7 +18,7 @@ type ShopPageProps = {
 
 const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [cart, setCart] = useState<Product[]>([]);
+  const { dispatch } = useCart();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -32,7 +33,6 @@ const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => 
     loadProducts();
   }, []);
 
-  // Filtrar productos según el término de búsqueda y la categoría seleccionada
   const filteredProducts = products.filter((product) => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
@@ -40,13 +40,12 @@ const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => 
   });
 
   const addToCart = (product: Product) => {
-    setCart((prevCart) => [...prevCart, product]);
+    dispatch({ type: 'ADD_ITEM', payload: product });
     alert(`${product.name} ha sido añadido al carrito`);
   };
 
   return (
     <div>
-      {/* Mostrar productos filtrados */}
       <div>
         {filteredProducts.map((product) => (
           <div key={product.id}>
@@ -58,18 +57,6 @@ const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => 
           </div>
         ))}
       </div>
-
-      {/* Carrito */}
-      <h3>Carrito</h3>
-      {cart.length > 0 ? (
-        <ul>
-          {cart.map((item, index) => (
-            <li key={index}>{item.name} - ${item.price.toFixed(2)}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>El carrito está vacío</p>
-      )}
     </div>
   );
 };
