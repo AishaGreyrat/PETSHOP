@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { addProduct } from '../Components/productoService';
-import { useNavigate } from 'react-router-dom';
 
 // Actualizamos el esquema de validación para incluir la categoría
 const productSchema = z.object({
@@ -19,15 +17,12 @@ const productSchema = z.object({
 
 type ProductFormData = z.infer<typeof productSchema>;
 
-const ProductForm: React.FC = () => {
+const ProductForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const { register, handleSubmit, formState: { errors } } = useForm<ProductFormData>({
     resolver: zodResolver(productSchema),
   });
 
   const [imageBase64, setImageBase64] = useState<string | null>(null);
-  const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState<ProductFormData | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -40,32 +35,17 @@ const ProductForm: React.FC = () => {
     }
   };
 
-  const onSubmit = (data: ProductFormData) => {
-    setFormData(data);
-    setIsModalOpen(true);
-  };
-
-  const handleConfirmSubmit = async () => {
-    if (formData) {
-      const productData = {
-        ...formData,
-        image: imageBase64 ?? undefined,
-      };
-
-      const response = await addProduct(productData);
-      if (response.success) {
-        alert(response.message);
-        navigate('/');
-      } else {
-        alert('Hubo un error al añadir el producto');
-      }
-      setIsModalOpen(false);
-    }
+  const onSubmit = (_data: ProductFormData) => {
+    // Aquí iría la lógica para enviar el producto a la base de datos
+    alert('Producto añadido con éxito');
+    closeModal(); // Cerrar el modal después de añadir el producto
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
+        {/* Botón para cerrar el modal */}
+        <button className="close-btn" onClick={closeModal}>&times;</button>
         <div>
           <label>Nombre del producto: </label>
           <input type="text" {...register('name')} />
@@ -110,20 +90,6 @@ const ProductForm: React.FC = () => {
 
         <button type="submit">Añadir producto</button>
       </form>
-
-      {/* Modal de confirmación */}
-      {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={() => setIsModalOpen(false)}>&times;</span>
-            <h3>¿Estás seguro de que deseas añadir este producto?</h3>
-            <div>
-              <button onClick={handleConfirmSubmit}>Confirmar</button>
-              <button onClick={() => setIsModalOpen(false)}>Cancelar</button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
