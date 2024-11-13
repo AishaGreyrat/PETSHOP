@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../Styles/AppBar.css';
 import SearchBar from './SearchBar';
-import Login from './Login';
-import Register from './Register';
-import ProductForm from './ProductForm';
+import Login from './Login'; // Importa el componente Login
+import Register from './Register'; // Importa el componente Register
+import ProductForm from './ProductForm'; // Importa el componente ProductForm
 
+// Definir el tipo para las props de AppBar
 type AppBarProps = {
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
@@ -19,23 +20,19 @@ const AppBar: React.FC<AppBarProps> = ({
   selectedCategory,
   setSelectedCategory,
 }) => {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false); // Estado para controlar el modal de login
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false); // Estado para controlar el modal de registro
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false); // Estado para controlar el modal de añadir producto
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
-
+  // Funciones para abrir y cerrar los modales
   const openLoginModal = () => setIsLoginModalOpen(true);
   const closeLoginModal = () => setIsLoginModalOpen(false);
 
   const openRegisterModal = () => setIsRegisterModalOpen(true);
   const closeRegisterModal = () => setIsRegisterModalOpen(false);
 
-  const openAddProductModal = () => setIsAddProductModalOpen(true);
-  const closeAddProductModal = () => setIsAddProductModalOpen(false);
+  const openAddProductModal = () => setIsAddProductModalOpen(true); // Abre el modal para añadir producto
+  const closeAddProductModal = () => setIsAddProductModalOpen(false); // Cierra el modal para añadir producto
 
   return (
     <header className="app-bar">
@@ -46,6 +43,7 @@ const AppBar: React.FC<AppBarProps> = ({
           </Link>
         </div>
 
+        {/* Barra de búsqueda y filtro */}
         <SearchBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -53,57 +51,52 @@ const AppBar: React.FC<AppBarProps> = ({
           setSelectedCategory={setSelectedCategory}
         />
 
-        <button className="menu-toggle" onClick={toggleSidebar}>
-          ☰
-        </button>
+        {/* Los link se quitaron porque cuando se podrian con el modal salira doble cuando dabas click*/}
+        <nav className="navbar-icons">
+          <ul>
+            {/* Enlace que abre el modal de Login */}
+            <li>
+              <a href="#" onClick={openLoginModal}>
+                <img src="/assets/perfil.svg" alt="perfil" className="icon" />
+              </a>
+            </li>
+
+            {/* Enlace para abrir el modal de añadir producto */}
+            <li>
+              <a href="#" onClick={openAddProductModal}>
+                <img src="/assets/add.svg" alt="add" className="icon" />
+              </a>
+            </li>
+
+            <li>
+              <Link to="/cart">
+                <img src="/assets/cart-outline.svg" alt="cart" className="icon" />
+              </Link>
+            </li>
+
+            {/* Enlace que abre el modal de Registro */}
+            <li>
+              <a href="#" onClick={openRegisterModal}>Registrar</a>
+            </li>
+          </ul>
+        </nav>
       </div>
 
-      {/* Barra lateral */}
-      <nav className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-        <ul>
-          <li>
-            <a href="#" onClick={openLoginModal}>
-              <img src="/assets/perfil.svg" alt="perfil" className="icon" />
-            </a>
-          </li>
-          <li>
-            <a href="#" onClick={openAddProductModal}>
-              <img src="/assets/add.svg" alt="add" className="icon" />
-            </a>
-          </li>
-          <li>
-            <Link to="/cart">
-              <img src="/assets/cart-outline.svg" alt="cart" className="icon" />
-            </Link>
-          </li>
-          <li>
-            <a href="#" onClick={openRegisterModal}>Registrar</a>
-          </li>
-        </ul>
-      </nav>
-
-      {/* Fondo para cerrar la barra lateral */}
-      {isSidebarOpen && <div className="backdrop" onClick={toggleSidebar}></div>}
-
-      {/* Modales */}
+      {/* Modal de Login */}
       {isLoginModalOpen && (
         <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeLoginModal}>&times;</span>
             <Login closeModal={closeLoginModal} />
           </div>
-        </div>
       )}
 
+      {/* Modal de Registro */}
       {isRegisterModalOpen && (
         <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeRegisterModal}>&times;</span>
             <Register closeModal={closeRegisterModal} />
           </div>
-        </div>
       )}
 
+      {/* Modal para añadir producto */}
       {isAddProductModalOpen && (
         <div className="modal">
           <div className="modal-content">

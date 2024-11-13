@@ -17,16 +17,16 @@ const App: React.FC = () => {
       {/* Carrusel de imágenes */}
       <ImageCarousel />
       <CartProvider>
-      <ReactRouter 
-        searchTerm={searchTerm} 
-        setSearchTerm={setSearchTerm} 
-        selectedCategory={selectedCategory} 
-        setSelectedCategory={setSelectedCategory} 
-      />
-      
+        <ReactRouter 
+          searchTerm={searchTerm} 
+          setSearchTerm={setSearchTerm} 
+          selectedCategory={selectedCategory} 
+          setSelectedCategory={setSelectedCategory} 
+        />
 
-      {/* Página de productos */}
-      <ShopPage searchTerm={searchTerm} selectedCategory={selectedCategory} />
+        {/* Página de productos */}
+        <ShopPage searchTerm={searchTerm} selectedCategory={selectedCategory} />
+
       </CartProvider>
       {/* footer */}
       <footer className="footer">
