@@ -3,6 +3,7 @@ import ImageCarousel from './Components/ImageCarousel'; // Importa el carrusel
 import './Styles/AppBar.css';
 import ReactRouter from './Routes/ReactRouter'; // Si este es el que gestiona las rutas
 import ShopPage from './Components/ShopPage'; // Página de productos
+import { CartProvider } from './Context/CartContext';
 
 const App: React.FC = () => {
   // Estado para el término de búsqueda y la categoría seleccionada
@@ -12,19 +13,21 @@ const App: React.FC = () => {
   return (
     <div>
       {/* Pasamos los estados a ReactRouter para que pueda acceder a las rutas que lo necesiten */}
-      <ReactRouter 
-        searchTerm={searchTerm} 
-        setSearchTerm={setSearchTerm} 
-        selectedCategory={selectedCategory} 
-        setSelectedCategory={setSelectedCategory} 
-      />
-
+     
       {/* Carrusel de imágenes */}
       <ImageCarousel />
+      <CartProvider>
+        <ReactRouter 
+          searchTerm={searchTerm} 
+          setSearchTerm={setSearchTerm} 
+          selectedCategory={selectedCategory} 
+          setSelectedCategory={setSelectedCategory} 
+        />
 
-      {/* Página de productos */}
-      <ShopPage searchTerm={searchTerm} selectedCategory={selectedCategory} />
+        {/* Página de productos */}
+        <ShopPage searchTerm={searchTerm} selectedCategory={selectedCategory} />
 
+      </CartProvider>
       {/* footer */}
       <footer className="footer">
         <p>&copy; 2024 Petshop. Todos los derechos reservados.</p>

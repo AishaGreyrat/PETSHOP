@@ -16,7 +16,7 @@ const Cart: React.FC = () => {
 
   const confirmRemove = () => {
     if (itemToRemove) {
-      dispatch({ type: 'REMOVE_ITEM', payload: { id: itemToRemove, name: '', price: 0 } });
+      dispatch({ type: 'REMOVE_ITEM', payload: { id: itemToRemove } });
       setItemToRemove(null);
       setIsRemoveModalOpen(false);
     }
@@ -33,7 +33,6 @@ const Cart: React.FC = () => {
 
   return (
     <div>
-      <> Luego se cambiará por un svg de carrito </> 
       <h2>Tu carrito</h2>
       {state.items.length === 0 ? (
         <p>Tu carrito está vacío</p>
