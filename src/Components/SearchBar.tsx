@@ -1,4 +1,6 @@
 import React from 'react';
+import { MagnifyingGlassCircleIcon } from '@heroicons/react/16/solid';
+
 
 type SearchBarProps = {
   searchTerm: string;
@@ -16,8 +18,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, select
         placeholder="Buscar productos..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-      />
-
+      >
+    </input>
+    <MagnifyingGlassCircleIcon className='icon-search'/>
       {/* Filtro por categoría */}
       <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
         <option value="">Todas las categorías</option>

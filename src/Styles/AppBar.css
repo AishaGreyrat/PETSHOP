@@ -27,8 +27,8 @@
 }
 
 .title-image {
-  width: 60px; /* Ajusta el tamaño del logo */
-  height: auto;
+  width: 130px; /* Ajusta el tamaño del logo */
+  height: 60px;
 }
 
 .navbar-search input {
@@ -37,6 +37,12 @@
   border: none;
   width: 200px;
   outline: none;
+}
+
+svg.icon-search {
+  height: 30px;
+  color: white;
+  margin-bottom: -10px;
 }
 
 .menu-toggle {
