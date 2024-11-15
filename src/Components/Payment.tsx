@@ -263,7 +263,7 @@ const Payment: React.FC = () => {
           <div className="modal-content">
             <h3>¿Estás seguro de que deseas confirmar el pago?</h3>
             <p>Total: ${total.toFixed(2)}</p>
-            <button onClick={handleConfirmPayment}>Confirmar</button>
+            <button onClick={handleConfirmPayment}>Confimar</button>
             <button onClick={handleCancelPayment}>Cancelar</button>
           </div>
         </div>
