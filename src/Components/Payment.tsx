@@ -21,6 +21,7 @@ const Payment: React.FC = () => {
     expirationDate: '',
     cvv: '',
   });
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la visibilidad del modal
 
   // Manejo del cambio de método de pago (tarjeta de crédito / débito)
   const handleMethodChange = (method: string) => {
@@ -78,28 +79,42 @@ const Payment: React.FC = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      // Simula el procesamiento del pago
-      alert('Pago realizado con éxito');
-
-      // Actualizar las cantidades de productos en Firebase
-      try {
-        for (const item of state.items) {
-          const productRef = doc(db, 'products', item.id); // Asegúrate de que 'products' es tu colección en Firebase
-          await updateDoc(productRef, {
-            quantity: increment(-item.quantity),  // Decrementa la cantidad según la cantidad en el carrito
-          });
-        }
-
-        // Vaciar el carrito local después de procesar el pago
-        dispatch({ type: 'CLEAR_CART' });
-
-        // Redirige al usuario a la página de inicio
-        navigate('/');
-      } catch (error) {
-        console.error('Error actualizando las cantidades en Firebase: ', error);
-        alert('Hubo un error al procesar tu pago, inicie sesion para proceder con el pago.');
-      }
+      // Abrir el modal de confirmación
+      setIsModalOpen(true);
     }
+  };
+
+  // Confirmar el pago y realizar la lógica de actualización
+  const handleConfirmPayment = async () => {
+    // Simula el procesamiento del pago
+    alert('Pago realizado con éxito');
+
+    // Actualizar las cantidades de productos en Firebase
+    try {
+      for (const item of state.items) {
+        const productRef = doc(db, 'products', item.id); // Asegúrate de que 'products' es tu colección en Firebase
+        await updateDoc(productRef, {
+          quantity: increment(-item.quantity),  // Decrementa la cantidad según la cantidad en el carrito
+        });
+      }
+
+      // Vaciar el carrito local después de procesar el pago
+      dispatch({ type: 'CLEAR_CART' });
+
+      // Redirige al usuario a la página de inicio
+      navigate('/');
+    } catch (error) {
+      console.error('Error actualizando las cantidades en Firebase: ', error);
+      alert('Hubo un error al procesar tu pago, inicie sesion para proceder con el pago.');
+    } finally {
+      // Cerrar el modal después de procesar el pago
+      setIsModalOpen(false);
+    }
+  };
+
+  // Cerrar el modal sin realizar el pago
+  const handleCancelPayment = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -241,6 +256,18 @@ const Payment: React.FC = () => {
 
         <button type="submit" className="btn-confirm">Confirmar Pago</button>
       </form>
+
+      {/* Modal de confirmación de pago */}
+      {isModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <h3>¿Estás seguro de que deseas confirmar el pago?</h3>
+            <p>Total: ${total.toFixed(2)}</p>
+            <button onClick={handleConfirmPayment}>Confirmar</button>
+            <button onClick={handleCancelPayment}>Cancelar</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
