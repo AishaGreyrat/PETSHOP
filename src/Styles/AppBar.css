@@ -1,24 +1,22 @@
 .app-bar {
-  background: linear-gradient(135deg, #0052cc, #003d99);
+  background-color: #0052cc;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  position: fixed;
-  top: 0;
+  position: fixed; /* Asegura que el navbar quede fijo en la parte superior */
+  top: 0; /* Asegura que esté en la parte superior */
   left: 0;
-  z-index: 1000;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Asegura que el navbar esté por encima de otros elementos */
 }
 
 .app-bar-content {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   max-width: 1280px;
-  margin: 0 auto;
-  justify-content: space-between;
 }
 
 .logo-section {
@@ -27,90 +25,137 @@
 }
 
 .title-image {
-  width: 60px; /* Ajusta el tamaño del logo */
+  width: 200px;
   height: auto;
+  margin-right: 100px;
+ margin-left: 200px;
+}
+
+.navbar-search {
+  flex-grow: 1;
+  text-align: center;
 }
 
 .navbar-search input {
   padding: 0.5rem;
-  border-radius: 20px;
-  border: none;
-  width: 200px;
-  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 300px;
 }
 
-.menu-toggle {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: white;
+.navbar-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.icon {
+  height: 24px;
   cursor: pointer;
 }
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  right: -250px; /* Barra lateral se oculta en el lado derecho */
-  width: 250px;
-  height: 100%;
-  background-color: #003d99;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 2rem;
-  transition: right 0.3s ease;
-  z-index: 1001;
-}
-
-.sidebar.open {
-  right: 0; /* Barra lateral se despliega desde el lado derecho */
-}
-
-.sidebar ul {
+.navbar-icons ul {
   list-style: none;
+  display: flex; /* Esto alineará los íconos de forma horizontal */
+  gap: 1rem; /* Espacio entre los íconos */
   padding: 0;
   margin: 0;
 }
 
-.sidebar li {
-  margin: 1rem 0;
+.navbar-icons li {
+  margin: 0;
+  display: flex;
+  align-items: center; /* Asegura que los íconos estén alineados verticalmente al centro */
 }
 
-.sidebar .icon {
-  width: 30px;
-  height: 30px;
+.icon {
+  height: 35px; /* Ajusta el tamaño de los íconos si es necesario */
+  cursor: pointer;
 }
-
-.backdrop {
+.footer {
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  width: 100%;
+  background-color: #022D6D;
+  color: white;
+  text-align: center;
+  padding: 0px ;
 }
 
+.footer p {
+  margin-bottom: 10px;
+}
+
+.footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.footer ul li {
+  display: inline;
+}
+
+.footer ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos del modal */
 .modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 2rem;
-  z-index: 1002;
-  border-radius: 8px;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro para el modal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content {
-  position: relative;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  max-width: 100%;
 }
 
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.2rem;
+.close-button {
+  color: red;
+  float: right;
+  font-size: 24px;
   cursor: pointer;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+  background-color: #0052cc;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button[type="submit"]:hover {
+  background-color: #003d99;
+}
+label {
+  color: #000;
 }

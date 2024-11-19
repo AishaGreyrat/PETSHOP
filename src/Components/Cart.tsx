@@ -1,34 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useCart } from '../Context/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 const Cart: React.FC = () => {
   const { state, dispatch } = useCart();
   const total = state.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const navigate = useNavigate();
 
-  const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
-  const [isClearModalOpen, setIsClearModalOpen] = useState(false);
-  const [itemToRemove, setItemToRemove] = useState<string | null>(null);
-
+  // Eliminar un producto del carrito
   const handleRemove = (id: string) => {
-    setItemToRemove(id);
-    setIsRemoveModalOpen(true);
+    dispatch({ type: 'REMOVE_ITEM', payload: { id } });
   };
 
-  const confirmRemove = () => {
-    if (itemToRemove) {
-      dispatch({ type: 'REMOVE_ITEM', payload: { id: itemToRemove } });
-      setItemToRemove(null);
-      setIsRemoveModalOpen(false);
-    }
-  };
-
+  // Limpiar el carrito
   const handleClearCart = () => {
-    setIsClearModalOpen(true);
-  };
-
-  const confirmClearCart = () => {
     dispatch({ type: 'CLEAR_CART' });
-    setIsClearModalOpen(false);
   };
 
   return (
@@ -47,32 +33,13 @@ const Cart: React.FC = () => {
         </ul>
       )}
       <h3>Total: ${total.toFixed(2)}</h3>
-      {state.items.length > 0 && <button onClick={handleClearCart}>Limpiar carrito</button>}
+      {state.items.length > 0 && (
+        <>
+          <button onClick={handleClearCart}>Limpiar carrito</button>
 
-      {isRemoveModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={() => setIsRemoveModalOpen(false)}>&times;</span>
-            <h3>¿Estás seguro de que deseas remover este producto?</h3>
-            <div>
-              <button onClick={confirmRemove}>Confirmar</button>
-              <button onClick={() => setIsRemoveModalOpen(false)}>Cancelar</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {isClearModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={() => setIsClearModalOpen(false)}>&times;</span>
-            <h3>¿Estás seguro de que deseas limpiar el carrito?</h3>
-            <div>
-              <button onClick={confirmClearCart}>Confirmar</button>
-              <button onClick={() => setIsClearModalOpen(false)}>Cancelar</button>
-            </div>
-          </div>
-        </div>
+          {/* Botón de Pagar que redirige a la página de pago */}
+          <button onClick={() => navigate('/payment')}>Pagar</button>
+        </>
       )}
     </div>
   );
