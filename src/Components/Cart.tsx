@@ -24,10 +24,22 @@ const Cart: React.FC = () => {
         <p>Tu carrito está vacío</p>
       ) : (
         <ul>
-          {state.items.map(item => (
-            <li key={item.id}>
-              {item.name} - ${item.price} x {item.quantity}
-              <button onClick={() => handleRemove(item.id)}>Remover</button>
+          {/* Estilos antes del cambio a css */}
+          {state.items.map((item) => (
+            <li key={item.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+              {item.image && (
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  style={{ width: '50px', height: '50px', marginRight: '10px', objectFit: 'cover' }}
+                />
+              )}
+              <div>
+                <p>
+                  {item.name} - ${item.price} x {item.quantity}
+                </p>
+                <button onClick={() => handleRemove(item.id)}>Remover</button>
+              </div>
             </li>
           ))}
         </ul>
@@ -36,8 +48,6 @@ const Cart: React.FC = () => {
       {state.items.length > 0 && (
         <>
           <button onClick={handleClearCart}>Limpiar carrito</button>
-
-          {/* Botón de Pagar que redirige a la página de pago */}
           <button onClick={() => navigate('/payment')}>Pagar</button>
         </>
       )}
