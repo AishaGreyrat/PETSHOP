@@ -1,11 +1,6 @@
 .app-bar {
-<<<<<<< Updated upstream
-  background: linear-gradient(135deg, #0052cc, #003d99);
-  padding: 1rem;
-=======
   background-color: #6439FF;
   padding: 1rem 1.5rem; /* Ajuste del padding para ahorrar espacio */
->>>>>>> Stashed changes
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,24 +9,15 @@
   top: 0;
   left: 0;
   z-index: 1000;
-<<<<<<< Updated upstream
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-=======
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar el navbar */
->>>>>>> Stashed changes
 }
 
 .app-bar-content {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-<<<<<<< Updated upstream
-  max-width: 1280px;
-  margin: 0 auto;
-  justify-content: space-between;
-=======
   max-width: 1200px;
->>>>>>> Stashed changes
 }
 
 .logo-section {
@@ -40,56 +26,6 @@
 }
 
 .title-image {
-<<<<<<< Updated upstream
-  width: 130px; /* Ajusta el tamaño del logo */
-  height: 60px;
-}
-
-.navbar-search input {
-  padding: 0.5rem;
-  border-radius: 20px;
-  border: none;
-  width: 200px;
-  outline: none;
-}
-
-svg.icon-search {
-  height: 30px;
-  color: white;
-  margin-bottom: -10px;
-}
-
-.menu-toggle {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: white;
-  cursor: pointer;
-}
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  right: -250px; /* Barra lateral se oculta en el lado derecho */
-  width: 250px;
-  height: 100%;
-  background-color: #003d99;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 2rem;
-  transition: right 0.3s ease;
-  z-index: 1001;
-}
-
-.sidebar.open {
-  right: 0; /* Barra lateral se despliega desde el lado derecho */
-}
-
-.sidebar ul {
-  list-style: none;
-=======
   width: 150px; /* Tamaño ajustado para que no ocupe tanto espacio */
   height: auto;
   margin-right: 20px;
@@ -134,23 +70,10 @@ svg.icon-search {
   list-style: none;
   display: flex;
   gap: 1rem;
->>>>>>> Stashed changes
   padding: 0;
   margin: 0;
 }
 
-<<<<<<< Updated upstream
-.sidebar li {
-  margin: 1rem 0;
-}
-
-.sidebar .icon {
-  width: 30px;
-  height: 30px;
-}
-
-.backdrop {
-=======
 .navbar-icons li {
   display: flex;
   align-items: center;
@@ -171,16 +94,9 @@ svg.icon-search {
 
 /* Footer Styles */
 .footer {
->>>>>>> Stashed changes
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
-<<<<<<< Updated upstream
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-=======
   width: 100%;
   background-color: #6439FF;
   color: white;
@@ -195,20 +111,10 @@ svg.icon-search {
   display: flex;
   justify-content: center;
   gap: 15px;
->>>>>>> Stashed changes
 }
 
 .modal {
   position: fixed;
-<<<<<<< Updated upstream
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 2rem;
-  z-index: 1002;
-  border-radius: 8px;
-=======
   top: 0;
   left: 0;
   width: 100%;
@@ -218,22 +124,10 @@ svg.icon-search {
   justify-content: center;
   align-items: center; /* Centrado vertical */
   z-index: 1000; /* Asegura que el modal esté sobre otros elementos */
->>>>>>> Stashed changes
 }
 
 /* Modal container */
 .modal-content {
-<<<<<<< Updated upstream
-  position: relative;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 1.2rem;
-  cursor: pointer;
-=======
   background-color: #fff;
   border-radius: 16px; /* Bordes redondeados */
   width: 90%;
@@ -298,7 +192,6 @@ svg.icon-search {
 .modal-body input,
 .modal-body select,
 .modal-body button {
-  width: 100%; /* Ocupan todo el ancho disponible */
   padding: 0.8rem;
   font-size: 1rem;
   border-radius: 8px;
@@ -335,5 +228,4 @@ svg.icon-search {
 
 .modal-footer {
   text-align: center;
->>>>>>> Stashed changes
 }
