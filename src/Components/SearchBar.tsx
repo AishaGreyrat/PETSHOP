@@ -22,7 +22,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, select
     </input>
     <MagnifyingGlassCircleIcon className='icon-search'/>
       {/* Filtro por categoría */}
-      <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+      <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}
+        className='category-dropdown'>
         <option value="">Todas las categorías</option>
         <option value="Alimentación">Alimentación</option>
         <option value="Salud e Higiene">Salud e Higiene</option>
