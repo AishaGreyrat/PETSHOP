@@ -1,14 +1,15 @@
 .app-bar {
-  background-color: #0052cc;
-  padding: 1rem;
+  background-color: #6439FF;
+  padding: 1rem 1.5rem; /* Ajuste del padding para ahorrar espacio */
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
-  position: fixed; /* Asegura que el navbar quede fijo en la parte superior */
-  top: 0; /* Asegura que esté en la parte superior */
+  position: fixed;
+  top: 0;
   left: 0;
-  z-index: 1000; /* Asegura que el navbar esté por encima de otros elementos */
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar el navbar */
 }
 
 .app-bar-content {
@@ -16,7 +17,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1280px;
+  max-width: 1200px;
 }
 
 .logo-section {
@@ -25,64 +26,84 @@
 }
 
 .title-image {
-  width: 200px;
+  width: 150px; /* Tamaño ajustado para que no ocupe tanto espacio */
   height: auto;
-  margin-right: 100px;
- margin-left: 200px;
+  margin-right: 20px;
 }
 
 .navbar-search {
-  flex-grow: 1;
-  text-align: center;
+  display: flex; /* Alinea la búsqueda y el dropdown en una fila */
+  align-items: center;
+  gap: 10px; /* Espaciado entre la barra de búsqueda y el dropdown */
 }
 
 .navbar-search input {
-  padding: 0.5rem;
-  border-radius: 5px;
+  padding: 0.6rem 1rem; /* Tamaño compacto */
+  border-radius: 8px;
   border: 1px solid #ccc;
-  width: 300px;
+  width: 300px; /* Ancho ajustado */
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.category-dropdown {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.category-dropdown:hover {
+  border-color: #0052cc;
+  background-color: #f0f8ff;
 }
 
 .navbar-icons {
   display: flex;
-  gap: 1rem;
+  gap: 1rem; /* Espaciado entre los íconos */
 }
 
-.icon {
-  height: 24px;
-  cursor: pointer;
-}
 .navbar-icons ul {
   list-style: none;
-  display: flex; /* Esto alineará los íconos de forma horizontal */
-  gap: 1rem; /* Espacio entre los íconos */
+  display: flex;
+  gap: 1rem;
   padding: 0;
   margin: 0;
 }
 
 .navbar-icons li {
-  margin: 0;
   display: flex;
-  align-items: center; /* Asegura que los íconos estén alineados verticalmente al centro */
+  align-items: center;
 }
 
 .icon {
-  height: 35px; /* Ajusta el tamaño de los íconos si es necesario */
+  height: 24px; /* Tamaño del ícono */
+  width: 24px;
+  color: #fff; /* Color blanco para destacar en fondo azul */
   cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
+
+.icon:hover {
+  transform: scale(1.2); /* Efecto de agrandamiento al pasar el mouse */
+  color: #ffcc00; /* Cambio de color en hover */
+}
+
+/* Footer Styles */
 .footer {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #022D6D;
+  background-color: #6439FF;
   color: white;
   text-align: center;
-  padding: 0px ;
-}
-
-.footer p {
-  margin-bottom: 10px;
+  padding: 0.8rem;
+  font-size: 0.9rem;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .footer ul {
@@ -92,70 +113,119 @@
   gap: 15px;
 }
 
-.footer ul li {
-  display: inline;
-}
-
-.footer ul li a {
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.footer ul li a:hover {
-  text-decoration: underline;
-}
-
-/* Estilos del modal */
 .modal {
   position: fixed;
-  z-index: 1000;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro para el modal */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; /* Centrado vertical */
+  z-index: 1000; /* Asegura que el modal esté sobre otros elementos */
 }
 
+/* Modal container */
 .modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 300px;
-  max-width: 100%;
+  background-color: #fff;
+  border-radius: 16px; /* Bordes redondeados */
+  width: 90%;
+  max-width: 450px; /* Ancho máximo ajustado */
+  padding: 2rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra moderna */
+  animation: scaleUp 0.3s ease-in-out; /* Animación de entrada */
+  position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Animación */
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Encabezado del modal */
+.modal-header {
+  display: flex;
+  justify-content: flex-end; /* Mueve el botón de cerrar a la esquina superior derecha */
+  margin-bottom: 1rem;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0 auto;
+  flex: 1;
+  text-align: center; /* Centra el título */
 }
 
 .close-button {
-  color: red;
-  float: right;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-input {
-  width: 100%;
-  padding: 8px;
-  margin: 10px 0;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-button[type="submit"] {
-  background-color: #0052cc;
-  color: white;
-  padding: 10px;
+  background: none;
   border: none;
-  border-radius: 5px;
+  font-size: 1.5rem;
+  color: #666;
   cursor: pointer;
-  width: 100%;
+  transition: color 0.3s ease;
+  position: absolute;
+  top: 1rem;
+  right: 1rem; /* Posicionamiento en la esquina superior derecha */
 }
 
-button[type="submit"]:hover {
-  background-color: #003d99;
+.close-button:hover {
+  color: red;
 }
-label {
-  color: #000;
+
+/* Cuerpo del modal */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Espaciado entre los elementos */
+  margin-bottom: 1rem;
+}
+
+.modal-body input,
+.modal-body select,
+.modal-body button {
+  padding: 0.8rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombras internas */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Diseño de inputs al enfocar */
+.modal-body input:focus,
+.modal-body select:focus {
+  border-color: #6439FF; /* Color al enfocar */
+  box-shadow: 0 0 5px rgba(100, 57, 255, 0.5); /* Resaltado */
+  outline: none;
+}
+
+/* Botón de acción */
+.modal-footer button {
+  padding: 0.8rem 1.5rem;
+  background-color: #6439FF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal-footer button:hover {
+  background-color: #4b29c4;
+  transform: scale(1.05); /* Efecto de aumento */
+}
+
+.modal-footer {
+  text-align: center;
 }

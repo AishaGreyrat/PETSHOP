@@ -30,7 +30,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ closeModal }) => {
 
   const [imageBase64, setImageBase64] = useState<string | null>(null);
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [formData, setFormData] = useState<ProductFormData | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +46,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ closeModal }) => {
 
   const onSubmit = (data: ProductFormData) => {
     setFormData(data);
-    setIsModalOpen(true);
+    setIsRegisterModalOpen(true);
   };
 
   const handleConfirmSubmit = async () => {
@@ -63,31 +63,35 @@ const ProductForm: React.FC<ProductFormProps> = ({ closeModal }) => {
       } else {
         alert('Hubo un error al añadir el producto');
       }
-      setIsModalOpen(false);
+      setIsRegisterModalOpen(false);
       if (closeModal) closeModal();
     }
   };
 
+function closeRegisterModal(event: React.MouseEvent<HTMLButtonElement>): void {
+  event.stopPropagation(); // Si necesitas evitar que el evento burbujee
+  setIsRegisterModalOpen(false); // Esta línea sigue cerrando el modal
+}
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+        <div className='modal-body'>
+          <h2>Agregar Producto</h2>
           <label>Nombre del producto: </label>
           <input type="text" {...register('name')} />
           {errors.name && <span>{errors.name.message}</span>}
-        </div>
-        <div>
+       
           <label>Precio: </label>
           <input type="number" step="0.01" {...register('price', { valueAsNumber: true })} />
           {errors.price && <span>{errors.price.message}</span>}
-        </div>
-        <div>
+       
           <label>Cantidad: </label>
           <input type="number" {...register('quantity', { valueAsNumber: true })} />
           {errors.quantity && <span>{errors.quantity.message}</span>}
         </div>
 
-        <div>
+        <div className='modal-body'>
           <label>Categoría: </label>
           <select {...register('category')}>
             <option value="">Selecciona una categoría</option>
@@ -114,14 +118,14 @@ const ProductForm: React.FC<ProductFormProps> = ({ closeModal }) => {
         <button type="submit">Añadir producto</button>
       </form>
 
-      {isModalOpen && (
+      {isRegisterModalOpen && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={() => setIsModalOpen(false)}>&times;</span>
+              <button className="close-button" onClick={closeRegisterModal}>&times;</button>
             <h3>¿Estás seguro de que deseas añadir este producto?</h3>
             <div>
               <button onClick={handleConfirmSubmit}>Confirmar</button>
-              <button onClick={() => setIsModalOpen(false)}>Cancelar</button>
+              <button onClick={() => setIsRegisterModalOpen(false)}>Cancelar</button>
             </div>
           </div>
         </div>
