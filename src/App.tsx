@@ -1,31 +1,48 @@
 import React, { useState } from 'react';
-import ImageCarousel from './Components/ImageCarousel'; // Importa el carrusel
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AppBar from './Components/Appbar';
+import ImageCarousel from './Components/ImageCarousel';
 import './Styles/AppBar.css';
-import ReactRouter from './Routes/ReactRouter'; // Si este es el que gestiona las rutas
-import ShopPage from './Components/ShopPage'; // Página de productos
+import ShopPage from './Components/ShopPage';
+import { CartProvider } from './Context/CartContext';
+import Cart from './Components/Cart';
+import PaymentPage from './Components/Payment'; // Importa el componente de pago
 
 const App: React.FC = () => {
-  // Estado para el término de búsqueda y la categoría seleccionada
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
 
   return (
     <div>
-      {/* Pasamos los estados a ReactRouter para que pueda acceder a las rutas que lo necesiten */}
-     
-      {/* Carrusel de imágenes */}
-      <ImageCarousel />
- <ReactRouter 
-        searchTerm={searchTerm} 
-        setSearchTerm={setSearchTerm} 
-        selectedCategory={selectedCategory} 
-        setSelectedCategory={setSelectedCategory} 
-      />
+      <CartProvider>
+        <Router>
+          {/* Barra de navegación siempre visible */}
+          <AppBar 
+            searchTerm={searchTerm} 
+            setSearchTerm={setSearchTerm} 
+            selectedCategory={selectedCategory} 
+            setSelectedCategory={setSelectedCategory} 
+          />
 
-      {/* Página de productos */}
-      <ShopPage searchTerm={searchTerm} selectedCategory={selectedCategory} />
+          <Routes>
+            {/* Página de inicio */}
+            <Route path="/" element={
+              <>
+                <ImageCarousel />
+                <ShopPage searchTerm={searchTerm} selectedCategory={selectedCategory} />
+              </>
+            } />
 
-      {/* footer */}
+            {/* Ruta para el carrito de compras */}
+            <Route path="/cart" element={<Cart />} />
+
+            {/* Ruta para la página de métodos de pago */}
+            <Route path="/payment" element={<PaymentPage />} />
+          </Routes>
+        </Router>
+      </CartProvider>
+
+      {/* Footer siempre visible */}
       <footer className="footer">
         <p>&copy; 2024 Petshop. Todos los derechos reservados.</p>
         <ul>
