@@ -1,16 +1,14 @@
 /* Estilos para el carrusel de imágenes */
 .image-carousel {
-    width: 100%;
-    height: 400px; /* Altura del carrusel */
-  width: 200%;
-    height: 452px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    margin-top: 149px; /* Espacio debajo del navbar */
-    
+  width: 54%;
+  height: 536px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  margin-top: 25px;
+  left: 410px;
   }
   
   .carousel-image {

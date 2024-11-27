@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { auth } from '../../firebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import "../Styles/AppBar.css"
 
 type RegisterProps = {
   closeModal: () => void; // Prop para cerrar el modal
@@ -49,7 +50,7 @@ const Register: React.FC<RegisterProps> = ({ closeModal }) => {
             required
           />
       </div>    
-          <button type="submit">Enter</button>
+          <button  className='register'type="submit">Registrarse</button>
         </form>
       </div>
     </div>
