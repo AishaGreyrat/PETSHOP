@@ -101,6 +101,20 @@
   background-color: #6439FF;
   color: white;
   text-align: center;
+  padding: 0px ;
+}
+
+.footer p {
+  margin-bottom: 10px;
+  width: 491.7%;
+  background-color: #6439FF;
+  color: white;
+  text-align: center;
+  padding: 2.5rem;
+  font-size: 0.2rem;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 25px;
+  margin-left: -2928px;
   padding: 0.8rem;
   font-size: 0.9rem;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
@@ -112,6 +126,50 @@
   justify-content: center;
   gap: 15px;
 }
+
+
+.footer ul li {
+  display: inline;
+}
+
+.footer ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos del modal */
+.footer-text {
+  text-align: center;
+  font-size: 21px;
+  color: #ffffff;
+  text-align: left;
+  margin-left: 3627px;
+}
+
+.footer-link {
+  text-align: center;
+  font-size: 14px;
+  color: #ffffff;
+  text-align: left;
+  margin-left: 1772px;
+}
+.footer-link2 {
+  text-align: center;
+  font-size: 14px;
+  color: #ffffff;
+  text-align: left;
+  margin-left: 0px;
+}
+
+.footer-link:hover {
+  text-decoration: underline; /* Subrayado cuando el enlace esté en hover */
+}
+
 
 .modal {
   position: fixed;

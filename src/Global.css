@@ -22,18 +22,21 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 35px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #f7f7f7;
+  background-color: #e94282;
   cursor: pointer;
   transition: border-color 0.25s;
+  border-color: #e94282;
+  font-family:  'PT Sans', Verdana, sans-serif;
+  color: white;
 }
 button:hover {
-  border-color: #646cff;
+  background-color:#8f0360 ;
+  border-color: #8f0360;
 }
 button:focus,
 button:focus-visible {
