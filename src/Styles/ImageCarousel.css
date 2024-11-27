@@ -1,18 +1,14 @@
 /* Estilos para el carrusel de imágenes */
 .image-carousel {
-<<<<<<< Updated upstream
     width: 100%;
     height: 400px; /* Altura del carrusel */
-=======
   width: 200%;
     height: 452px;
->>>>>>> Stashed changes
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;
-<<<<<<< Updated upstream
     margin-top: 149px; /* Espacio debajo del navbar */
     
   }
@@ -23,7 +19,6 @@
     object-fit: cover; /* Asegura que las imágenes se ajusten al contenedor */
   }
   
-=======
     margin-top: 126px;
     margin-left: -107px;
 }
@@ -33,4 +28,20 @@
   height: 131%;
   object-fit: cover; /* Asegura que las imágenes se ajusten al contenedor */
 }
->>>>>>> Stashed changes
+
+  width: 100%;
+  height: 400px; /* Altura del carrusel */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  margin-top: 149px; /* Espacio debajo del navbar */
+  
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que las imágenes se ajusten al contenedor */
+}

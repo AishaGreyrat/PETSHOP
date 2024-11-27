@@ -27,11 +27,13 @@ const Register: React.FC<RegisterProps> = ({ closeModal }) => {
   };
 
   return (
-    <div className="modal-container">
+    <div className="modal">
       <div className="modal-content">
+        <h2>Registro</h2>
         {/* Botón para cerrar el modal */}
-        <button className="close-btn" onClick={closeModal}>&times;</button>
+        <button className="close-button" onClick={closeModal}>&times;</button>
         <form onSubmit={handleRegister} className="register-form">
+      <div className='modal-body' >
           <input
             type="email"
             placeholder="Email"
@@ -46,7 +48,8 @@ const Register: React.FC<RegisterProps> = ({ closeModal }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Registrar</button>
+      </div>    
+          <button type="submit">Enter</button>
         </form>
       </div>
     </div>
