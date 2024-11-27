@@ -52,8 +52,8 @@ const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => 
           <div key={product.id}>
             {product.image && <img src={product.image} alt={product.name} />}
             <h3>{product.name}</h3>
-            <p>Precio: ${product.price.toFixed(2)}</p>
-            <p>Cantidad: {product.quantity}</p>
+            <p className="price">Precio: ${product.price.toFixed(2)}</p>
+            <p className="quantity">Cantidad: {product.quantity}</p>
             <button onClick={() => addToCart(product)}>Agregar al carrito</button>
           </div>
         ))}

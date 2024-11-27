@@ -27,17 +27,19 @@ const App: React.FC = () => {
 
       {/* footer */}
       <footer className="footer">
-        <p>&copy; 2024 Petshop. Todos los derechos reservados.</p>
-        <ul>
-          <li>
-            <a href="#terms">Términos de servicio</a>
-          </li>
-          <li>
-            <a href="#contact">Contáctanos</a>
-          </li>
-        </ul>
-      </footer>
-    </div>
+        <p className="footer-text">&copy; 2024 Petshop. Todos los derechos reservados.</p>
+       <ul>
+        <li>
+         <a className="footer-link" href="#terms">Términos de servicio</a>
+        </li>
+         <li>
+          <a className="footer-link2" href="#contact">Contáctanos</a>
+         </li>
+       </ul>
+     </footer>
+  </div>
+
+    
   );
 };
 

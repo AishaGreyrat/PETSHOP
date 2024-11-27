@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import { useCart } from '../Context/CartContext';
+<<<<<<< Updated upstream
+=======
+import { useNavigate } from 'react-router-dom';
+import "../Styles/AppBar.css";
+>>>>>>> Stashed changes
 
 const Cart: React.FC = () => {
   const { state, dispatch } = useCart();
