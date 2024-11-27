@@ -4,6 +4,8 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { addProduct } from '../Components/productoService';
 import { useNavigate } from 'react-router-dom';
+import "../Styles/AppBar.css"
+
 
 // Esquema de validación
 const productSchema = z.object({
@@ -115,7 +117,7 @@ function closeRegisterModal(event: React.MouseEvent<HTMLButtonElement>): void {
           {imageBase64 && <img src={imageBase64} alt="Vista previa" style={{ width: '100px' }} />}
         </div>
 
-        <button type="submit">Añadir producto</button>
+        <button className='añadir' type="submit">Añadir producto</button>
       </form>
 
       {isRegisterModalOpen && (

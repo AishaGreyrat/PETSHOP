@@ -94,19 +94,7 @@
 
 /* Footer Styles */
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #6439FF;
-  color: white;
-  text-align: center;
-  padding: 0px ;
-}
-
-.footer p {
-  margin-bottom: 10px;
-  width: 491.7%;
+  width: 95.8%;
   background-color: #6439FF;
   color: white;
   text-align: center;
@@ -114,12 +102,8 @@
   font-size: 0.2rem;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 25px;
-  margin-left: -2928px;
-  padding: 0.8rem;
-  font-size: 0.9rem;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: -1px;
 }
-
 .footer ul {
   list-style: none;
   display: flex;
@@ -127,36 +111,18 @@
   gap: 15px;
 }
 
-
-.footer ul li {
-  display: inline;
-}
-
-.footer ul li a {
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.footer ul li a:hover {
-  text-decoration: underline;
-}
-
-/* Estilos del modal */
 .footer-text {
   text-align: center;
   font-size: 21px;
   color: #ffffff;
   text-align: left;
-  margin-left: 3627px;
+  margin-left: 700px;
 }
-
 .footer-link {
-  text-align: center;
   font-size: 14px;
   color: #ffffff;
   text-align: left;
-  margin-left: 1772px;
+  margin-left: -15px;
 }
 .footer-link2 {
   text-align: center;
@@ -169,7 +135,6 @@
 .footer-link:hover {
   text-decoration: underline; /* Subrayado cuando el enlace esté en hover */
 }
-
 
 .modal {
   position: fixed;
@@ -226,8 +191,9 @@
 .close-button {
   background: none;
   border: none;
-  font-size: 1.5rem;
-  color: #666;
+  font-size: 1rem;
+  background-color: #e40808;
+  color: #f0f0f0;
   cursor: pointer;
   transition: color 0.3s ease;
   position: absolute;
@@ -236,8 +202,11 @@
 }
 
 .close-button:hover {
-  color: red;
-}
+  color: #e40808;
+  background-color: #9b9a9a;
+  transform: scale(1.05); /* Efecto de aumento */
+  }
+
 
 /* Cuerpo del modal */
 .modal-body {
@@ -267,9 +236,9 @@
 }
 
 /* Botón de acción */
-.modal-footer button {
+.confirmar-button {
   padding: 0.8rem 1.5rem;
-  background-color: #6439FF;
+  background-color: #8c08e4;
   color: white;
   border: none;
   border-radius: 8px;
@@ -277,13 +246,53 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 10px;
+  margin-left: -16px;
 }
 
-.modal-footer button:hover {
-  background-color: #4b29c4;
+.confirmar-button:hover {
+  background-color: #075514;
   transform: scale(1.05); /* Efecto de aumento */
 }
 
 .modal-footer {
   text-align: center;
+}
+.añadir
+{
+  padding: 0.8rem 1.5rem;
+  background-color: #8c08e4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 15px;
+  margin-left: -18px;
+}
+.añadir:hover
+{
+  background-color: #075514;
+  transform: scale(1.05); /* Efecto de aumento */
+}
+.register
+{
+  padding: 0.8rem 1.5rem;
+  background-color: #8c08e4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 10px;
+  margin-left: -16px;
+}
+.register:hover
+{
+  background-color: #075514;
+  transform: scale(1.05); /* Efecto de aumento */
 }

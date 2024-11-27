@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from './productoService';
 import { useCart } from '../Context/CartContext';
+import "../Styles/ProductGrid.css"; // Archivo de estilos para la cuadrícula
 
 type Product = {
   id: string;
@@ -46,9 +47,9 @@ const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => 
 
   return (
     <div>
-      <div>
+      <div className="product-grid">
         {filteredProducts.map((product) => (
-          <div key={product.id}>
+          <div className="product-card" key={product.id}>
             {product.image && <img src={product.image} alt={product.name} />}
             <h3>{product.name}</h3>
             <p className="price">Precio: ${product.price.toFixed(2)}</p>
