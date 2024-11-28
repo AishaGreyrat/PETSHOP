@@ -54,7 +54,13 @@ const Cart: React.FC = () => {
           <button onClick={() => navigate('/payment')}>Pagar</button>
         </>
       )}
+
+
     </div>
+
+
+
+
   );
 };
 
