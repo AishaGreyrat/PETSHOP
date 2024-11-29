@@ -79,7 +79,7 @@ function closeRegisterModal(event: React.MouseEvent<HTMLButtonElement>): void {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='modal-body'>
-          <h2>Agregar Producto</h2>
+          <h2 >Agregar Producto</h2>
           <label>Nombre del producto: </label>
           <input type="text" {...register('name')} />
           {errors.name && <span>{errors.name.message}</span>}

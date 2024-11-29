@@ -31,7 +31,7 @@ const Login: React.FC<LoginProps> = ({ closeModal }) => {
     <div className="modal">
       <div className="modal-content">
         <div className='modal-header'></div>
-        <h2>Iniciar Sesisón</h2>
+        <h2 className="iniciarsesión">Iniciar Sesisón</h2>
         {/* Botón para cerrar el modal */}
         <button className="close-button" onClick={closeModal}>
           &times;
