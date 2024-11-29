@@ -55,14 +55,37 @@ button:focus-visible {
   }
 }
 
-h3 {
+.total {
   display: block;
-  font-size: 1.17em;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+    margin-top: 220px;
+}
+
+
+.carritotitle {
+  display: block;
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   font-weight: bold;
   unicode-bidi: isolate;
-  margin-top: 0px;
+  margin-top: 200px;
+}
+
+.carritovacio
+{
+  display: block;
+    margin-block-start: 12em;
+    margin-block-end: 7em;
+    margin-inline-start: 1px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
 }
