@@ -2,7 +2,6 @@ import React from 'react';
 import { useCart } from '../Context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import "../Styles/AppBar.css";
-import { useNavigate } from 'react-router-dom';
 
 
 const Cart: React.FC = () => {
