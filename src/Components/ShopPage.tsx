@@ -54,7 +54,7 @@ const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => 
             <h3>{product.name}</h3>
             <p className="price">Precio: ${product.price.toFixed(2)}</p>
             <p className="quantity">Cantidad: {product.quantity}</p>
-            <button onClick={() => addToCart(product)}>Agregar al carrito</button>
+            <button className='añadir' onClick={() => addToCart(product)}>Agregar al carrito</button>
           </div>
         ))}
       </div>

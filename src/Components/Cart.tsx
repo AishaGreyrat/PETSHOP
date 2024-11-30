@@ -40,7 +40,7 @@ const Cart: React.FC = () => {
                 <p>
                   {item.name} - ${item.price} x {item.quantity}
                 </p>
-                <button onClick={() => handleRemove(item.id)}>Remover</button>
+                <button className='remover' onClick={() => handleRemove(item.id)}>Remover</button>
               </div>
             </li>
           ))}

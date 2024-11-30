@@ -20,7 +20,7 @@ h1 {
   line-height: 1.1;
 }
 
-button {
+.añadir{
   border-radius: 35px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -33,12 +33,12 @@ button {
   font-family:  'PT Sans', Verdana, sans-serif;
   color: white;
 }
-button:hover {
+.añadir:hover {
   background-color:#8f0360 ;
   border-color: #8f0360;
 }
-button:focus,
-button:focus-visible {
+.añadir:focus,
+.añadir:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
@@ -50,7 +50,7 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
-  button {
+  .añadir {
     background-color: #f9f9f9;
   }
 }
