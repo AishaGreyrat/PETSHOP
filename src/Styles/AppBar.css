@@ -31,12 +31,6 @@
   margin-right: 20px;
 }
 
-.registrar {
-  font-weight: 500;
-  color: white;
-  text-decoration: inherit;
-}
-
 .navbar-search {
   display: flex; /* Alinea la búsqueda y el dropdown en una fila */
   align-items: center;
@@ -100,18 +94,16 @@
 
 /* Footer Styles */
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  width: 95.8%;
   background-color: #6439FF;
   color: white;
   text-align: center;
-  padding: 0.8rem;
-  font-size: 0.9rem;
+  padding: 2.5rem;
+  font-size: 0.2rem;
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 100px;
+  margin-left: -1px;
 }
-
 .footer ul {
   list-style: none;
   display: flex;
@@ -119,8 +111,6 @@
   gap: 15px;
 }
 
-<<<<<<< Updated upstream
-=======
 .footer-text {
   text-align: center;
   font-size: 21px;
@@ -143,16 +133,9 @@
 }
 
 .footer-link:hover {
-  color: goldenrod;
   text-decoration: underline; /* Subrayado cuando el enlace esté en hover */
 }
 
-.footer-link2:hover {
-  color: goldenrod;
-  text-decoration: underline; /* Subrayado cuando el enlace esté en hover */
-}
-
->>>>>>> Stashed changes
 .modal {
   position: fixed;
   top: 0;
@@ -208,8 +191,9 @@
 .close-button {
   background: none;
   border: none;
-  font-size: 1.5rem;
-  color: #666;
+  font-size: 1rem;
+  background-color: #e40808;
+  color: #f0f0f0;
   cursor: pointer;
   transition: color 0.3s ease;
   position: absolute;
@@ -218,16 +202,11 @@
 }
 
 .close-button:hover {
-<<<<<<< Updated upstream
-  color: red;
-}
-=======
-  color: white;
-  background-color: goldenrod;
+  color: #e40808;
+  background-color: #9b9a9a;
   transform: scale(1.05); /* Efecto de aumento */
   }
 
->>>>>>> Stashed changes
 
 /* Cuerpo del modal */
 .modal-body {
@@ -257,9 +236,9 @@
 }
 
 /* Botón de acción */
-.modal-footer button {
+.confirmar-button {
   padding: 0.8rem 1.5rem;
-  background-color: #6439FF;
+  background-color: #8c08e4;
   color: white;
   border: none;
   border-radius: 8px;
@@ -267,13 +246,58 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 10px;
+  margin-left: -16px;
 }
 
-.modal-footer button:hover {
-  background-color: #4b29c4;
+.confirmar-button:hover {
+  background-color: #075514;
   transform: scale(1.05); /* Efecto de aumento */
 }
 
 .modal-footer {
   text-align: center;
+}
+.añadir
+{
+  padding: 0.8rem 1.5rem;
+  background-color: #8c08e4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 15px;
+  margin-left: -18px;
+}
+.añadir:hover
+{
+  background-color: #075514;
+  transform: scale(1.05); /* Efecto de aumento */
+}
+.register
+{
+  padding: 0.8rem 1.5rem;
+  background-color: #8c08e4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 10px;
+  margin-left: -16px;
+}
+.register:hover
+{
+  background-color: #075514;
+  transform: scale(1.05); /* Efecto de aumento */
+}
+.element.style {
+  width: 99px;
+  margin-top: 20px;
+  margin-left: -24px;
 }

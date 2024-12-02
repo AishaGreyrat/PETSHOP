@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { addProduct } from '../Components/productoService';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addProduct } from "../Components/productoService";
+import { useNavigate } from "react-router-dom";
+import "../Styles/AppBar.css";
 
 // Esquema de validación
 const productSchema = z.object({
@@ -24,7 +25,11 @@ type ProductFormProps = {
 };
 
 const ProductForm: React.FC<ProductFormProps> = ({ closeModal }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm<ProductFormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ProductFormData>({
     resolver: zodResolver(productSchema),
   });
 
@@ -59,41 +64,50 @@ const ProductForm: React.FC<ProductFormProps> = ({ closeModal }) => {
       const response = await addProduct(productData);
       if (response.success) {
         alert(response.message);
-        navigate('/');
+        navigate("/");
       } else {
-        alert('Hubo un error al añadir el producto');
+        alert("Hubo un error al añadir el producto");
       }
       setIsRegisterModalOpen(false);
       if (closeModal) closeModal();
     }
   };
 
-function closeRegisterModal(event: React.MouseEvent<HTMLButtonElement>): void {
-  event.stopPropagation(); // Si necesitas evitar que el evento burbujee
-  setIsRegisterModalOpen(false); // Esta línea sigue cerrando el modal
-}
+  function closeRegisterModal(
+    event: React.MouseEvent<HTMLButtonElement>
+  ): void {
+    event.stopPropagation(); // Si necesitas evitar que el evento burbujee
+    setIsRegisterModalOpen(false); // Esta línea sigue cerrando el modal
+  }
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className='modal-body'>
+        <div className="modal-body">
           <h2>Agregar Producto</h2>
           <label>Nombre del producto: </label>
-          <input type="text" {...register('name')} />
+          <input type="text" {...register("name")} />
           {errors.name && <span>{errors.name.message}</span>}
-       
+
           <label>Precio: </label>
-          <input type="number" step="0.01" {...register('price', { valueAsNumber: true })} />
+          <input
+            type="number"
+            step="0.01"
+            {...register("price", { valueAsNumber: true })}
+          />
           {errors.price && <span>{errors.price.message}</span>}
-       
+
           <label>Cantidad: </label>
-          <input type="number" {...register('quantity', { valueAsNumber: true })} />
+          <input
+            type="number"
+            {...register("quantity", { valueAsNumber: true })}
+          />
           {errors.quantity && <span>{errors.quantity.message}</span>}
         </div>
 
-        <div className='modal-body'>
+        <div className="modal-body">
           <label>Categoría: </label>
-          <select {...register('category')}>
+          <select {...register("category")}>
             <option value="">Selecciona una categoría</option>
             <option value="Alimentación">Alimentación</option>
             <option value="Salud e Higiene">Salud e Higiene</option>
@@ -104,7 +118,9 @@ function closeRegisterModal(event: React.MouseEvent<HTMLButtonElement>): void {
             <option value="Entrenamiento">Entrenamiento</option>
             <option value="Seguridad">Seguridad</option>
             <option value="Cuidado dental">Cuidado dental</option>
-            <option value="Limpieza y Desinfección">Limpieza y Desinfección</option>
+            <option value="Limpieza y Desinfección">
+              Limpieza y Desinfección
+            </option>
           </select>
           {errors.category && <span>{errors.category.message}</span>}
         </div>
@@ -112,20 +128,32 @@ function closeRegisterModal(event: React.MouseEvent<HTMLButtonElement>): void {
         <div>
           <label>Imagen del producto: </label>
           <input type="file" onChange={handleImageChange} />
-          {imageBase64 && <img src={imageBase64} alt="Vista previa" style={{ width: '100px' }} />}
+          {imageBase64 && (
+            <img
+              src={imageBase64}
+              alt="Vista previa"
+              style={{ width: "100px" }}
+            />
+          )}
         </div>
 
-        <button type="submit">Añadir producto</button>
+        <button className="añadir" type="submit">
+          Añadir producto
+        </button>
       </form>
 
       {isRegisterModalOpen && (
         <div className="modal">
           <div className="modal-content">
-              <button className="close-button" onClick={closeRegisterModal}>&times;</button>
+            <button className="close-button" onClick={closeRegisterModal}>
+              &times;
+            </button>
             <h3>¿Estás seguro de que deseas añadir este producto?</h3>
             <div>
               <button onClick={handleConfirmSubmit}>Confirmar</button>
-              <button onClick={() => setIsRegisterModalOpen(false)}>Cancelar</button>
+              <button onClick={() => setIsRegisterModalOpen(false)}>
+                Cancelar
+              </button>
             </div>
           </div>
         </div>
