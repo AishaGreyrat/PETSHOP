@@ -90,11 +90,9 @@ const AppBar: React.FC<AppBarProps> = ({
             </li>
 
             {/* Enlace que abre el modal de Registro */}
-            <li>
-              <a href="#" onClick={openRegisterModal}>
-                Registrar
-              </a>
-            </li>
+            <button className="registrar" onClick={openRegisterModal}>
+              Registrate
+            </button>
           </ul>
         </nav>
       </div>

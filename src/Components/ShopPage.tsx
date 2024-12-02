@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { fetchProducts } from './productoService';
-import { useCart } from '../Context/CartContext';
+import React, { useEffect, useState } from "react";
+import { fetchProducts } from "./productoService";
+import { useCart } from "../Context/CartContext";
 import "../Styles/ProductGrid.css"; // Archivo de estilos para la cuadrícula
 
 type Product = {
@@ -17,7 +17,10 @@ type ShopPageProps = {
   selectedCategory: string;
 };
 
-const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => {
+const ShopPage: React.FC<ShopPageProps> = ({
+  searchTerm,
+  selectedCategory,
+}) => {
   const [products, setProducts] = useState<Product[]>([]);
   const { dispatch } = useCart();
 
@@ -27,7 +30,7 @@ const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => 
         const fetchedProducts = await fetchProducts();
         setProducts(fetchedProducts);
       } catch (error) {
-        console.error('Error al obtener los productos:', error);
+        console.error("Error al obtener los productos:", error);
       }
     };
 
@@ -35,13 +38,17 @@ const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => 
   }, []);
 
   const filteredProducts = products.filter((product) => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory ? product.category === selectedCategory : true;
+    const matchesSearch = product.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory
+      ? product.category === selectedCategory
+      : true;
     return matchesSearch && matchesCategory;
   });
 
   const addToCart = (product: Product) => {
-    dispatch({ type: 'ADD_ITEM', payload: product });
+    dispatch({ type: "ADD_ITEM", payload: product });
     alert(`${product.name} ha sido añadido al carrito`);
   };
 
@@ -54,7 +61,9 @@ const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => 
             <h3>{product.name}</h3>
             <p className="price">Precio: ${product.price.toFixed(2)}</p>
             <p className="quantity">Cantidad: {product.quantity}</p>
-            <button onClick={() => addToCart(product)}>Agregar al carrito</button>
+            <button onClick={() => addToCart(product)}>
+              Agregar al carrito
+            </button>
           </div>
         ))}
       </div>

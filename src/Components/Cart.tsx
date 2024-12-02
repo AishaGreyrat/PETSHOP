@@ -3,20 +3,22 @@ import { useCart } from '../Context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import "../Styles/AppBar.css";
 
-
 const Cart: React.FC = () => {
   const { state, dispatch } = useCart();
-  const total = state.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const total = state.items.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
   const navigate = useNavigate();
 
   // Eliminar un producto del carrito
   const handleRemove = (id: string) => {
-    dispatch({ type: 'REMOVE_ITEM', payload: { id } });
+    dispatch({ type: "REMOVE_ITEM", payload: { id } });
   };
 
   // Limpiar el carrito
   const handleClearCart = () => {
-    dispatch({ type: 'CLEAR_CART' });
+    dispatch({ type: "CLEAR_CART" });
   };
 
   return (
@@ -28,12 +30,24 @@ const Cart: React.FC = () => {
         <ul>
           {/* Estilos antes del cambio a css */}
           {state.items.map((item) => (
-            <li key={item.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+            <li
+              key={item.id}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "10px",
+              }}
+            >
               {item.image && (
                 <img
                   src={item.image}
                   alt={item.name}
-                  style={{ width: '50px', height: '50px', marginRight: '10px', objectFit: 'cover' }}
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                    marginRight: "10px",
+                    objectFit: "cover",
+                  }}
                 />
               )}
               <div>
@@ -50,7 +64,7 @@ const Cart: React.FC = () => {
       {state.items.length > 0 && (
         <>
           <button onClick={handleClearCart}>Limpiar carrito</button>
-          <button onClick={() => navigate('/payment')}>Pagar</button>
+          <button onClick={() => navigate("/payment")}>Pagar</button>
         </>
       )}
 
