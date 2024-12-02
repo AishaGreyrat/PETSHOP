@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { auth } from "../../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom"; // Importa el hook useNavigate
+
 import "../Styles/AppBar.css";
+
 
 type LoginProps = {
   closeModal: () => void; // Prop para cerrar el modal

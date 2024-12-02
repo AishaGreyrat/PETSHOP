@@ -136,7 +136,6 @@ const ProductForm: React.FC<ProductFormProps> = ({ closeModal }) => {
             />
           )}
         </div>
-
         <button className="añadir" type="submit">
           Añadir producto
         </button>
