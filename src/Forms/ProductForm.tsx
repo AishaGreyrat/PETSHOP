@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addProduct } from "../Components/productoService";
+import { addProduct } from "./productoService";
 import { useNavigate } from "react-router-dom";
 import "../Styles/AppBar.css";
 

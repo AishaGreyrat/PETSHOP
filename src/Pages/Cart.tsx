@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCart } from '../Context/CartContext';
+import { useCart } from '../Contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 import "../Styles/AppBar.css";
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchProducts } from "./productoService";
-import { useCart } from "../Context/CartContext";
+import { useCart } from "../Contexts/CartContext";
 import "../Styles/ProductGrid.css"; // Archivo de estilos para la cuadrícula
 
 type Product = {

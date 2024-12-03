@@ -1,13 +1,13 @@
 // Routes/ReactRouter.tsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProductForm from '../Components/ProductForm';
-import ProductList from '../Components/ProductList';
-import Cart from '../Components/Cart';
-import AppBar from '../Components/Appbar';
-import Login from '../Components/Login';
-import Register from '../Components/Register';
-import PaymentPage from '../Components/Payment'; // Importa PaymentPage
+import ProductForm from '../componentes/ProductForm';
+import ProductList from '../Pages/ProductList';
+import Cart from '../Pages/Cart';
+import AppBar from '../Components/AppBar/Appbar';
+import Login from '../Pages/Login';
+import Register from '../Pages/Register';
+import PaymentPage from '../Pages/Payment'; // Importa PaymentPage
 
 interface ReactRouterProps {
   searchTerm: string;
