@@ -134,9 +134,9 @@ const Payment: React.FC = () => {
 
   return (
     <div className="payment-page">
-      <h2>Método de Pago</h2>
+      <h2 className='payment'>Método de Pago</h2>
       <div className="cart-summary">
-        <h3>Resumen del Carrito</h3>
+        <h3 className='resumen-cart'>Resumen del Carrito</h3>
         <ul>
           {state.items.map((item) => (
             <li key={item.id}>
@@ -149,12 +149,15 @@ const Payment: React.FC = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="payment-options">
-      <div classname="payment-direccion">
-              <div>
+      <div className="payment-direccion">
+            <div>
               <label htmlFor="address">Dirección</label>
                 <input
                 type="text"
+                required
                 />
+                {errors.address && 
+                <p>{errors.address.message}</p>}
               </div>
             </div>
             

@@ -18,6 +18,23 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Formulario de Pago</h2>
       <div>
+        <label htmlFor="address">Dirección</label>
+        <Controller
+          name="address"
+          control={control}
+          render={({ field }) => (
+            <input
+              {...field}
+              id="address"
+              placeholder="Ingrese su dirección"
+              type="text"
+            />
+          )}
+        />
+        {errors.address && <p>{errors.address.message}</p>}
+      </div>
+
+      <div>
         <label htmlFor="cardNumber">Número de Tarjeta</label>
         <Controller
           name="cardNumber"
