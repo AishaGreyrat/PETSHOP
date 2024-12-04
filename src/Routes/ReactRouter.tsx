@@ -1,4 +1,3 @@
-// Routes/ReactRouter.tsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductList from '../Pages/ProductList';
@@ -8,6 +7,7 @@ import AddProductForm from '../Components/Forms/AddProduct/AddProductForm';
 import LoginForm from '../Components/Forms/Login/LoginForm';
 import RegisterForm from '../Components/Forms/Register/RegisterForm';
 import PaymentPage from '../Pages/Payment'; // Importa PaymentPage
+import Footer from '../Components/Footer/Footer'; // Asegúrate de que el import sea correcto
 
 interface ReactRouterProps {
   searchTerm: string;
@@ -31,21 +31,21 @@ const ReactRouter: React.FC<ReactRouterProps> = ({
         setSelectedCategory={setSelectedCategory}
       />
       <Routes>
-        <Route path="/add-product" element={<AddProductForm />}/>
-        <Route path="/login" element={<LoginForm />}/>
-        <Route path="/register" element={<RegisterForm />}/>
+        <Route path="/add-product" element={<AddProductForm />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
         <Route
           path="/products"
           element={
-            <ProductList
-              searchTerm={searchTerm}
-              selectedCategory={selectedCategory}
-            />
+            <ProductList searchTerm={searchTerm} selectedCategory={selectedCategory} />
           }
         />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/payment" element={<PaymentPage />} /> {/* Nueva ruta para la página de pago */}
+        <Route path="/payment" element={<PaymentPage />} />
       </Routes>
+      
+      {/* Footer siempre visible */}
+      <Footer /> {/* El footer se debería ver al final de la página */}
     </Router>
   );
 };
