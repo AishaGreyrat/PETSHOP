@@ -1,5 +1,5 @@
 import React from 'react';
-import './SearchBar.module.css';
+import styles from './SearchBar.module.css';
 
 type SearchBarProps = {
   searchTerm: string;
@@ -10,7 +10,7 @@ type SearchBarProps = {
 
 const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, selectedCategory, setSelectedCategory }) => {
   return (
-    <div className="navbar-search">
+    <div className={styles.navbarsearch}>
       {/* Barra de búsqueda */}
       <input
         type="text"
@@ -21,7 +21,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ searchTerm, setSearchTerm, select
 
       {/* Filtro por categoría */}
       <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}
-        className='category-dropdown'>
+        className={styles.categorydropdown}>
         <option value="">Todas las categorías</option>
         <option value="Alimentación">Alimentación</option>
         <option value="Salud e Higiene">Salud e Higiene</option>

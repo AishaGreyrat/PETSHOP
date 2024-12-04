@@ -1,11 +1,11 @@
 
-.navbar-search {
+.navbarsearch {
     display: flex; /* Alinea la búsqueda y el dropdown en una fila */
     align-items: center;
     gap: 10px; /* Espaciado entre la barra de búsqueda y el dropdown */
   }
   
-  .navbar-search input {
+  .navbarsearch input {
     padding: 0.6rem 1rem; /* Tamaño compacto */
     border-radius: 8px;
     border: 1px solid #ccc;
@@ -14,7 +14,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .category-dropdown {
+  .categorydropdown {
     padding: 0.6rem 1rem;
     border-radius: 8px;
     border: 1px solid #ccc;
@@ -24,7 +24,7 @@
     transition: border-color 0.3s ease, background-color 0.3s ease;
   }
   
-  .category-dropdown:hover {
+  .categorydropdown:hover {
     border-color: #0052cc;
     background-color: #f0f8ff;
   }

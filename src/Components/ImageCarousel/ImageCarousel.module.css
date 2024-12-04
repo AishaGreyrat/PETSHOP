@@ -1,74 +1,82 @@
-.imageCarousel {
+.image-Carousel {
   position: relative;
   width: 100%;
-  height: 400px; /* Ajustamos la altura para que sea fija y proporcional */
+  height: 400px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #F8F8F9; /* Fondo claro */
+  background-color: #F8F8F9;
   margin-top: 10em;
-  object-fit: contain;
 }
 
-.carouselImage {
+.carousel-Image {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ajusta las imágenes sin deformarlas */
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 150%;
+  object-fit: contain;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out; /* Transición suave entre las imágenes */
+  transition: opacity 0.5s ease-in-out;
 }
 
-.carouselImage.active {
-  opacity: 1; /* Solo la imagen activa es visible */
+.carousel-Image.active {
+  opacity: 1;
 }
 
-.carouselButton {
+.carousel-Button {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%); /* Centra las flechas verticalmente */
-  background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
   border: none;
   color: white;
-  font-size: 2rem; /* Tamaño más grande para las flechas */
+  font-size: 2rem;
   padding: 10px;
   cursor: pointer;
   z-index: 10;
-  border-radius: 50%; /* Hace que las flechas sean redondas */
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px; /* Tamaño más grande de las flechas */
+  width: 50px;
   height: 50px;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.carouselButton:hover {
-  background-color: rgba(0, 0, 0, 0.8); /* Fondo más oscuro al pasar el mouse */
+.carousel-Button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
-.carouselButton:active {
-  transform: translateY(-50%) scale(0.9); /* Animación de presión al hacer clic */
+.carousel-Button:active {
+  transform: translateY(-50%) scale(0.9);
 }
 
 .left {
-  left: 20px; /* Más separación del borde izquierdo */
+  left: 20px;
 }
 
 .right {
-  right: 20px; /* Más separación del borde derecho */
+  right: 20px;
 }
 
-/* Media query para pantallas pequeñas */
 @media (max-width: 768px) {
-  .carouselImage {
-    object-fit: contain; /* En pantallas pequeñas, ajustamos la imagen para no recortarla */
+  .imageCarousel {
+    height: 300px;
   }
 
-  .carouselButton {
-    width: 40px; /* Flechas más pequeñas en pantallas pequeñas */
+  .carousel-Image {
+    object-fit: contain;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+  }
+
+  .carousel-Button {
+    width: 40px;
     height: 40px;
-    font-size: 1.5rem; /* Tamaño más pequeño de las flechas */
+    font-size: 1.5rem;
   }
 }

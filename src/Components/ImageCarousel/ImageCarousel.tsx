@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styles from './ImageCarousel.module.css';
 
 const images = [
-  '/assets/homepage.png',
-  '/assets/discount.png',
-  '/assets/accesories.png',
-  '/assets/shopnow.png'
+  '/assets/happypets.png',
+  '/assets/food.png',
+  '/assets/loveurpet.png',
+  '/assets/sale.png'
 ];
 
 const ImageCarousel: React.FC = () => {
@@ -30,19 +30,19 @@ const ImageCarousel: React.FC = () => {
   }, []);
 
   return (
-    <div className={styles.imageCarousel}>
+    <div className={styles['image-Carousel']}>
       {images.map((image, index) => (
         <img
           key={index}
           src={image}
           alt={`Imagen ${index + 1}`}
-          className={`${styles.carouselImage} ${index === currentImageIndex ? styles.active : ''}`}
+          className={`${styles['carousel-Image']} ${index === currentImageIndex ? styles.active : ''}`}
         />
       ))}
-      <button className={`${styles.carouselButton} ${styles.left}`} onClick={previousImage}>
+      <button className={`${styles['carousel-Button']} ${styles['left']}`} onClick={previousImage}>
         &#10094;
       </button>
-      <button className={`${styles.carouselButton} ${styles.right}`} onClick={nextImage}>
+      <button className={`${styles['carousel-Button']} ${styles['right']}`} onClick={nextImage}>
         &#10095;
       </button>
     </div>

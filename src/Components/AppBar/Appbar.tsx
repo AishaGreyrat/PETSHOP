@@ -21,10 +21,20 @@ const AppBar: React.FC<AppBarProps> = ({
 
   return (
     <header className={styles["app-bar"]}>
+      {/* Header superior */}
+      <div className={styles["top-header"]}>
+        <p>Envío gratis en todo México en compras mayores a $1500.</p>
+      </div>
+
+      {/* Barra de navegación principal */}
       <div className={styles["app-bar-content"]}>
         <div className={styles["logo-section"]}>
           <Link to="/">
-            <img src="/assets/daysi.png" alt="Daysi Logo" className={styles["title-image"]} />
+            <img
+              src="/assets/daysi.png"
+              alt="Daysi Logo"
+              className={styles["title-image"]}
+            />
           </Link>
         </div>
 
@@ -52,16 +62,28 @@ const AppBar: React.FC<AppBarProps> = ({
                 <ShoppingCartIcon className={styles.icon} />
               </Link>
             </li>
-            <button className={styles.registrar} onClick={() => setIsRegisterModalOpen(true)}>
+            <button
+              className={styles.registrar}
+              onClick={() => setIsRegisterModalOpen(true)}
+            >
               Regístrate
             </button>
           </ul>
         </nav>
       </div>
 
-      <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
-      <RegisterModal isOpen={isRegisterModalOpen} onClose={() => setIsRegisterModalOpen(false)} />
-      <AddProductModal isOpen={isAddProductModalOpen} onClose={() => setIsAddProductModalOpen(false)} />
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
+      <RegisterModal
+        isOpen={isRegisterModalOpen}
+        onClose={() => setIsRegisterModalOpen(false)}
+      />
+      <AddProductModal
+        isOpen={isAddProductModalOpen}
+        onClose={() => setIsAddProductModalOpen(false)}
+      />
     </header>
   );
 };
