@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './ImageCarousel.module.css';
+import '@/Components/ImageCarousel/ImageCarousel.module.css';
 
 const images = [
-  '/assets/petshop1.jpg',
-  '/assets/petshop2.jpg',
-  '/assets/petshop3.jpg',
+  '/assets/homepage.png',
+  '/assets/discount.png',
+  '/assets/accesories.png',
+  '/assets/shopnow.png'
 ];
 
 const ImageCarousel: React.FC = () => {
