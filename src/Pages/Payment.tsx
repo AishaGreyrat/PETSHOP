@@ -149,6 +149,15 @@ const Payment: React.FC = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="payment-options">
+      <div classname="payment-direccion">
+              <div>
+              <label htmlFor="address">Dirección</label>
+                <input
+                type="text"
+                />
+              </div>
+            </div>
+            
         <h3>Opciones de Pago</h3>
 
         {/* Selección de método de pago */}
