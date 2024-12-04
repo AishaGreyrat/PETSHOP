@@ -18,12 +18,14 @@ const Payment: React.FC = () => {
     cardHolder: "",
     expirationDate: "",
     cvv: "",
+    address: "",
   });
   const [errors, setErrors] = useState({
     cardNumber: "",
     cardHolder: "",
     expirationDate: "",
     cvv: "",
+    address: "",
   });
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la visibilidad del modal
 
@@ -46,6 +48,7 @@ const Payment: React.FC = () => {
       cardHolder: "",
       expirationDate: "",
       cvv: "",
+      address: "",
     };
 
     // Validación del número de tarjeta
