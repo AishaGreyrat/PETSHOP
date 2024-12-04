@@ -5,7 +5,7 @@ Jose Raul Brito Argaez encargado de funcionalidad: que funciones todos los boton
 
 Diego Alberto López  Arana Encargado de dar estilos a la pagina 
 
-Jesus Manuel Tamayo Pech Encargado de hacer los modales de la pagina y ademas de las confirmaciones de la página
+Jesus Emanuel Tamayo Pech Encargado de hacer los modales de la pagina y ademas de las confirmaciones de la página
 
 Victor Manuel Aranda Rodriguez Se encargo de reforzar los estilos de la pagina y que sea responsivo 
 
