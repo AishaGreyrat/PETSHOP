@@ -113,7 +113,7 @@ const AddProductForm: React.FC<AddProductFormProps> = ({ closeModal }) => {
             <img
               src={imageBase64}
               alt="Vista previa"
-              style={{ width: "100px" }}
+              className="ImagePrev"
             />
           )}
         </div>

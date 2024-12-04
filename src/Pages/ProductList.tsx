@@ -1,19 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '@/Services/productoService';
-
-type Product = {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-  category?: string;
-  image?: string;
-};
-
-type ProductListProps = {
-  searchTerm: string;
-  selectedCategory: string;
-};
+import { Product, ProductListProps } from '../Types/types';
 
 const ProductList: React.FC<ProductListProps> = ({ searchTerm, selectedCategory }) => {
   const [products, setProducts] = useState<Product[]>([]);
