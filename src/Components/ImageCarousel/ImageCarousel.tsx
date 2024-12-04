@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '@/Components/ImageCarousel/ImageCarousel.module.css';
+import styles from './ImageCarousel.module.css';
 
 const images = [
   '/assets/homepage.png',
@@ -30,21 +30,19 @@ const ImageCarousel: React.FC = () => {
   }, []);
 
   return (
-    <div className="image-carousel">
+    <div className={styles.imageCarousel}>
       {images.map((image, index) => (
         <img
           key={index}
           src={image}
           alt={`Imagen ${index + 1}`}
-          className={`carousel-image ${
-            index === currentImageIndex ? 'active' : ''
-          }`}
+          className={`${styles.carouselImage} ${index === currentImageIndex ? styles.active : ''}`}
         />
       ))}
-      <button className="carousel-button left" onClick={previousImage}>
+      <button className={`${styles.carouselButton} ${styles.left}`} onClick={previousImage}>
         &#10094;
       </button>
-      <button className="carousel-button right" onClick={nextImage}>
+      <button className={`${styles.carouselButton} ${styles.right}`} onClick={nextImage}>
         &#10095;
       </button>
     </div>

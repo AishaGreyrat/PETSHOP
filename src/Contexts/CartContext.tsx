@@ -15,7 +15,7 @@ type CartState = {
 };
 
 // Acciones disponibles para el carrito
-type CartAction =
+export type CartAction =
   | { type: 'ADD_ITEM'; payload: Omit<Product, 'quantity'> } // Excluye 'quantity' del payload de ADD_ITEM
   | { type: 'REMOVE_ITEM'; payload: { id: string } }
   | { type: 'CLEAR_CART' };
