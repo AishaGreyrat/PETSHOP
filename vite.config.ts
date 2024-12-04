@@ -10,6 +10,7 @@ export default defineConfig({
       '@pages': '/src/pages',
       '@hooks': '/src/hooks',
       '@styles': '/src/styles',
+      '@forms': '/src/forms',
     },
   },
 })

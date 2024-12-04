@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../Styles/ImageCarousel.css';
+import './ImageCarousel.module.css';
 
 const images = [
   '/assets/petshop1.jpg', // Cambia estas rutas por las correctas de tus imágenes

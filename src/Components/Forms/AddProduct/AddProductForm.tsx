@@ -1,42 +1,22 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { addProduct } from "./productoService";
+import { zodResolver } from "@hookform/resolvers/zod";  // Resolver de Zod
 import { useNavigate } from "react-router-dom";
-import "../Styles/AppBar.css";
+import { addProduct } from "../../../Services/productoService";  // Asumiendo que esta es la función que maneja el envío del producto
+import { AddProductFormProps } from "../../../Types/types";
+import { AddproductSchema, ProductFormData } from "../../../ValidationSchemas/validationSchemas";  // Importamos el esquema
 
-// Esquema de validación
-const productSchema = z.object({
-  name: z.string().min(1, { message: "Se requiere el nombre del producto" }),
-  price: z
-    .number({ invalid_type_error: "El precio debe ser un número válido" })
-    .min(0.01, { message: "El precio debe ser superior a 0" }),
-  quantity: z
-    .number({ invalid_type_error: "La cantidad debe ser un número válido" })
-    .min(1, { message: "La cantidad debe ser al menos 1" }),
-  category: z.string().min(1, { message: "Se requiere la categoría" }),
-});
+import "../../../Styles/AppBar.css"; // Aquí se importan los estilos para el formulario
 
-type ProductFormData = z.infer<typeof productSchema>;
-
-type ProductFormProps = {
-  closeModal?: () => void;
-};
-
-const ProductForm: React.FC<ProductFormProps> = ({ closeModal }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ProductFormData>({
-    resolver: zodResolver(productSchema),
-  });
-
-  const [imageBase64, setImageBase64] = useState<string | null>(null);
+const AddProductForm: React.FC<AddProductFormProps> = ({ closeModal }) => {
   const navigate = useNavigate();
+  const [imageBase64, setImageBase64] = useState<string | null>(null);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [formData, setFormData] = useState<ProductFormData | null>(null);
+
+  const { register, handleSubmit, formState: { errors } } = useForm<ProductFormData>({
+    resolver: zodResolver(AddproductSchema),  // Usamos el esquema para validar el formulario
+  });
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -58,55 +38,58 @@ const ProductForm: React.FC<ProductFormProps> = ({ closeModal }) => {
     if (formData) {
       const productData = {
         ...formData,
-        image: imageBase64 ?? undefined,
+        image: imageBase64 ?? undefined,  // Agregar imagen si está presente
       };
 
       const response = await addProduct(productData);
       if (response.success) {
         alert(response.message);
-        navigate("/");
+        navigate("/");  // Redirigir al listado de productos
       } else {
         alert("Hubo un error al añadir el producto");
       }
+
       setIsRegisterModalOpen(false);
-      if (closeModal) closeModal();
+      if (closeModal) closeModal();  // Cerrar el modal si está disponible
     }
   };
 
-  function closeRegisterModal(
-    event: React.MouseEvent<HTMLButtonElement>
-  ): void {
-    event.stopPropagation(); // Si necesitas evitar que el evento burbujee
-    setIsRegisterModalOpen(false); // Esta línea sigue cerrando el modal
+  function closeRegisterModal(event: React.MouseEvent<HTMLButtonElement>) {
+    event.stopPropagation();  // Evitar que el evento burbujee
+    setIsRegisterModalOpen(false);  // Cerrar el modal
   }
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="modal-body">
-          <h2>Agregar Producto</h2>
-          <label>Nombre del producto: </label>
-          <input type="text" {...register("name")} />
-          {errors.name && <span>{errors.name.message}</span>}
+      <form onSubmit={handleSubmit(onSubmit)} className="add-product-form">
+        <div>
+            <h2>Agregar Producto</h2>
+            <label htmlFor="name">Nombre del producto: </label>
+            <input type="text" {...register("name")} />
+            {errors.name && <span>{errors.name.message}</span>} {/* Mostrar errores */}
+        </div>
 
-          <label>Precio: </label>
+        <div>
+          <label htmlFor="price">Precio: </label>
           <input
             type="number"
             step="0.01"
             {...register("price", { valueAsNumber: true })}
           />
-          {errors.price && <span>{errors.price.message}</span>}
+          {errors.price && <span>{errors.price.message}</span>} {/* Mostrar errores */}
+        </div>
 
-          <label>Cantidad: </label>
+        <div>
+          <label htmlFor="quantity">Cantidad: </label>
           <input
             type="number"
             {...register("quantity", { valueAsNumber: true })}
           />
-          {errors.quantity && <span>{errors.quantity.message}</span>}
+          {errors.quantity && <span>{errors.quantity.message}</span>} {/* Mostrar errores */}
         </div>
 
-        <div className="modal-body">
-          <label>Categoría: </label>
+        <div>
+          <label htmlFor="category">Categoría: </label>
           <select {...register("category")}>
             <option value="">Selecciona una categoría</option>
             <option value="Alimentación">Alimentación</option>
@@ -118,15 +101,13 @@ const ProductForm: React.FC<ProductFormProps> = ({ closeModal }) => {
             <option value="Entrenamiento">Entrenamiento</option>
             <option value="Seguridad">Seguridad</option>
             <option value="Cuidado dental">Cuidado dental</option>
-            <option value="Limpieza y Desinfección">
-              Limpieza y Desinfección
-            </option>
+            <option value="Limpieza y Desinfección">Limpieza y Desinfección</option>
           </select>
-          {errors.category && <span>{errors.category.message}</span>}
+          {errors.category && <span>{errors.category.message}</span>} {/* Mostrar errores */}
         </div>
 
         <div>
-          <label>Imagen del producto: </label>
+          <label htmlFor="image">Imagen del producto: </label>
           <input type="file" onChange={handleImageChange} />
           {imageBase64 && (
             <img
@@ -136,6 +117,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ closeModal }) => {
             />
           )}
         </div>
+
         <button className="añadir" type="submit">
           Añadir producto
         </button>
@@ -161,4 +143,4 @@ const ProductForm: React.FC<ProductFormProps> = ({ closeModal }) => {
   );
 };
 
-export default ProductForm;
+export default AddProductForm;

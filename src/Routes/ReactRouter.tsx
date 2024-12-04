@@ -1,12 +1,12 @@
 // Routes/ReactRouter.tsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProductForm from '../componentes/ProductForm';
 import ProductList from '../Pages/ProductList';
 import Cart from '../Pages/Cart';
 import AppBar from '../Components/AppBar/Appbar';
-import Login from '../Pages/Login';
-import Register from '../Pages/Register';
+import AddProductForm from '../Components/Forms/AddProduct/AddProductForm';
+import LoginForm from '../Components/Forms/Login/LoginForm';
+import RegisterForm from '../Components/Forms/Register/RegisterForm';
 import PaymentPage from '../Pages/Payment'; // Importa PaymentPage
 
 interface ReactRouterProps {
@@ -31,7 +31,9 @@ const ReactRouter: React.FC<ReactRouterProps> = ({
         setSelectedCategory={setSelectedCategory}
       />
       <Routes>
-        <Route path="/add-product" element={<ProductForm />} />
+        <Route path="/add-product" element={<AddProductForm />}/>
+        <Route path="/login" element={<LoginForm />}/>
+        <Route path="/register" element={<RegisterForm />}/>
         <Route
           path="/products"
           element={
@@ -42,8 +44,6 @@ const ReactRouter: React.FC<ReactRouterProps> = ({
           }
         />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/payment" element={<PaymentPage />} /> {/* Nueva ruta para la página de pago */}
       </Routes>
     </Router>
