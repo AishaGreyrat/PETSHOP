@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { ShoppingCartIcon, UserIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
-import styles from "./AppBar.module.css";
-import SearchBar from "../SearchBar/SearchBar";
-import LoginModal from "../Modal/LoginModal";
+import styles from './AppBar.module.css';
+import SearchBar from '@/Components/SearchBar/SearchBar';
+import LoginModal from '@/Components/Modal/LoginModal';
 import RegisterModal from "../Modal/RegisterModal";
-import AddProductModal from "../Modal/AddProductModal";
-import { AppBarProps } from "../../Types/types";
+import AddProductModal from '@/Components/Modal/AddProductModal';
+import { AppBarProps } from '@/Types/types'
 
 
 const AppBar: React.FC<AppBarProps> = ({

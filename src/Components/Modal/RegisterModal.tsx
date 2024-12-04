@@ -1,8 +1,8 @@
-import React from "react";
-import Modal from "./Modal";
-import RegisterForm from "../Forms/Register/RegisterForm";
-import { RegisterModalProps } from "../../Types/types";
-import styles from "./Modal.module.css";
+import React from 'react';
+import Modal from './Modal';
+import RegisterForm from '../Forms/Register/RegisterForm';
+import { RegisterModalProps } from '@/Types/types';
+import styles from './Modal.module.css';
 
 const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose }) => {
   return (

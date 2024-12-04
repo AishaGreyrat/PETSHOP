@@ -1,13 +1,6 @@
 import { collection, addDoc, getDocs, QuerySnapshot, DocumentData } from 'firebase/firestore';
-import { db } from '../../firebaseConfig'; // Asegúrate de que la ruta sea correcta
-
-interface Product {
-  id: string; // El ID único del producto en Firebase Firestore.
-  name: string; // El nombre del producto.
-  price: number; // El precio del producto.
-  quantity: number; // La cantidad disponible del producto.
-  image?: string; // Opcional: La URL de la imagen del producto.
-}
+import { db } from '../../firebaseConfig';
+import { Product } from '@/Types/types';
 
 // Función para añadir un producto sin ID, ya que Firebase generará uno automáticamente
 export const addProduct = async (product: Omit<Product, 'id'>) => {

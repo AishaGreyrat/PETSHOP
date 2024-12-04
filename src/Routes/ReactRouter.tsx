@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProductList from '../Pages/ProductList';
-import Cart from '../Pages/Cart';
-import AppBar from '../Components/AppBar/Appbar';
-import AddProductForm from '../Components/Forms/AddProduct/AddProductForm';
-import LoginForm from '../Components/Forms/Login/LoginForm';
-import RegisterForm from '../Components/Forms/Register/RegisterForm';
-import PaymentPage from '../Pages/Payment'; // Importa PaymentPage
-import Footer from '../Components/Footer/Footer'; // Asegúrate de que el import sea correcto
+import ProductList from '@/Pages/ProductList';
+import Cart from '@/Pages/Cart';
+import AppBar from '@/Components/AppBar/Appbar';
+import AddProductForm from '@/Components/Forms/AddProduct/AddProductForm';
+import LoginForm from '@/Components/Forms/Login/LoginForm';
+import RegisterForm from '@/Components/Forms/Register/RegisterForm';
+import PaymentPage from '@/Pages/Payment'; // Importa PaymentPage
+import Footer from '@/Components/Footer/Footer';
 
 interface ReactRouterProps {
   searchTerm: string;

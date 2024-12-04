@@ -1,13 +1,13 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";  // Resolver de Zod
-import { loginSchema, LoginFormData } from "../../../ValidationSchemas/validationSchemas";  // Importamos el esquema
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../../firebaseConfig";
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';  // Resolver de Zod
+import { loginSchema, LoginFormData } from '@/ValidationSchemas/validationSchemas';  // Importamos el esquema
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../../firebaseConfig';
 import { useNavigate } from "react-router-dom";
-import { LoginFormProps } from "../../../Types/types";
-import "../../../Styles/AppBar.css";
-import '../Form.module.css';
+import { LoginFormProps } from '@/Types/types';
+
+import '@/Styles/AppBar.css';
 
 const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {
   const navigate = useNavigate();

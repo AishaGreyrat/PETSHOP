@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchProducts } from '../Services/productoService';
+import { fetchProducts } from '@/Services/productoService';
 import { Product, ProductListProps } from '../Types/types';
 
 const ProductList: React.FC<ProductListProps> = ({ searchTerm, selectedCategory }) => {

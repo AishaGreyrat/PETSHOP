@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { fetchProducts } from "../Services/productoService";
-import { useCart } from "../Contexts/CartContext";
-import "../Styles/ProductGrid.css";
-import { Product, ShopPageProps } from "../Types/types";
+import { fetchProducts } from '@/Services/productoService';
+import { useCart } from '@/Contexts/CartContext';
+import '@/Styles/ProductGrid.css'; // Archivo de estilos para la cuadrícula
+import { Product, ShopPageProps } from '@/Types/types';
 
 const ShopPage: React.FC<ShopPageProps> = ({
   searchTerm,
