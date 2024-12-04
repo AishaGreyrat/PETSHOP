@@ -1,0 +1,165 @@
+/* Modal.module.css */
+
+/* Fondo oscuro del modal */
+.modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centrado vertical */
+    z-index: 1000; /* Asegura que el modal esté sobre otros elementos */
+  }
+  
+  /* Modal container */
+  .modalContent {
+    background-color: #fff;
+    border-radius: 16px; /* Bordes redondeados */
+    width: 90%;
+    max-width: 450px; /* Ancho máximo ajustado */
+    padding: 2rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra moderna */
+    animation: scaleUp 0.3s ease-in-out; /* Animación de entrada */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+  }
+  
+  /* Animación */
+  @keyframes scaleUp {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  /* Encabezado del modal */
+  .modalHeader {
+    display: flex;
+    justify-content: flex-end; /* Mueve el botón de cerrar a la esquina superior derecha */
+    margin-bottom: 1rem;
+  }
+  
+  .modalHeader h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0 auto;
+    flex: 1;
+    text-align: center; /* Centra el título */
+  }
+  
+  /* Botón de cerrar */
+  .closeButton {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    background-color: #e40808;
+    color: #f0f0f0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    position: absolute;
+    top: 1rem;
+    right: 1rem; /* Posicionamiento en la esquina superior derecha */
+  }
+  
+  .closeButton:hover {
+    color: #e40808;
+    background-color: #9b9a9a;
+    transform: scale(1.05); /* Efecto de aumento */
+  }
+  
+  /* Cuerpo del modal */
+  .modalBody {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Espaciado entre los elementos */
+    margin-bottom: 1rem;
+  }
+  
+  .modalBody input,
+  .modalBody select,
+  .modalBody button {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombras internas */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* Diseño de inputs al enfocar */
+  .modalBody input:focus,
+  .modalBody select:focus {
+    border-color: #6439FF; /* Color al enfocar */
+    box-shadow: 0 0 5px rgba(100, 57, 255, 0.5); /* Resaltado */
+    outline: none;
+  }
+  
+  /* Botón de acción */
+  .confirmarButton {
+    padding: 0.8rem 1.5rem;
+    background-color: #8c08e4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+    margin-left: -16px;
+  }
+  
+  .confirmarButton:hover {
+    background-color: #075514;
+    transform: scale(1.05); /* Efecto de aumento */
+  }
+  
+  .modalFooter {
+    text-align: center;
+  }
+  
+  /* Estilos de botones específicos (añadir y registrar) */
+  .añadir {
+    padding: 0.8rem 1.5rem;
+    background-color: #8c08e4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 15px;
+    margin-left: -18px;
+  }
+  
+  .añadir:hover {
+    background-color: #075514;
+    transform: scale(1.05);
+  }
+  
+  .register {
+    padding: 0.8rem 1.5rem;
+    background-color: #8c08e4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+    margin-left: -16px;
+  }
+  
+  .register:hover {
+    background-color: #075514;
+    transform: scale(1.05);
+  }
+  
