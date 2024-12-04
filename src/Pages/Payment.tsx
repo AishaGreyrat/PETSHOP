@@ -1,9 +1,9 @@
-import React, { useState, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
-import { useCart } from "../Contexts/CartContext";
-import { db } from "../../firebaseConfig"; // Asegúrate de importar tu configuración de Firebase
-import { doc, updateDoc, increment } from "firebase/firestore";
-import "../Styles/AppBar.css";
+import React, { useState, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '@/Contexts/CartContext';
+import { db } from 'firebaseConfig'; // Asegúrate de importar tu configuración de Firebase
+import { doc, updateDoc, increment } from 'firebase/firestore';
+import '@/Styles/AppBar.css';
 
 const Payment: React.FC = () => {
   const { state, dispatch } = useCart();

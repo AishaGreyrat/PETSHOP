@@ -1,5 +1,5 @@
 import React from 'react';
-import { uploadFile } from '../../firebaseConfig';
+import { uploadFile } from 'firebaseConfig';
 
 const FileInput: React.FC = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 // Esquema de validación para el formulario de registro
 export const registerSchema = z.object({

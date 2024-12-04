@@ -1,5 +1,5 @@
 import { collection, addDoc, getDocs, QuerySnapshot, DocumentData } from 'firebase/firestore';
-import { db } from '../../firebaseConfig'; // Asegúrate de que la ruta sea correcta
+import { db } from 'firebaseConfig'; // Asegúrate de que la ruta sea correcta
 
 interface Product {
   id: string; // El ID único del producto en Firebase Firestore.

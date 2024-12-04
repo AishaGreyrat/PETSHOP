@@ -1,7 +1,7 @@
 import React from 'react';
-import { useCart } from '../Contexts/CartContext';
+import { useCart } from '@/Contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
-import "../Styles/AppBar.css";
+import '@/Styles/AppBar.css';
 
 const Cart: React.FC = () => {
   const { state, dispatch } = useCart();
