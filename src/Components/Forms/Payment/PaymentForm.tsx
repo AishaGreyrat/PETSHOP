@@ -1,22 +1,39 @@
 import React from "react";
-import { useForm, Controller } from "react-hook-form"; // Usamos react-hook-form
-import { zodResolver } from "@hookform/resolvers/zod"; // Resolver con Zod
-import { paymentSchema } from "../../../ValidationSchemas/validationSchemas"; // Asegúrate de que el esquema esté importado correctamente
-import { PaymentFormData } from "../../../Types/types";  // El tipo de datos del formulario, importado de `types.ts`
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { paymentSchema } from "../../../ValidationSchemas/validationSchemas";
+import { PaymentFormData } from "../../../Types/types";
 
 const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const { control, handleSubmit, formState: { errors } } = useForm<PaymentFormData>({
-    resolver: zodResolver(paymentSchema),  // Usamos Zod para validación
+    resolver: zodResolver(paymentSchema),
   });
 
   const onSubmit = (data: PaymentFormData) => {
     console.log("Datos de pago enviados", data);
-    closeModal();  // Cerrar el modal después de enviar el formulario
+    closeModal(); // Cerrar el modal después de enviar el formulario
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Formulario de Pago</h2>
+
+      <div>
+        <label htmlFor="address">Dirección</label>
+        <Controller
+          name="address"
+          control={control}
+          render={({ field }) => (
+            <input
+              {...field}
+              id="address"
+              placeholder="Ingrese su dirección"
+              type="text"
+            />
+          )}
+        />
+        {errors.address && <p>{errors.address.message}</p>}
+      </div>
 
       <div>
         <label htmlFor="cardNumber">Número de Tarjeta</label>

@@ -46,6 +46,7 @@ export interface PaymentModalProps {
   /* Parte de Payment */
 
 export type PaymentFormData = {
+    address: Text;
     cardNumber: string;
     cardHolder: string;
     expirationDate: string;
