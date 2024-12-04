@@ -6,8 +6,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { LoginFormProps } from "../../../Types/types";
-
 import "../../../Styles/AppBar.css";
+import '../Form.module.css';
 
 const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {
   const navigate = useNavigate();

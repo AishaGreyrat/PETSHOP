@@ -1,7 +1,8 @@
-import React from 'react';
-import { useCart } from '../Contexts/CartContext';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useCart } from "../Contexts/CartContext";
+import { useNavigate } from "react-router-dom";
 import "../Styles/AppBar.css";
+import { handleRemove, handleClearCart } from "../Utils/utils"; // Importa las funciones de utils
 
 const Cart: React.FC = () => {
   const { state, dispatch } = useCart();
@@ -11,24 +12,14 @@ const Cart: React.FC = () => {
   );
   const navigate = useNavigate();
 
-  // Eliminar un producto del carrito
-  const handleRemove = (id: string) => {
-    dispatch({ type: "REMOVE_ITEM", payload: { id } });
-  };
-
-  // Limpiar el carrito
-  const handleClearCart = () => {
-    dispatch({ type: "CLEAR_CART" });
-  };
-
   return (
     <div>
-      <h2 className='carritotitle'>Tu carrito</h2>
+      <h2 className="carritotitle">Tu carrito</h2>
       {state.items.length === 0 ? (
-        <p className='carritovacio'>Tu carrito está vacío</p>
+        <p className="carritovacio">Tu carrito está vacío</p>
       ) : (
         <ul>
-          {/* Estilos antes del cambio a css */}
+          {/* Mapea los items del carrito */}
           {state.items.map((item) => (
             <li
               key={item.id}
@@ -54,26 +45,20 @@ const Cart: React.FC = () => {
                 <p>
                   {item.name} - ${item.price} x {item.quantity}
                 </p>
-                <button onClick={() => handleRemove(item.id)}>Remover</button>
+                <button onClick={() => handleRemove(item.id, dispatch)}>Remover</button>
               </div>
             </li>
           ))}
         </ul>
       )}
-      <h3 className='total'>Total: ${total.toFixed(2)}</h3>
+      <h3 className="total">Total: ${total.toFixed(2)}</h3>
       {state.items.length > 0 && (
         <>
-          <button onClick={handleClearCart}>Limpiar carrito</button>
+          <button onClick={() => handleClearCart(dispatch)}>Limpiar carrito</button>
           <button onClick={() => navigate("/payment")}>Pagar</button>
         </>
       )}
-
-
     </div>
-
-
-
-
   );
 };
 

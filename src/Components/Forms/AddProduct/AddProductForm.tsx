@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { addProduct } from "../../../Services/productoService";  // Asumiendo que esta es la función que maneja el envío del producto
 import { AddProductFormProps } from "../../../Types/types";
 import { AddproductSchema, ProductFormData } from "../../../ValidationSchemas/validationSchemas";  // Importamos el esquema
-
+import '../Form.module.css';
 import "../../../Styles/AppBar.css"; // Aquí se importan los estilos para el formulario
 
 const AddProductForm: React.FC<AddProductFormProps> = ({ closeModal }) => {
@@ -113,7 +113,7 @@ const AddProductForm: React.FC<AddProductFormProps> = ({ closeModal }) => {
             <img
               src={imageBase64}
               alt="Vista previa"
-              style={{ width: "100px" }}
+              className="ImagePrev"
             />
           )}
         </div>

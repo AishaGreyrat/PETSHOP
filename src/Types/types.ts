@@ -36,6 +36,22 @@ export interface AddProductModalProps {
     onClose: () => void;
   };
 
+export interface PaymentModalProps {
+    isOpen: boolean;
+    onConfirm: () => void;
+    onCancel: () => void;
+    total: number;
+  }
+
+  /* Parte de Payment */
+
+export type PaymentFormData = {
+    cardNumber: string;
+    cardHolder: string;
+    expirationDate: string;
+    cvv: string;
+  };
+
 /* -------------------------------------- Props Forms -------------------------------------- */
 
 
@@ -56,3 +72,36 @@ export interface ButtonProps {
     onClick: () => void;       // Función para manejar el clic
   }
   
+  /* -------------------------------------- Props Pages -------------------------------------- */
+
+export interface Product {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  category?: string;
+  image?: string;
+};
+
+export interface ProductListProps {
+  searchTerm: string;
+  selectedCategory: string;
+};
+
+export interface ShopPageProps {
+  searchTerm: string;
+  selectedCategory: string;
+};
+
+export interface CartItem extends Product {
+  quantity: number;
+}
+
+export interface CartState {
+  items: CartItem[];
+}
+
+export interface CartAction {
+  type: 'ADD_ITEM' | 'REMOVE_ITEM' | 'CLEAR_CART' | 'SET_CART';
+  payload?: any;
+}

@@ -36,3 +36,13 @@ export const AddproductSchema = z.object({
 
 // Inferir el tipo de datos del formulario de productos a partir del esquema Zod
 export type ProductFormData = z.infer<typeof AddproductSchema>;
+
+// Esquema de validación para los campos del formulario de pago
+export const paymentSchema = z.object({
+  cardNumber: z.string().regex(/^\d{16}$/, { message: "El número de tarjeta debe tener 16 dígitos" }),
+  cardHolder: z.string().min(1, { message: "El nombre del titular es obligatorio" }),
+  expirationDate: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, { message: "Fecha de vencimiento inválida (MM/AA)" }),
+  cvv: z.string().regex(/^\d{3}$/, { message: "El CVV debe tener 3 dígitos" })
+});
+
+export type PaymentFormData = z.infer<typeof paymentSchema>;
