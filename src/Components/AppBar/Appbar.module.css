@@ -14,16 +14,9 @@
   color: #6a1b9a; /* Texto púrpura */
   font-size: 0.9rem; /* Tamaño del texto */
   text-align: center; /* Centrado horizontal */
-  padding: -0.5em; /* Espaciado interno */
+  padding: -0.5em 0; /* Espaciado interno */
   border-bottom: 1px solid #e0e0e0; /* Línea divisoria */
   z-index: 1100; /* Encima del navbar */
-}
-
-@media (max-width: 768px) {
-  .top-header {
-    font-size: 0.8rem; /* Texto más pequeño en dispositivos móviles */
-    padding: 0.4em; /* Ajustar espaciado interno */
-  }
 }
 
 
@@ -31,7 +24,7 @@
   background-color: #6439FF; /* Fondo púrpura */
   padding: 1rem 1.5rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%; /* Ocupa todo el ancho */
   position: fixed; /* Fijo debajo del header superior */
@@ -39,6 +32,15 @@
   left: 0; /* Alineado al borde izquierdo */
   z-index: 1000; /* Debajo del header superior */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+}
+
+/* Media Query para Pantallas Pequeñas */
+@media (max-width: 768px) {
+  .app-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
 }
   
   .app-bar-content {
@@ -74,6 +76,25 @@
     font-size: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
+  
+/* Estilo para la barra de búsqueda en pantallas grandes */
+.search-bar {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+/* Estilo para la barra de búsqueda en pantallas pequeñas */
+.mobile-search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  background-color: #f4f4f4;
+  border-top: 1px solid #e0e0e0;
+}
+ 
   
   .category-dropdown {
     padding: 0.6rem 1rem;
@@ -216,6 +237,51 @@
     flex: 1;
     text-align: center; /* Centra el título */
   }
+
+  .menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .menu-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  /* Menú móvil */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 300px;
+    background-color: #f9f9f9;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .menu-header {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .menu-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+  }
   
   .close-button {
     background: none;
@@ -322,7 +388,7 @@
   }
   .register:hover
   {
-    background-color: #075514;
+    background-color: goldenrod;
     transform: scale(1.05); /* Efecto de aumento */
   }
   .element.style {

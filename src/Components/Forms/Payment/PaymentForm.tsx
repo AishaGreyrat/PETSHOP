@@ -1,8 +1,8 @@
-import React from "react";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { paymentSchema } from "../../../ValidationSchemas/validationSchemas";
-import { PaymentFormData } from "../../../Types/types";
+import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod";
+import { paymentSchema } from '@/ValidationSchemas/validationSchemas';
+import { PaymentFormData } from '@/Types/types';
 
 const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const { control, handleSubmit, formState: { errors } } = useForm<PaymentFormData>({
