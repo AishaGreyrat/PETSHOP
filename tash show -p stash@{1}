@@ -1,0 +1,217 @@
+[1mdiff --git a/package-lock.json b/package-lock.json[m
+[1mindex 83d4c0c..b5c1794 100644[m
+[1m--- a/package-lock.json[m
+[1m+++ b/package-lock.json[m
+[36m@@ -10,6 +10,7 @@[m
+       "dependencies": {[m
+         "@heroicons/react": "^2.2.0",[m
+         "@hookform/resolvers": "^3.9.0",[m
+[32m+[m[32m        "core-js": "^3.39.0",[m
+         "firebase": "^10.14.1",[m
+         "font-awesome": "^4.7.0",[m
+         "react": "^18.3.1",[m
+[36m@@ -1079,7 +1080,6 @@[m
+       "version": "2.2.0",[m
+       "resolved": "https://registry.npmjs.org/@heroicons/react/-/react-2.2.0.tgz",[m
+       "integrity": "sha512-LMcepvRaS9LYHJGsF0zzmgKCUim/X3N/DQKc4jepAXJ7l8QxJ1PmxJzqplF2Z3FE4PqBAIGyJAQ/w4B5dsqbtQ==",[m
+[31m-      "license": "MIT",[m
+       "peerDependencies": {[m
+         "react": ">= 16 || ^19.0.0-rc"[m
+       }[m
+[36m@@ -2071,6 +2071,16 @@[m
+       "integrity": "sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==",[m
+       "dev": true[m
+     },[m
+[32m+[m[32m    "node_modules/core-js": {[m
+[32m+[m[32m      "version": "3.39.0",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/core-js/-/core-js-3.39.0.tgz",[m
+[32m+[m[32m      "integrity": "sha512-raM0ew0/jJUqkJ0E6e8UDtl+y/7ktFivgWvqw8dNSQeNWoSDLvQ1H/RN3aPXB9tBd4/FhyR4RDPGhsNIMsAn7g==",[m
+[32m+[m[32m      "hasInstallScript": true,[m
+[32m+[m[32m      "funding": {[m
+[32m+[m[32m        "type": "opencollective",[m
+[32m+[m[32m        "url": "https://opencollective.com/core-js"[m
+[32m+[m[32m      }[m
+[32m+[m[32m    },[m
+     "node_modules/cross-spawn": {[m
+       "version": "7.0.3",[m
+       "resolved": "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.3.tgz",[m
+[1mdiff --git a/package.json b/package.json[m
+[1mindex 5435a71..0261a98 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -12,6 +12,7 @@[m
+   "dependencies": {[m
+     "@heroicons/react": "^2.2.0",[m
+     "@hookform/resolvers": "^3.9.0",[m
+[32m+[m[32m    "core-js": "^3.39.0",[m
+     "firebase": "^10.14.1",[m
+     "font-awesome": "^4.7.0",[m
+     "react": "^18.3.1",[m
+[36m@@ -35,5 +36,10 @@[m
+     "typescript": "^5.5.3",[m
+     "typescript-eslint": "^8.7.0",[m
+     "vite": "^5.4.8"[m
+[31m-  }[m
+[32m+[m[32m  },[m
+[32m+[m[32m  "browserslist": [[m
+[32m+[m[32m    ">0.2%",[m
+[32m+[m[32m    "not dead",[m
+[32m+[m[32m    "not op_mini all"[m
+[32m+[m[32m  ][m
+ }[m
+[1mdiff --git a/src/Components/Footer/Footer.tsx b/src/Components/Footer/Footer.tsx[m
+[1mindex b6fa634..9a4f6fb 100644[m
+[1m--- a/src/Components/Footer/Footer.tsx[m
+[1m+++ b/src/Components/Footer/Footer.tsx[m
+[36m@@ -1,17 +1,61 @@[m
+[31m-import React from 'react';[m
+[31m-import styles from './Footer.module.css';[m
+[32m+[m[32mimport React, { useState } from 'react';[m
+[32m+[m[32mimport TermsModal from '../Modal/TermsModal';[m
+[32m+[m[32mimport ContactModal from '../Modal/ContactModal';[m
+ [m
+ const Footer: React.FC = () => {[m
+[32m+[m[32m  const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);[m
+[32m+[m[32m  const [isContactModalOpen, setIsContactModalOpen] = useState(false);[m
+[32m+[m
+[32m+[m[32m  const openTermsModal = () => setIsTermsModalOpen(true);[m
+[32m+[m[32m  const closeTermsModal = () => setIsTermsModalOpen(false);[m
+[32m+[m
+[32m+[m[32m  const openContactModal = () => setIsContactModalOpen(true);[m
+[32m+[m[32m  const closeContactModal = () => setIsContactModalOpen(false);[m
+[32m+[m
+   return ([m
+[31m-    <footer className={styles.footer}>[m
+[31m-      <div className={styles.footerContent}>[m
+[31m-        <p className={styles.footerText}>&copy; 2024 Peekeshop. Todos los derechos reservados.</p>[m
+[32m+[m[32m    <footer className="footer">[m
+[32m+[m[32m      <div className="footerContent">[m
+[32m+[m[32m        <p className="footerText">&copy; 2024 Peekeshop. Todos los derechos reservados.</p>[m
+ [m
+[31m-        <ul className={styles.footerLinks}>[m
+[31m-          <li><a href="#terms" aria-label="Términos de servicio">Términos de servicio</a></li>[m
+[31m-          <li><a href="#contact" aria-label="Contáctanos">Contáctanos</a></li>[m
+[32m+[m[32m        <ul className="footerLinks">[m
+[32m+[m[32m          <li>[m
+[32m+[m[32m            <a[m
+[32m+[m[32m              href="#terms"[m
+[32m+[m[32m              aria-label="Términos de servicio"[m
+[32m+[m[32m              onClick={(e) => {[m
+[32m+[m[32m                e.preventDefault();[m
+[32m+[m[32m                openTermsModal();[m
+[32m+[m[32m              }}[m
+[32m+[m[32m            >[m
+[32m+[m[32m              Términos de servicio[m
+[32m+[m[32m            </a>[m
+[32m+[m[32m          </li>[m
+[32m+[m[32m          <li>[m
+[32m+[m[32m            <a[m
+[32m+[m[32m              href="#contact"[m
+[32m+[m[32m              aria-label="Contáctanos"[m
+[32m+[m[32m              onClick={(e) => {[m
+[32m+[m[32m                e.preventDefault();[m
+[32m+[m[32m                openContactModal();[m
+[32m+[m[32m              }}[m
+[32m+[m[32m            >[m
+[32m+[m[32m              Contáctanos[m
+[32m+[m[32m            </a>[m
+[32m+[m[32m          </li>[m
+         </ul>[m
+       </div>[m
+[32m+[m
+[32m+[m[32m      {/* Modal de Términos de servicio */}[m
+[32m+[m[32m      <TermsModal[m
+[32m+[m[32m        isOpen={isTermsModalOpen}[m
+[32m+[m[32m        onClose={closeTermsModal}[m
+[32m+[m[32m      />[m
+[32m+[m
+[32m+[m[32m      {/* Modal de Contacto */}[m
+[32m+[m[32m      <ContactModal[m
+[32m+[m[32m        isOpen={isContactModalOpen}[m
+[32m+[m[32m        onClose={closeContactModal}[m
+[32m+[m[32m      />[m
+     </footer>[m
+   );[m
+ };[m
+[1mdiff --git a/src/Types/types.ts b/src/Types/types.ts[m
+[1mindex 82afe1b..887b69e 100644[m
+[1m--- a/src/Types/types.ts[m
+[1m+++ b/src/Types/types.ts[m
+[36m@@ -12,7 +12,6 @@[m [mexport interface AppBarProps {[m
+     setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;[m
+   };[m
+ [m
+[31m-[m
+ /* -------------------------------------- Props Modales -------------------------------------- */[m
+ [m
+ export interface ModalProps {[m
+[36m@@ -41,8 +40,19 @@[m [mexport interface PaymentModalProps {[m
+     onConfirm: () => void;[m
+     onCancel: () => void;[m
+     total: number;[m
+[32m+[m[32m  };[m
+[32m+[m
+[32m+[m[32m/* Nuevas interfaces para los modales de Términos de Servicio y Contáctanos */[m
+[32m+[m[32mexport interface TermsModalProps {[m
+[32m+[m[32m  isOpen: boolean;[m
+[32m+[m[32m  onClose: () => void;[m
+   }[m
+ [m
+[32m+[m[32mexport interface ContactModalProps {[m
+[32m+[m[32m  isOpen: boolean;[m
+[32m+[m[32m  onClose: () => void;[m
+[32m+[m[32m  };[m
+[32m+[m
+   /* Parte de Payment */[m
+ [m
+ export type PaymentFormData = {[m
+[36m@@ -55,7 +65,6 @@[m [mexport type PaymentFormData = {[m
+ [m
+ /* -------------------------------------- Props Forms -------------------------------------- */[m
+ [m
+[31m-[m
+ export interface RegisterFormProps {[m
+     closeModal?: () => void;[m
+   };[m
+[36m@@ -71,8 +80,8 @@[m [mexport interface AddProductFormProps {[m
+ export interface ButtonProps {[m
+     label: string;             // El texto del botón[m
+     onClick: () => void;       // Función para manejar el clic[m
+[31m-  }[m
+[31m-  [m
+[32m+[m[32m};[m
+[32m+[m
+   /* -------------------------------------- Props Pages -------------------------------------- */[m
+ [m
+ export interface Product {[m
+[36m@@ -105,4 +114,4 @@[m [mexport interface CartState {[m
+ export interface CartAction {[m
+   type: 'ADD_ITEM' | 'REMOVE_ITEM' | 'CLEAR_CART' | 'SET_CART';[m
+   payload?: any;[m
+[31m-}[m
+\ No newline at end of file[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/main.tsx b/src/main.tsx[m
+[1mindex ab0b3e0..c8004e7 100644[m
+[1m--- a/src/main.tsx[m
+[1m+++ b/src/main.tsx[m
+[36m@@ -2,6 +2,7 @@[m [mimport { StrictMode } from 'react'[m
+ import { createRoot } from 'react-dom/client'[m
+ import App from './App.tsx'[m
+ import './Global.css'[m
+[32m+[m[32mimport 'core-js/stable';  // Polyfills para las nuevas características de JS[m
+ [m
+ createRoot(document.getElementById('root')!).render([m
+   <StrictMode>[m
+[1mdiff --git a/vite.config.ts b/vite.config.ts[m
+[1mindex 45042b8..93ed3e6 100644[m
+[1m--- a/vite.config.ts[m
+[1m+++ b/vite.config.ts[m
+[36m@@ -11,4 +11,7 @@[m [mexport default defineConfig({[m
+       { find: 'firebaseConfig', replacement: path.resolve(__dirname, 'src/path/to/firebaseConfig') },[m
+     ],[m
+   },[m
+[32m+[m[32m  build: {[m
+[32m+[m[32m    target: 'es2015',  // Garantiza la compatibilidad con navegadores.[m
+[32m+[m[32m  },[m
+ });[m
