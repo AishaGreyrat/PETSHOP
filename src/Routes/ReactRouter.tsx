@@ -1,18 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProductForm from '../Components/ProductForm';
-import ProductList from '../Components/ProductList';
-import Cart from '../Components/Cart';
-import AppBar from '../Components/Appbar';
-import Login from '../Components/Login';
-import Register from '../Components/Register';
+import ProductList from '@/Pages/ProductList';
+import Cart from '@/Pages/Cart';
+import AppBar from '@/Components/AppBar/Appbar';
+import AddProductForm from '@/Components/Forms/AddProduct/AddProductForm';
+import LoginForm from '@/Components/Forms/Login/LoginForm';
+import RegisterForm from '@/Components/Forms/Register/RegisterForm';
+import PaymentPage from '@/Pages/Payment'; // Importa PaymentPage
+import Footer from '@/Components/Footer/Footer';
+import LogoutButton from '@/Components/Forms/logout/LogoutButton';
 
-type ReactRouterProps = {
+interface ReactRouterProps {
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
   selectedCategory: string;
   setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
-};
+}
 
 const ReactRouter: React.FC<ReactRouterProps> = ({
   searchTerm,
@@ -29,20 +32,22 @@ const ReactRouter: React.FC<ReactRouterProps> = ({
         setSelectedCategory={setSelectedCategory}
       />
       <Routes>
-        <Route path="/add-product" element={<ProductForm />} />
+        <Route path="/add-product" element={<AddProductForm />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path='/logoutButton' element={<LogoutButton />} />
         <Route
           path="/products"
           element={
-            <ProductList
-              searchTerm={searchTerm}
-              selectedCategory={selectedCategory}
-            />
+            <ProductList searchTerm={searchTerm} selectedCategory={selectedCategory} />
           }
         />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/payment" element={<PaymentPage />} />
       </Routes>
+      
+      {/* Footer siempre visible */}
+      <Footer /> {/* El footer se debería ver al final de la página */}
     </Router>
   );
 };

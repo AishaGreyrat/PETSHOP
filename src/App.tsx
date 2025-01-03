@@ -1,42 +1,53 @@
 import React, { useState } from 'react';
-import ImageCarousel from './Components/ImageCarousel'; // Importa el carrusel
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AppBar from './Components/AppBar/Appbar';
+import ImageCarousel from './Components/ImageCarousel/ImageCarousel';
+import ShopPage from './Pages/ShopPage';
+import { CartProvider } from './Contexts/CartContext';
+import Cart from './Pages/Cart';
+import PaymentPage from './Pages/Payment'; // Importa el componente de pago
+import Footer from "./Components/Footer/Footer";
 import './Styles/AppBar.css';
-import ReactRouter from './Routes/ReactRouter'; // Si este es el que gestiona las rutas
-import ShopPage from './Components/ShopPage'; // Página de productos
 
 const App: React.FC = () => {
-  // Estado para el término de búsqueda y la categoría seleccionada
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   return (
-    <div>
-      {/* Pasamos los estados a ReactRouter para que pueda acceder a las rutas que lo necesiten */}
-     
-      {/* Carrusel de imágenes */}
-      <ImageCarousel />
- <ReactRouter 
-        searchTerm={searchTerm} 
-        setSearchTerm={setSearchTerm} 
-        selectedCategory={selectedCategory} 
-        setSelectedCategory={setSelectedCategory} 
-      />
+    <div className="app-container"> {/* Contenedor principal */}
+      <CartProvider>
+        <Router>
+          {/* Barra de navegación siempre visible */}
+          <AppBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
 
-      {/* Página de productos */}
-      <ShopPage searchTerm={searchTerm} selectedCategory={selectedCategory} />
+          <div className="main-content"> {/* Contenido principal */}
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <ImageCarousel />
+                    <ShopPage
+                      searchTerm={searchTerm}
+                      selectedCategory={selectedCategory}
+                    />
+                  </>
+                }
+              />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/payment" element={<PaymentPage />} />
+            </Routes>
+          </div>
 
-      {/* footer */}
-      <footer className="footer">
-        <p>&copy; 2024 Petshop. Todos los derechos reservados.</p>
-        <ul>
-          <li>
-            <a href="#terms">Términos de servicio</a>
-          </li>
-          <li>
-            <a href="#contact">Contáctanos</a>
-          </li>
-        </ul>
-      </footer>
+          {/* Footer siempre visible */}
+          <Footer />
+        </Router>
+      </CartProvider>
     </div>
   );
 };

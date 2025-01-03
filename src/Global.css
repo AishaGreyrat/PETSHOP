@@ -1,4 +1,3 @@
-
 a {
   font-weight: 500;
   color: #646cff;
@@ -8,9 +7,12 @@ a:hover {
   color: #535bf2;
 }
 
+li {
+  list-style: none;
+}
+
 body {
   margin: 0;
-  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -22,18 +24,21 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 35px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #f7f7f7;
+  background-color: #e94282;
   cursor: pointer;
   transition: border-color 0.25s;
+  border-color: #e94282;
+  font-family:  'PT Sans', Verdana, sans-serif;
+  color: white;
 }
 button:hover {
-  border-color: #646cff;
+  background-color:#8f0360 ;
+  border-color: #8f0360;
 }
 button:focus,
 button:focus-visible {
@@ -51,4 +56,55 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.total {
+  display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+    margin-top: 220px;
+}
+
+
+.carritotitle {
+  display: block;
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
+  margin-top: 200px;
+}
+
+.carritovacio
+{
+  display: block;
+    margin-block-start: 12em;
+    margin-block-end: 7em;
+    margin-inline-start: 1px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+/* Establecer el tamaño mínimo de la página */
+html, body {
+  height: 100%; /* Hace que el body ocupe toda la altura */
+  margin: 0; /* Quita cualquier margen por defecto */
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que el contenedor principal ocupe al menos toda la altura de la pantalla */
+}
+
+.main-content {
+  flex-grow: 1; /* Hace que el contenido principal ocupe el espacio disponible */
 }
