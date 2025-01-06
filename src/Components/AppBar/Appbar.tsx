@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { ShoppingCartIcon, UserIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
-import styles from './AppBar.module.css';
 import SearchBar from '@/Components/SearchBar/SearchBar';
 import LoginModal from '@/Components/Modal/LoginModal';
 import RegisterModal from "../Modal/RegisterModal";
 import AddProductModal from '@/Components/Modal/AddProductModal';
 import { AppBarProps } from '@/Types/types'
-
+import styles from './Appbar.module.css';
+import { useUser } from "@/Contexts/UserContext";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../firebaseConfig";
+import { signInWithGoogle } from "@/Services/authService";
 
 const AppBar: React.FC<AppBarProps> = ({
   searchTerm,
@@ -15,6 +18,11 @@ const AppBar: React.FC<AppBarProps> = ({
   selectedCategory,
   setSelectedCategory,
 }) => {
+  const { user, setUser } = useUser();
+  const handleSignOut = async () => {
+    await signOut(auth);
+    setUser(null);
+  }
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
@@ -47,27 +55,48 @@ const AppBar: React.FC<AppBarProps> = ({
 
         <nav className={styles["navbar-icons"]}>
           <ul>
-            <li>
-              <a href="#" onClick={() => setIsLoginModalOpen(true)}>
-                <UserIcon className={styles.icon} />
-              </a>
-            </li>
-            <li>
-              <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
-                <PlusIcon className={styles.icon} />
-              </a>
-            </li>
-            <li>
-              <Link to="/cart">
-                <ShoppingCartIcon className={styles.icon} />
-              </Link>
-            </li>
-            <button
-              className={styles.registrar}
-              onClick={() => setIsRegisterModalOpen(true)}
-            >
-              Regístrate
-            </button>
+            {user ? (
+              <>
+                <li>
+                  <span>Bienvenido, {user.displayName}</span>
+                  <button onClick={handleSignOut}>Cerrar sesión</button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <button onClick={signInWithGoogle}>Iniciar sesión</button>
+                </li>
+                <li>
+                  <button onClick={() => setIsRegisterModalOpen(true)}>
+                    Regístrate
+                  </button>
+                </li>
+              </>
+            )
+          
+          }
+              <li>
+                <a href="#" onClick={() => setIsLoginModalOpen(true)}>
+                  <UserIcon className={styles.icon} />
+                </a>
+              </li>
+              <li>
+                <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
+                  <PlusIcon className={styles.icon} />
+                </a>
+              </li>
+              <li>
+                <Link to="/cart">
+                  <ShoppingCartIcon className={styles.icon} />
+                </Link>
+              </li>
+              <button
+                className={styles.registrar}
+                onClick={() => setIsRegisterModalOpen(true)}
+              >
+                Regístrate
+              </button>
           </ul>
         </nav>
       </div>

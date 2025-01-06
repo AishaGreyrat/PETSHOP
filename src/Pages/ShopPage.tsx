@@ -1,8 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { fetchProducts } from '@/Services/productoService';
-import { useCart } from '@/Contexts/CartContext';
-import '@/Styles/ProductGrid.css'; // Archivo de estilos para la cuadrícula
-import { Product, ShopPageProps } from '@/Types/types';
+import React, { useEffect, useState } from "react";
+import { fetchProducts } from "@/Services/productoService";
+import { useCart } from "../Contexts/CartContext";
+import "../Styles/ProductGrid.css"; // Archivo de estilos para la cuadrícula
+
+type Product = {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  category?: string;
+  image?: string;
+};
+
+type ShopPageProps = {
+  searchTerm: string;
+  selectedCategory: string;
+};
 
 const ShopPage: React.FC<ShopPageProps> = ({
   searchTerm,
