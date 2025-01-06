@@ -4,14 +4,13 @@ import { Link } from "react-router-dom";
 import SearchBar from '@/Components/SearchBar/SearchBar';
 import LoginModal from '@/Components/Modal/LoginModal';
 import RegisterModal from "../Modal/RegisterModal";
-import LogoutButton from "../Forms/logout/LogoutButton";
 import AddProductModal from '@/Components/Modal/AddProductModal';
 import { AppBarProps } from '@/Types/types'
 import styles from './Appbar.module.css';
 import { useUser } from "@/Contexts/UserContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
-import { signInWithGoogle } from "@/Services/authService";
+import { adminEmails } from "../../Roles/useAdminCheck"
 
 const AppBar: React.FC<AppBarProps> = ({
   searchTerm,
@@ -59,6 +58,10 @@ const AppBar: React.FC<AppBarProps> = ({
                   <span>Bienvenido, {user.displayName}</span>
                   <button onClick={handleSignOut}>Cerrar sesión</button>
                 </li>
+                {user = adminEmails
+                (
+
+                )}
                 <li>
                   <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
                     <PlusIcon className={styles.icon} />
