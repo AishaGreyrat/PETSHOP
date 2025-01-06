@@ -59,11 +59,18 @@ const AppBar: React.FC<AppBarProps> = ({
                   <span>Bienvenido, {user.displayName}</span>
                   <button onClick={handleSignOut}>Cerrar sesión</button>
                 </li>
+                <li>
+                  <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
+                    <PlusIcon className={styles.icon} />
+                  </a>
+                </li>
               </>
             ) : (
               <>
                 <li>
-                  <button onClick={signInWithGoogle}>Iniciar sesión</button>
+                  <a href="#" onClick={() => setIsLoginModalOpen(true)}>
+                    <UserIcon className={styles.icon} />
+                  </a>
                 </li>
                 <li>
                   <button onClick={() => setIsRegisterModalOpen(true)}>
@@ -75,26 +82,16 @@ const AppBar: React.FC<AppBarProps> = ({
           
           }
               <li>
-                <a href="#" onClick={() => setIsLoginModalOpen(true)}>
-                  <UserIcon className={styles.icon} />
+                <a >
+                  
                 </a>
               </li>
-              <li>
-                <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
-                  <PlusIcon className={styles.icon} />
-                </a>
-              </li>
+              
               <li>
                 <Link to="/cart">
                   <ShoppingCartIcon className={styles.icon} />
                 </Link>
               </li>
-              <button
-                className={styles.registrar}
-                onClick={() => setIsRegisterModalOpen(true)}
-              >
-                Regístrate
-              </button>
           </ul>
         </nav>
       </div>
