@@ -1,21 +1,4 @@
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-}
-
-interface CartItem extends Product {
-  quantity: number;
-}
-
-interface CartState {
-  items: CartItem[];
-}
-
-interface CartAction {
-  type: 'ADD_ITEM' | 'REMOVE_ITEM' | 'CLEAR_CART' | 'SET_CART';
-  payload?: any;
-}
+import { CartAction, CartState } from "../Types/types";
 
 export const cartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
