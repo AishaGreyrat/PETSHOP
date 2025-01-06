@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import SearchBar from '@/Components/SearchBar/SearchBar';
 import LoginModal from '@/Components/Modal/LoginModal';
 import RegisterModal from "../Modal/RegisterModal";
+import LogoutButton from "../Forms/logout/LogoutButton";
 import AddProductModal from '@/Components/Modal/AddProductModal';
 import { AppBarProps } from '@/Types/types'
 import styles from './Appbar.module.css';
