@@ -35,7 +35,7 @@
   align-items: center;
   width: 100%; /* Ocupa todo el ancho */
   position: fixed; /* Fijo debajo del header superior */
-  top: 2.5rem; /* Altura ajustada para dejar espacio al header superior */
+  top: -0.5rem; /* Altura ajustada para dejar espacio al header superior */
   left: 0; /* Alineado al borde izquierdo */
   z-index: 1000; /* Debajo del header superior */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
