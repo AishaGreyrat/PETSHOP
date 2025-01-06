@@ -30,10 +30,7 @@ const AppBar: React.FC<AppBarProps> = ({
 
   return (
     <header className={styles["app-bar"]}>
-      {/* Header superior */}
-      <div className={styles["top-header"]}>
-        <p>Envío gratis en todo México en compras mayores a $1500.</p>
-      </div>
+    
 
       {/* Barra de navegación principal */}
       <div className={styles["app-bar-content"]}>
