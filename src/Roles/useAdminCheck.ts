@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Correos electrónicos de las cuentas administradoras
-const adminEmails = ["lord128@gmail.com", "noctuner21@gmail.com", "darckflame547@gmail.com"];
+export const adminEmails = ["lord128@gmail.com", "noctuner21@gmail.com", "darckflame547@gmail.com"];
 
 export const useAdminCheck = () => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);

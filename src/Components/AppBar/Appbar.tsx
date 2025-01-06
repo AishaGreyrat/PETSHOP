@@ -19,15 +19,11 @@ const AppBar: React.FC<AppBarProps> = ({
   setSelectedCategory,
 }) => {
   const { user, setUser } = useUser();
-  const { isAdmin, loading } = useAdminCheck();
+  const { isAdmin } = useAdminCheck();
   const handleSignOut = async () => {
     await signOut(auth);
     setUser(null);
   };
-
-  if (loading) {
-    return <div>Cargando...</div>; // Muestra un mensaje mientras se carga el estado
-  }
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
@@ -59,24 +55,34 @@ const AppBar: React.FC<AppBarProps> = ({
           <ul>
             {user ? (
               <>
-                <li>
-                  <span>Bienvenido, {user.displayName}</span>
-                  <button onClick={handleSignOut}>Cerrar sesión</button>
-                </li>
                 {isAdmin && (
                 <li>
-                  <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
-                    <PlusIcon className={styles.icon} />
-                  </a>
+                  <button>
+                    <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
+                      <PlusIcon className={styles.icon} />
+                    </a>
+                  </button>
                 </li>
                 )}
+                <li>
+                  <button>
+                    <Link to="/cart">
+                      <ShoppingCartIcon className={styles.icon} />
+                    </Link>
+                  </button>
+                </li>
+                <li>
+                  <button onClick={handleSignOut}>Cerrar sesión</button>
+                </li>
               </>
             ) : (
               <>
                 <li>
-                  <a href="#" onClick={() => setIsLoginModalOpen(true)}>
-                    <UserIcon className={styles.icon} />
-                  </a>
+                  <button>
+                    <a href="#" onClick={() => setIsLoginModalOpen(true)}>
+                      <UserIcon className={styles.icon} />
+                    </a>
+                  </button>
                 </li>
                 <li>
                   <button onClick={() => setIsRegisterModalOpen(true)}>
@@ -85,19 +91,7 @@ const AppBar: React.FC<AppBarProps> = ({
                 </li>
               </>
             )
-          
           }
-              <li>
-                <a >
-                  
-                </a>
-              </li>
-              
-              <li>
-                <Link to="/cart">
-                  <ShoppingCartIcon className={styles.icon} />
-                </Link>
-              </li>
           </ul>
         </nav>
       </div>
