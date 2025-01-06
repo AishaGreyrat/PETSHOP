@@ -10,7 +10,7 @@ import styles from './Appbar.module.css';
 import { useUser } from "@/Contexts/UserContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
-import { adminEmails } from "../../Roles/useAdminCheck"
+import { useAdminCheck } from "../../Roles/useAdminCheck"
 
 const AppBar: React.FC<AppBarProps> = ({
   searchTerm,
@@ -19,9 +19,14 @@ const AppBar: React.FC<AppBarProps> = ({
   setSelectedCategory,
 }) => {
   const { user, setUser } = useUser();
+  const { isAdmin, loading } = useAdminCheck();
   const handleSignOut = async () => {
     await signOut(auth);
     setUser(null);
+  };
+
+  if (loading) {
+    return <div>Cargando...</div>; // Muestra un mensaje mientras se carga el estado
   }
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -58,15 +63,13 @@ const AppBar: React.FC<AppBarProps> = ({
                   <span>Bienvenido, {user.displayName}</span>
                   <button onClick={handleSignOut}>Cerrar sesión</button>
                 </li>
-                {user = adminEmails
-                (
-
-                )}
+                {isAdmin && (
                 <li>
                   <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
                     <PlusIcon className={styles.icon} />
                   </a>
                 </li>
+                )}
               </>
             ) : (
               <>
