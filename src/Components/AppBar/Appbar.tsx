@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { ShoppingCartIcon, UserIcon, PlusIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
-import SearchBar from '@/Components/SearchBar/SearchBar';
-import LoginModal from '@/Components/Modal/LoginModal';
+import SearchBar from "@/Components/SearchBar/SearchBar";
+import LoginModal from "@/Components/Modal/LoginModal";
 import RegisterModal from "../Modal/RegisterModal";
-import AddProductModal from '@/Components/Modal/AddProductModal';
-import { AppBarProps } from '@/Types/types'
+import AddProductModal from "@/Components/Modal/AddProductModal";
+import { AppBarProps } from "@/Types/types";
 import { useUser } from "@/Contexts/UserContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
-import { useAdminCheck } from "../../Roles/useAdminCheck"
-import styles from './Appbar.module.css';
-import { useAdminCheck } from "@/Roles/useAdminCheck"
+import { useAdminCheck } from "@/Roles/useAdminCheck";
+import styles from "./Appbar.module.css";
 import useMediaQuery from "@/Hooks/useMediaQuery";
 
 const AppBar: React.FC<AppBarProps> = ({
@@ -22,10 +21,12 @@ const AppBar: React.FC<AppBarProps> = ({
 }) => {
   const { user, setUser } = useUser();
   const { isAdmin } = useAdminCheck();
+
   const handleSignOut = async () => {
     await signOut(auth);
     setUser(null);
   };
+
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
@@ -33,7 +34,7 @@ const AppBar: React.FC<AppBarProps> = ({
   const isAboveMediumScreens = useMediaQuery("(min-width: 768px)");
 
   return (
-        <header className={styles["app-bar"]}>
+    <header className={styles["app-bar"]}>
       <div className={styles["app-bar-content"]}>
         {/* Logo */}
         <div className={styles["logo-section"]}>
@@ -54,36 +55,17 @@ const AppBar: React.FC<AppBarProps> = ({
           setSelectedCategory={setSelectedCategory}
         />
 
-        <nav className={styles["navbar-icons"]}>
-          <ul>
-            {user ? (
-              <>
-                {isAdmin && (
-                <li>
-                  <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
-                    <button>
-                      <PlusIcon className={styles.icon} />
-                    </button>
-                  </a>
-                </li>
-                )}
-                <li>
-                  <Link to="/cart">
-                    <button>
-                      <ShoppingCartIcon className={styles.icon} />
-                    </button>
-                  </Link>
-                </li>
-                <li>
-                <button className="sign-out-button" onClick={handleSignOut}>Cerrar sesión</button>
-
         {/* Botón de menú responsivo */}
         {!isAboveMediumScreens && (
           <button
             className={styles["menu-toggle"]}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <XMarkIcon className={styles.icon} /> : <Bars3Icon className={styles.icon} />}
+            {isMenuOpen ? (
+              <XMarkIcon className={styles.icon} />
+            ) : (
+              <Bars3Icon className={styles.icon} />
+            )}
           </button>
         )}
 
@@ -101,14 +83,17 @@ const AppBar: React.FC<AppBarProps> = ({
                     </li>
                   )}
                   <li>
-                    <button>
-                      <Link to="/cart">
+                    <Link to="/cart">
+                      <button>
                         <ShoppingCartIcon className={styles.icon} />
-                      </Link>
-                    </button>
+                      </button>
+                    </Link>
                   </li>
                   <li>
-                    <button className="sign-out-button" onClick={handleSignOut}>
+                    <button
+                      className="sign-out-button"
+                      onClick={handleSignOut}
+                    >
                       Cerrar sesión
                     </button>
                   </li>
@@ -160,18 +145,18 @@ const AppBar: React.FC<AppBarProps> = ({
             ) : (
               <>
                 <li>
-                  <a href="#" onClick={() => setIsLoginModalOpen(true)}>
-                    <button>
-                      <UserIcon className={styles.icon} />
-                    </button>
-                  </a>
+                  <button onClick={() => setIsLoginModalOpen(true)}>
+                    <UserIcon className={styles.icon} />
+                  </button>
                   <button onClick={() => setIsLoginModalOpen(true)}>
                     Iniciar sesión
                   </button>
                 </li>
                 <li>
-                  <button className="register-button" onClick={() => setIsRegisterModalOpen(true)}>Regístrate</button>
-                  <button onClick={() => setIsRegisterModalOpen(true)}>
+                  <button
+                    className="register-button"
+                    onClick={() => setIsRegisterModalOpen(true)}
+                  >
                     Regístrate
                   </button>
                 </li>
@@ -182,9 +167,18 @@ const AppBar: React.FC<AppBarProps> = ({
       )}
 
       {/* Modales */}
-      <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
-      <RegisterModal isOpen={isRegisterModalOpen} onClose={() => setIsRegisterModalOpen(false)} />
-      <AddProductModal isOpen={isAddProductModalOpen} onClose={() => setIsAddProductModalOpen(false)} />
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
+      <RegisterModal
+        isOpen={isRegisterModalOpen}
+        onClose={() => setIsRegisterModalOpen(false)}
+      />
+      <AddProductModal
+        isOpen={isAddProductModalOpen}
+        onClose={() => setIsAddProductModalOpen(false)}
+      />
     </header>
   );
 };
