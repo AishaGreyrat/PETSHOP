@@ -30,6 +30,7 @@
   height: auto;
   margin-right: 20px;
 }
+/*menu-toggle */
 
 .navbar-icons {
   display: flex;
@@ -61,3 +62,38 @@
   transform: scale(1.2); /* Efecto de agrandamiento al pasar el mouse */
   color: #ffcc00; /* Cambio de color en hover */
 }
+/*sign-out-button*/
+.sign-out-button {
+  border-radius: 35px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  background-color: #e94282;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.15s;
+}
+
+button:hover {
+  background-color: #8f0360;
+}
+/*register-button*/
+.register-button {
+  border-radius: 35px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  background-color: #e94282;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.15s;
+}
+
+button:hover {
+  background-color: #8f0360;
+}
+
+/*mobile-menu*/
+/*mobile-menu*/

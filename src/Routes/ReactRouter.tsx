@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProductList from '@/Pages/ProductList';
+import ProductList from '@/Pages/ProductList/ProductList';
 import Cart from '@/Pages/Cart/Cart';
 import AppBar from '@/Components/AppBar/Appbar';
 import AddProductForm from '@/Components/Forms/AddProduct/AddProductForm';
 import LoginForm from '@/Components/Forms/Login/LoginForm';
 import RegisterForm from '@/Components/Forms/Register/RegisterForm';
-import PaymentPage from '@/Pages/Payment'; // Importa PaymentPage
+import PaymentPage from '@/Pages/Payment/Payment'; // Importa PaymentPage
 import Footer from '@/Components/Footer/Footer';
 import LogoutButton from '@/Components/Forms/logout/LogoutButton';
 

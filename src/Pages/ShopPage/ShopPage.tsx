@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '@/Services/productoService';
 import { useCart } from '@/Contexts/CartContext';
-import '@/Styles/ProductGrid.css';
 import { Product, ShopPageProps } from '@/Types/types';
-import { db, storage } from '../../firebaseConfig';
+import { db, storage } from '../../../firebaseConfig';
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { useAdminCheck } from '../Roles/useAdminCheck'; // Para verificar si el usuario es administrador
+import { useAdminCheck } from '../../Roles/useAdminCheck';  // Para verificar si el usuario es administrador
+import './ShopPage.module.css';
 
 const ShopPage: React.FC<ShopPageProps> = ({
   searchTerm,
