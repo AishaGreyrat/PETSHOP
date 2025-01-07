@@ -6,10 +6,11 @@ import LoginModal from '@/Components/Modal/LoginModal';
 import RegisterModal from "../Modal/RegisterModal";
 import AddProductModal from '@/Components/Modal/AddProductModal';
 import { AppBarProps } from '@/Types/types'
-import styles from './Appbar.module.css';
 import { useUser } from "@/Contexts/UserContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
+import { useAdminCheck } from "../../Roles/useAdminCheck"
+import styles from './Appbar.module.css';
 import { useAdminCheck } from "@/Roles/useAdminCheck"
 import useMediaQuery from "@/Hooks/useMediaQuery";
 
@@ -52,6 +53,29 @@ const AppBar: React.FC<AppBarProps> = ({
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
+
+        <nav className={styles["navbar-icons"]}>
+          <ul>
+            {user ? (
+              <>
+                {isAdmin && (
+                <li>
+                  <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
+                    <button>
+                      <PlusIcon className={styles.icon} />
+                    </button>
+                  </a>
+                </li>
+                )}
+                <li>
+                  <Link to="/cart">
+                    <button>
+                      <ShoppingCartIcon className={styles.icon} />
+                    </button>
+                  </Link>
+                </li>
+                <li>
+                <button className="sign-out-button" onClick={handleSignOut}>Cerrar sesión</button>
 
         {/* Botón de menú responsivo */}
         {!isAboveMediumScreens && (
@@ -136,11 +160,17 @@ const AppBar: React.FC<AppBarProps> = ({
             ) : (
               <>
                 <li>
+                  <a href="#" onClick={() => setIsLoginModalOpen(true)}>
+                    <button>
+                      <UserIcon className={styles.icon} />
+                    </button>
+                  </a>
                   <button onClick={() => setIsLoginModalOpen(true)}>
                     Iniciar sesión
                   </button>
                 </li>
                 <li>
+                  <button className="register-button" onClick={() => setIsRegisterModalOpen(true)}>Regístrate</button>
                   <button onClick={() => setIsRegisterModalOpen(true)}>
                     Regístrate
                   </button>
