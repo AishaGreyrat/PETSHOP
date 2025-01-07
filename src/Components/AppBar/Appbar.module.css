@@ -1,41 +1,14 @@
 /* Ajuste del contenido principal */
-.main-content {
-  margin-top: 6rem; /* Ajusta según la altura combinada del header y el navbar */
-}
-
-
-/* Header superior */
-.top-header {
-  position: fixed; /* Fijo en la parte superior */
-  top: 0; /* Posicionado al inicio */
-  left: 0; /* Alineado al borde izquierdo */
-  width: 100%; /* Ocupa todo el ancho */
-  background-color: #f4f4f4; /* Fondo claro */
-  color: #6a1b9a; /* Texto púrpura */
-  font-size: 0.9rem; /* Tamaño del texto */
-  text-align: center; /* Centrado horizontal */
-  padding: -0.5em; /* Espaciado interno */
-  border-bottom: 1px solid #e0e0e0; /* Línea divisoria */
-  z-index: 1100; /* Encima del navbar */
-}
-
-@media (max-width: 768px) {
-  .top-header {
-    font-size: 0.8rem; /* Texto más pequeño en dispositivos móviles */
-    padding: 0.4em; /* Ajustar espaciado interno */
-  }
-}
-
 
 .app-bar {
   background-color: #6439FF; /* Fondo púrpura */
-  padding: 1rem 1.5rem;
+  padding: 1rem 1.5rem; /* Ajuste del padding para ahorrar espacio */
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%; /* Ocupa todo el ancho */
   position: fixed; /* Fijo debajo del header superior */
-  top: -0.5rem; /* Altura ajustada para dejar espacio al header superior */
+  top: 0; /* Altura ajustada para dejar espacio al header superior */
   left: 0; /* Alineado al borde izquierdo */
   z-index: 1000; /* Debajo del header superior */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
@@ -44,7 +17,8 @@
 .app-bar-content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  width: 100%;
+  max-width: 1200px;
   flex-wrap: wrap; /* Permite que los elementos se envuelvan */
 }
 
@@ -53,7 +27,7 @@
     align-items: center;
   }
   .title-image {
-    width: 100px; /* Tamaño ajustado para que no ocupe tanto espacio */
+    width: 150px; /* Tamaño ajustado para que no ocupe tanto espacio */
     height: auto;
     margin-right: 20px;
   }

@@ -7,7 +7,7 @@ import { auth } from '../../../../firebaseConfig';
 import { useNavigate } from "react-router-dom";
 import { LoginFormProps } from '@/Types/types';
 
-import '@/Styles/AppBar.css';
+import '../../AppBar/Appbar.module.css';
 import { signInWithGoogle } from '@/Services/authService';
 
 const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {

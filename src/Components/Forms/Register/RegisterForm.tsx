@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { RegisterFormProps } from '@/Types/types';
 import { registerSchema, RegisterFormData } from '@/ValidationSchemas/validationSchemas';  // Correcto para importar el esquema y tipo
 
-import '@/Styles/AppBar.css';
+import '../../AppBar/Appbar.module.css';
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ closeModal }) => {
   const navigate = useNavigate();

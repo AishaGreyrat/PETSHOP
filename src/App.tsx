@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AppBar from './Components/AppBar/Appbar';
-import ImageCarousel from './Components/ImageCarousel/ImageCarousel';
-import ShopPage from './Pages/ShopPage';
+import AppBar from './Components/AppBar';
+import ShopPage from './Pages/ShopPage/ShopPage';
 import { CartProvider } from './Contexts/CartContext';
-import Cart from './Pages/Cart';
-import PaymentPage from './Pages/Payment'; // Importa el componente de pago
+import Cart from './Pages/Cart/Cart';
+import PaymentPage from './Pages/Payment/Payment'; // Importa el componente de pago
 import Footer from "./Components/Footer/Footer";
-import './Styles/AppBar.css';
 import { UserProvider } from './Contexts/UserContext';
+import ImageCarousel from './Components/ImageCarousel';
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");

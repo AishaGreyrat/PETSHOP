@@ -1,0 +1,21 @@
+.CartContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+}            
+
+.CartEmpty {
+        width: 200px;
+        height: 200px;
+        object-Fit: contain;
+        margin-Bottom: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #555;
+}
+            
