@@ -1,15 +1,22 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { addItem } from '../../Redux/features/cartSlice';
+import styles from './Cart.module.css';
 
-const AddToCartButton: React.FC<{ id: string; name: string; price: number }> = ({ id, name, price }) => {
-  const dispatch = useDispatch();
+interface AddToCartProps {
+  id: string;
+  name: string;
+  price: number;
+}
 
+const AddToCartButton: React.FC<AddToCartProps> = ({ id, name, price }) => {
   const handleAddToCart = () => {
-    dispatch(addItem({ id, name, price, quantity: 1 }));
+    console.log(`Producto añadido: ${name}`);
   };
 
-  return <button onClick={handleAddToCart}>Agregar al carrito</button>;
+  return (
+    <button className={styles['add-to-cart-button']} onClick={handleAddToCart}>
+      Agregar al carrito
+    </button>
+  );
 };
 
 export default AddToCartButton;

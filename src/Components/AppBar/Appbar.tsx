@@ -6,11 +6,11 @@ import LoginModal from '@/Components/Modal/LoginModal';
 import RegisterModal from "../Modal/RegisterModal";
 import AddProductModal from '@/Components/Modal/AddProductModal';
 import { AppBarProps } from '@/Types/types'
-import styles from './Appbar.module.css';
 import { useUser } from "@/Contexts/UserContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 import { useAdminCheck } from "../../Roles/useAdminCheck"
+import styles from './Appbar.module.css';
 
 const AppBar: React.FC<AppBarProps> = ({
   searchTerm,
@@ -57,19 +57,19 @@ const AppBar: React.FC<AppBarProps> = ({
               <>
                 {isAdmin && (
                 <li>
-                  <button>
-                    <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
+                  <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
+                    <button>
                       <PlusIcon className={styles.icon} />
-                    </a>
-                  </button>
+                    </button>
+                  </a>
                 </li>
                 )}
                 <li>
-                  <button>
-                    <Link to="/cart">
+                  <Link to="/cart">
+                    <button>
                       <ShoppingCartIcon className={styles.icon} />
-                    </Link>
-                  </button>
+                    </button>
+                  </Link>
                 </li>
                 <li>
                 <button className="sign-out-button" onClick={handleSignOut}>Cerrar sesión</button>
@@ -79,15 +79,14 @@ const AppBar: React.FC<AppBarProps> = ({
             ) : (
               <>
                 <li>
-                  <button>
-                    <a href="#" onClick={() => setIsLoginModalOpen(true)}>
+                  <a href="#" onClick={() => setIsLoginModalOpen(true)}>
+                    <button>
                       <UserIcon className={styles.icon} />
-                    </a>
-                  </button>
+                    </button>
+                  </a>
                 </li>
                 <li>
                   <button className="register-button" onClick={() => setIsRegisterModalOpen(true)}>Regístrate</button>
-
                 </li>
               </>
             )
