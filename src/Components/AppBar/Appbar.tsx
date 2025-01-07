@@ -72,7 +72,8 @@ const AppBar: React.FC<AppBarProps> = ({
                   </button>
                 </li>
                 <li>
-                  <button onClick={handleSignOut}>Cerrar sesión</button>
+                <button className="sign-out-button" onClick={handleSignOut}>Cerrar sesión</button>
+
                 </li>
               </>
             ) : (
@@ -85,9 +86,8 @@ const AppBar: React.FC<AppBarProps> = ({
                   </button>
                 </li>
                 <li>
-                  <button onClick={() => setIsRegisterModalOpen(true)}>
-                    Regístrate
-                  </button>
+                  <button className="register-button" onClick={() => setIsRegisterModalOpen(true)}>Regístrate</button>
+
                 </li>
               </>
             )

@@ -131,15 +131,15 @@ const ShopPage: React.FC<ShopPageProps> = ({
             <h3>{product.name}</h3>
             <p className="price">Precio: ${product.price.toFixed(2)}</p>
             <p className="quantity">Cantidad: {product.quantity}</p>
-            <button onClick={() => addToCart(product)}>
-              Agregar al carrito
-            </button>
+            <button className="add-to-cart-button" onClick={() => addToCart(product)}>Agregar al carrito</button>
+
 
             {/* Solo mostrar los botones de editar y eliminar si el usuario es administrador */}
             {isAdmin && (
               <>
-                <button onClick={() => openEditModal(product)}>Editar</button>
-                <button onClick={handleDelete}>Eliminar</button>
+                <button className="edit-button" onClick={() => openEditModal(product)}>Editar</button>
+                <button className="delete-button" onClick={handleDelete}>Eliminar</button>
+
               </>
             )}
           </div>
