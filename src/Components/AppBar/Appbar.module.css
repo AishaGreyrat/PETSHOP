@@ -35,35 +35,33 @@
   align-items: center;
   width: 100%; /* Ocupa todo el ancho */
   position: fixed; /* Fijo debajo del header superior */
-  top: 2.5rem; /* Altura ajustada para dejar espacio al header superior */
+  top: -0.5rem; /* Altura ajustada para dejar espacio al header superior */
   left: 0; /* Alineado al borde izquierdo */
   z-index: 1000; /* Debajo del header superior */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
 }
   
-  .app-bar-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-  }
-  
+.app-bar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+}
+
   .logo-section {
     display: flex;
     align-items: center;
   }
-  
   .title-image {
-    width: 150px; /* Tamaño ajustado para que no ocupe tanto espacio */
+    width: 100px; /* Tamaño ajustado para que no ocupe tanto espacio */
     height: auto;
     margin-right: 20px;
   }
   
-  .navbar-search {
-    display: flex; /* Alinea la búsqueda y el dropdown en una fila */
-    align-items: center;
-    gap: 10px; /* Espaciado entre la barra de búsqueda y el dropdown */
+  .navbar-search input {
+    width: 80%; /* Ajusta el ancho de la barra de búsqueda */
+    max-width: 400px; /* Tamaño máximo en pantallas grandes */
+    margin: 0 auto;
   }
   
   .navbar-search input {
@@ -92,13 +90,11 @@
   
   .navbar-icons {
     display: flex;
-    gap: 1rem; /* Espaciado entre los íconos */
   }
   
   .navbar-icons ul {
     list-style: none;
     display: flex;
-    gap: 1rem;
     padding: 0;
     margin: 0;
   }
@@ -120,19 +116,45 @@
     transform: scale(1.2); /* Efecto de agrandamiento al pasar el mouse */
     color: #ffcc00; /* Cambio de color en hover */
   }
+
+
+  @media (max-width: 768px) {
+    .app-bar-content {
+      flex-direction: column; /* Coloca los elementos en una columna */
+      align-items: center; /* Centra los elementos */
+    }
+  
+    .navbar-icons ul {
+      flex-direction: column; /* Cambia los íconos a una columna */
+      gap: 0.5rem; /* Reduce el espacio entre los íconos */
+    }
+  
+    .title-image {
+      width: 120px; /* Ajusta el tamaño del logo */
+      margin: 0 auto; /* Centra el logo */
+    }
+  
+    .navbar-search input {
+      width: 90%; /* Haz que el input ocupe el ancho disponible */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-icons {
+      flex-direction: column;
+      gap: 10px; /* Reduce el espacio entre íconos */
+    }
+  
+    .icon {
+      height: 20px; /* Reduce el tamaño de los íconos */
+    }
+  }
+  
   
   /* Footer Styles */
-  .footer {
-    width: 95.8%;
-    background-color: #6439FF;
-    color: white;
-    text-align: center;
-    padding: 2.5rem;
-    font-size: 0.2rem;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 100px;
-    margin-left: -1px;
-  }
+ 
+  
+  
   .footer ul {
     list-style: none;
     display: flex;

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { LoginFormProps } from '@/Types/types';
 
 import '@/Styles/AppBar.css';
+import { signInWithGoogle } from '@/Services/authService';
 
 const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {
   const navigate = useNavigate();
@@ -56,6 +57,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {
                 {errors.password && <span>{errors.password.message}</span>} {/* Mostrar errores */}
             </div>
             <button type="submit">Iniciar sesión</button>
+
+            <button onClick={signInWithGoogle}>Iniciar sesion con Google</button>
         </form>
     </div>
   );

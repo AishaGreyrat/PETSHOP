@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';  // Resolver de Zod
+import { zodResolver } from '@hookform/resolvers/zod'; 
 import { useNavigate } from 'react-router-dom';
- import { addProduct } from '@/Services/productoService'; // Asumiendo que esta es la función que maneja el envío del producto //
+import { addProduct } from '@/Services/productoService'; 
 import { AddProductFormProps } from '@/Types/types';
-import { AddproductSchema, ProductFormData } from '@/ValidationSchemas/validationSchemas';  // Importamos el esquema
+import { AddproductSchema, ProductFormData } from '@/ValidationSchemas/validationSchemas';  
+import { useAdminCheck } from '../../../Roles/useAdminCheck'; // Hook para verificar si el usuario es administrador
 
-import '@/Styles/AppBar.css'; // Aquí se importan los estilos para el formulario
+import '@/Styles/AppBar.css';
 
 const AddProductForm: React.FC<AddProductFormProps> = ({ closeModal }) => {
+  const { isAdmin, loading } = useAdminCheck(); // Hook para verificar si el usuario es admin
   const navigate = useNavigate();
   const [imageBase64, setImageBase64] = useState<string | null>(null);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [formData, setFormData] = useState<ProductFormData | null>(null);
 
   const { register, handleSubmit, formState: { errors } } = useForm<ProductFormData>({
-    resolver: zodResolver(AddproductSchema),  // Usamos el esquema para validar el formulario
+    resolver: zodResolver(AddproductSchema),
   });
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,35 +40,44 @@ const AddProductForm: React.FC<AddProductFormProps> = ({ closeModal }) => {
     if (formData) {
       const productData = {
         ...formData,
-        image: imageBase64 ?? undefined,  // Agregar imagen si está presente
+        image: imageBase64 ?? undefined, 
       };
 
       const response = await addProduct(productData);
       if (response.success) {
         alert(response.message);
-        navigate("/");  // Redirigir al listado de productos
+        navigate("/");  
       } else {
         alert("Hubo un error al añadir el producto");
       }
 
       setIsRegisterModalOpen(false);
-      if (closeModal) closeModal();  // Cerrar el modal si está disponible
+      if (closeModal) closeModal();
     }
   };
 
   function closeRegisterModal(event: React.MouseEvent<HTMLButtonElement>) {
-    event.stopPropagation();  // Evitar que el evento burbujee
-    setIsRegisterModalOpen(false);  // Cerrar el modal
+    event.stopPropagation(); 
+    setIsRegisterModalOpen(false); 
+  }
+
+  // Verificamos si el usuario es admin y está cargando la verificación
+  if (loading) {
+    return <p>Cargando...</p>;
+  }
+
+  if (!isAdmin) {
+    return <p>No tienes permisos para agregar productos.</p>;
   }
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="add-product-form">
         <div>
-            <h2>Agregar Producto</h2>
-            <label htmlFor="name">Nombre del producto: </label>
-            <input type="text" {...register("name")} />
-            {errors.name && <span>{errors.name.message}</span>} {/* Mostrar errores */}
+          <h2>Agregar Producto</h2>
+          <label htmlFor="name">Nombre del producto: </label>
+          <input type="text" {...register("name")} />
+          {errors.name && <span>{errors.name.message}</span>}
         </div>
 
         <div>
@@ -76,7 +87,7 @@ const AddProductForm: React.FC<AddProductFormProps> = ({ closeModal }) => {
             step="0.01"
             {...register("price", { valueAsNumber: true })}
           />
-          {errors.price && <span>{errors.price.message}</span>} {/* Mostrar errores */}
+          {errors.price && <span>{errors.price.message}</span>}
         </div>
 
         <div>
@@ -85,7 +96,7 @@ const AddProductForm: React.FC<AddProductFormProps> = ({ closeModal }) => {
             type="number"
             {...register("quantity", { valueAsNumber: true })}
           />
-          {errors.quantity && <span>{errors.quantity.message}</span>} {/* Mostrar errores */}
+          {errors.quantity && <span>{errors.quantity.message}</span>}
         </div>
 
         <div>
@@ -103,7 +114,7 @@ const AddProductForm: React.FC<AddProductFormProps> = ({ closeModal }) => {
             <option value="Cuidado dental">Cuidado dental</option>
             <option value="Limpieza y Desinfección">Limpieza y Desinfección</option>
           </select>
-          {errors.category && <span>{errors.category.message}</span>} {/* Mostrar errores */}
+          {errors.category && <span>{errors.category.message}</span>}
         </div>
 
         <div>

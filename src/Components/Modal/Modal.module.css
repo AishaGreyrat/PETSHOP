@@ -13,7 +13,7 @@
     align-items: center; /* Centrado vertical */
     z-index: 1000; /* Asegura que el modal esté sobre otros elementos */
   }
-  
+
   /* Modal container */
   .modalContent {
     background-color: #fff;
@@ -25,7 +25,7 @@
     animation: scaleUp 0.3s ease-in-out; /* Animación de entrada */
     position: relative; /* Posicionamiento relativo para el botón de cerrar */
   }
-  
+
   /* Animación */
   @keyframes scaleUp {
     from {
@@ -37,14 +37,14 @@
       opacity: 1;
     }
   }
-  
+
   /* Encabezado del modal */
   .modalHeader {
     display: flex;
     justify-content: flex-end; /* Mueve el botón de cerrar a la esquina superior derecha */
     margin-bottom: 1rem;
   }
-  
+
   .modalHeader h2 {
     font-size: 1.5rem;
     color: #333;
@@ -52,7 +52,7 @@
     flex: 1;
     text-align: center; /* Centra el título */
   }
-  
+
   /* Botón de cerrar */
   .closeButton {
     background: none;
@@ -66,13 +66,13 @@
     top: 1rem;
     right: 1rem; /* Posicionamiento en la esquina superior derecha */
   }
-  
+
   .closeButton:hover {
     color: #e40808;
     background-color: #9b9a9a;
     transform: scale(1.05); /* Efecto de aumento */
   }
-  
+
   /* Cuerpo del modal */
   .modalBody {
     display: flex;
@@ -80,7 +80,7 @@
     gap: 1rem; /* Espaciado entre los elementos */
     margin-bottom: 1rem;
   }
-  
+
   .modalBody input,
   .modalBody select,
   .modalBody button {
@@ -91,7 +91,7 @@
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombras internas */
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
-  
+
   /* Diseño de inputs al enfocar */
   .modalBody input:focus,
   .modalBody select:focus {
@@ -99,7 +99,7 @@
     box-shadow: 0 0 5px rgba(100, 57, 255, 0.5); /* Resaltado */
     outline: none;
   }
-  
+
   /* Botón de acción */
   .confirmarButton {
     padding: 0.8rem 1.5rem;
@@ -114,16 +114,16 @@
     margin-top: 10px;
     margin-left: -16px;
   }
-  
+
   .confirmarButton:hover {
     background-color: #075514;
     transform: scale(1.05); /* Efecto de aumento */
   }
-  
+
   .modalFooter {
     text-align: center;
   }
-  
+
   /* Estilos de botones específicos (añadir y registrar) */
   .añadir {
     padding: 0.8rem 1.5rem;
@@ -138,12 +138,12 @@
     margin-top: 15px;
     margin-left: -18px;
   }
-  
+
   .añadir:hover {
     background-color: #075514;
     transform: scale(1.05);
   }
-  
+
   .register {
     padding: 0.8rem 1.5rem;
     background-color: #8c08e4;
@@ -157,9 +157,60 @@
     margin-top: 10px;
     margin-left: -16px;
   }
-  
+
   .register:hover {
     background-color: #075514;
     transform: scale(1.05);
   }
-  
+
+  /* --------- RESPONSIVIDAD --------- */
+
+  /* Ajustes en pantallas pequeñas */
+  @media (max-width: 768px) {
+    .modalContent {
+        width: 90%;
+        padding: 1.5rem; /* Menos espacio en pantallas pequeñas */
+    }
+
+    .modalHeader h2 {
+        font-size: 1.25rem;
+    }
+
+    .confirmarButton,
+    .añadir,
+    .register {
+        font-size: 0.9rem;
+        padding: 0.7rem 1.2rem; /* Botones más pequeños */
+    }
+
+    .modalBody input,
+    .modalBody select,
+    .modalBody button {
+        font-size: 0.9rem; /* Ajuste de tamaño de fuente */
+    }
+  }
+
+  /* Ajustes en pantallas aún más pequeñas (móviles) */
+  @media (max-width: 480px) {
+    .modalContent {
+        width: 95%; /* Modal más pequeño en pantallas muy pequeñas */
+        padding: 1rem; /* Menos espacio en pantallas más pequeñas */
+    }
+
+    .modalHeader h2 {
+        font-size: 1.1rem; /* Título más pequeño */
+    }
+
+    .confirmarButton,
+    .añadir,
+    .register {
+        font-size: 0.8rem; /* Ajuste de tamaño de los botones */
+        padding: 0.6rem 1rem; /* Botones más pequeños */
+    }
+
+    .modalBody input,
+    .modalBody select,
+    .modalBody button {
+        font-size: 0.85rem; /* Ajuste de tamaño de texto */
+    }
+  }

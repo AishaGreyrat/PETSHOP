@@ -13,10 +13,24 @@ li {
 
 body {
   margin: 0;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  padding: 0;
+  font-family: 'PT Sans', sans-serif;
+  box-sizing: border-box;
 }
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+
+.app-container {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+
 
 h1 {
   font-size: 3.2em;
@@ -35,6 +49,7 @@ button {
   border-color: #e94282;
   font-family:  'PT Sans', Verdana, sans-serif;
   color: white;
+  margin-left: 10px;
 }
 button:hover {
   background-color:#8f0360 ;
@@ -94,17 +109,20 @@ button:focus-visible {
 }
 
 /* Establecer el tamaño mínimo de la página */
-html, body {
-  height: 100%; /* Hace que el body ocupe toda la altura */
-  margin: 0; /* Quita cualquier margen por defecto */
-}
+
 
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Asegura que el contenedor principal ocupe al menos toda la altura de la pantalla */
+  min-height: 100vh;
+  max-width: 1280vw; /* Limita el ancho máximo en pantallas grandes */
+  margin: 0 auto; /* Centra horizontalmente */
 }
 
 .main-content {
-  flex-grow: 1; /* Hace que el contenido principal ocupe el espacio disponible */
+  flex-grow: 0;
+  width: 100%;
 }
+
+
+
