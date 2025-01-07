@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ShoppingCartIcon, UserIcon, PlusIcon } from "@heroicons/react/24/solid";
+import { ShoppingCartIcon, UserIcon, PlusIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import SearchBar from '@/Components/SearchBar/SearchBar';
 import LoginModal from '@/Components/Modal/LoginModal';
@@ -10,7 +10,8 @@ import styles from './Appbar.module.css';
 import { useUser } from "@/Contexts/UserContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
-import { useAdminCheck } from "../../Roles/useAdminCheck"
+import { useAdminCheck } from "@/Roles/useAdminCheck"
+import useMediaQuery from "@/Hooks/useMediaQuery";
 
 const AppBar: React.FC<AppBarProps> = ({
   searchTerm,
@@ -27,13 +28,13 @@ const AppBar: React.FC<AppBarProps> = ({
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isAboveMediumScreens = useMediaQuery("(min-width: 768px)");
 
   return (
-    <header className={styles["app-bar"]}>
-    
-
-      {/* Barra de navegación principal */}
+        <header className={styles["app-bar"]}>
       <div className={styles["app-bar-content"]}>
+        {/* Logo */}
         <div className={styles["logo-section"]}>
           <Link to="/">
             <img
@@ -44,6 +45,7 @@ const AppBar: React.FC<AppBarProps> = ({
           </Link>
         </div>
 
+        {/* Barra de búsqueda */}
         <SearchBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -51,63 +53,108 @@ const AppBar: React.FC<AppBarProps> = ({
           setSelectedCategory={setSelectedCategory}
         />
 
-        <nav className={styles["navbar-icons"]}>
+        {/* Botón de menú responsivo */}
+        {!isAboveMediumScreens && (
+          <button
+            className={styles["menu-toggle"]}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <XMarkIcon className={styles.icon} /> : <Bars3Icon className={styles.icon} />}
+          </button>
+        )}
+
+        {/* Menú de navegación */}
+        {isAboveMediumScreens && (
+          <nav className={styles["navbar-icons"]}>
+            <ul>
+              {user ? (
+                <>
+                  {isAdmin && (
+                    <li>
+                      <button onClick={() => setIsAddProductModalOpen(true)}>
+                        <PlusIcon className={styles.icon} />
+                      </button>
+                    </li>
+                  )}
+                  <li>
+                    <button>
+                      <Link to="/cart">
+                        <ShoppingCartIcon className={styles.icon} />
+                      </Link>
+                    </button>
+                  </li>
+                  <li>
+                    <button className="sign-out-button" onClick={handleSignOut}>
+                      Cerrar sesión
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <button onClick={() => setIsLoginModalOpen(true)}>
+                      <UserIcon className={styles.icon} />
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="register-button"
+                      onClick={() => setIsRegisterModalOpen(true)}
+                    >
+                      Regístrate
+                    </button>
+                  </li>
+                </>
+              )}
+            </ul>
+          </nav>
+        )}
+      </div>
+
+      {/* Menú lateral móvil */}
+      {!isAboveMediumScreens && isMenuOpen && (
+        <div className={styles["mobile-menu"]}>
           <ul>
             {user ? (
               <>
                 {isAdmin && (
-                <li>
-                  <button>
-                    <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
-                      <PlusIcon className={styles.icon} />
-                    </a>
-                  </button>
-                </li>
+                  <li>
+                    <button onClick={() => setIsAddProductModalOpen(true)}>
+                      Agregar Producto
+                    </button>
+                  </li>
                 )}
                 <li>
-                  <button>
-                    <Link to="/cart">
-                      <ShoppingCartIcon className={styles.icon} />
-                    </Link>
-                  </button>
+                  <Link to="/cart">Carrito</Link>
                 </li>
                 <li>
-                <button className="sign-out-button" onClick={handleSignOut}>Cerrar sesión</button>
-
+                  <button className="sign-out-button" onClick={handleSignOut}>
+                    Cerrar sesión
+                  </button>
                 </li>
               </>
             ) : (
               <>
                 <li>
-                  <button>
-                    <a href="#" onClick={() => setIsLoginModalOpen(true)}>
-                      <UserIcon className={styles.icon} />
-                    </a>
+                  <button onClick={() => setIsLoginModalOpen(true)}>
+                    Iniciar sesión
                   </button>
                 </li>
                 <li>
-                  <button className="register-button" onClick={() => setIsRegisterModalOpen(true)}>Regístrate</button>
-
+                  <button onClick={() => setIsRegisterModalOpen(true)}>
+                    Regístrate
+                  </button>
                 </li>
               </>
-            )
-          }
+            )}
           </ul>
-        </nav>
-      </div>
+        </div>
+      )}
 
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-      />
-      <RegisterModal
-        isOpen={isRegisterModalOpen}
-        onClose={() => setIsRegisterModalOpen(false)}
-      />
-      <AddProductModal
-        isOpen={isAddProductModalOpen}
-        onClose={() => setIsAddProductModalOpen(false)}
-      />
+      {/* Modales */}
+      <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
+      <RegisterModal isOpen={isRegisterModalOpen} onClose={() => setIsRegisterModalOpen(false)} />
+      <AddProductModal isOpen={isAddProductModalOpen} onClose={() => setIsAddProductModalOpen(false)} />
     </header>
   );
 };
