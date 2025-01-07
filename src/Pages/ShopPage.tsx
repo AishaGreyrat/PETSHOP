@@ -6,7 +6,7 @@ import { Product, ShopPageProps } from '@/Types/types';
 import { db, storage } from '../../firebaseConfig';
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { useAdminCheck } from '../Roles/useAdminCheck'; // Para verificar si el usuario es administrador
+import { useAdminCheck } from '../Roles/useAdminCheck';  // Para verificar si el usuario es administrador
 
 const ShopPage: React.FC<ShopPageProps> = ({
   searchTerm,
@@ -25,7 +25,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
         const fetchedProducts = await fetchProducts();
         setProducts(fetchedProducts);
       } catch (error) {
-        console.error('Error al obtener los productos:', error);
+        console.error("Error al obtener los productos:", error);
       }
     };
 
@@ -43,7 +43,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
   });
 
   const addToCart = (product: Product) => {
-    dispatch({ type: 'ADD_ITEM', payload: product });
+    dispatch({ type: "ADD_ITEM", payload: product });
     alert(`${product.name} ha sido añadido al carrito`);
   };
 
@@ -70,6 +70,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
       image: newImage ? URL.createObjectURL(newImage) : selectedProduct.image,
     };
 
+    // Si se seleccionó una nueva imagen, subirla a Firebase Storage
     if (newImage) {
       const imageRef = ref(storage, `product-images/${newImage.name}`);
       await uploadBytes(imageRef, newImage);
@@ -81,8 +82,10 @@ const ShopPage: React.FC<ShopPageProps> = ({
     }
 
     try {
+      // Intentar actualizar el producto en Firestore
       const productRef = doc(db, 'products', selectedProduct.id);
       await updateDoc(productRef, updatedProduct);
+      console.log('Producto actualizado en Firebase');
       const updatedProducts = products.map((product) =>
         product.id === selectedProduct.id ? updatedProduct : product
       );
@@ -94,15 +97,17 @@ const ShopPage: React.FC<ShopPageProps> = ({
     }
   };
 
-  const handleDelete = async (productId: string) => {
-    if (!window.confirm('¿Estás seguro de que deseas eliminar este producto?')) return;
+  const handleDelete = async () => {
+    if (!selectedProduct) return;
 
-    const productRef = doc(db, 'products', productId);
+    const productRef = doc(db, 'products', selectedProduct.id);
     try {
       await deleteDoc(productRef);
-      const updatedProducts = products.filter((product) => product.id !== productId);
+      const updatedProducts = products.filter(
+        (product) => product.id !== selectedProduct.id
+      );
       setProducts(updatedProducts);
-      alert('Producto eliminado correctamente');
+      closeModal();
     } catch (error) {
       console.error('Error al eliminar el producto:', error);
       alert('Hubo un error al eliminar el producto');
@@ -126,20 +131,15 @@ const ShopPage: React.FC<ShopPageProps> = ({
             <h3>{product.name}</h3>
             <p className="price">Precio: ${product.price.toFixed(2)}</p>
             <p className="quantity">Cantidad: {product.quantity}</p>
-            <button className="add-to-cart-button" onClick={() => addToCart(product)}>
-              Agregar al carrito
-            </button>
+            <button className="add-to-cart-button" onClick={() => addToCart(product)}>Agregar al carrito</button>
+
+
+            {/* Solo mostrar los botones de editar y eliminar si el usuario es administrador */}
             {isAdmin && (
               <>
-                <button className="edit-button" onClick={() => openEditModal(product)}>
-                  Editar
-                </button>
-                <button
-                  className="delete-button"
-                  onClick={() => handleDelete(product.id)}
-                >
-                  Eliminar
-                </button>
+                <button className="edit-button" onClick={() => openEditModal(product)}>Editar</button>
+                <button className="delete-button" onClick={handleDelete}>Eliminar</button>
+
               </>
             )}
           </div>
@@ -192,7 +192,11 @@ const ShopPage: React.FC<ShopPageProps> = ({
               </label>
               <label>
                 Imagen:
-                <input type="file" accept="image/*" onChange={handleImageChange} />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                />
                 {newImage && (
                   <div>
                     <p>Imagen seleccionada:</p>
