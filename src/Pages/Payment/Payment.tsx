@@ -5,6 +5,24 @@ import { db } from '../../../firebaseConfig';
 import { doc, updateDoc, increment } from 'firebase/firestore';
 import './Payment.module.css';
 
+// Componente Modal reutilizable
+const Modal: React.FC<{
+  isOpen: boolean;
+  onConfirm: () => void;
+  onCancel: () => void;
+}> = ({ isOpen, onConfirm, onCancel }) => {
+  if (!isOpen) return null;
+  return (
+    <div className="modal">
+      <div className="modal-content">
+        <h3>¿Estás seguro de que deseas confirmar el pago?</h3>
+        <button onClick={onConfirm}>Confirmar</button>
+        <button onClick={onCancel}>Cancelar</button>
+      </div>
+    </div>
+  );
+};
+
 const Payment: React.FC = () => {
   const { state, dispatch } = useCart();
   const total = state.items.reduce(
@@ -14,28 +32,35 @@ const Payment: React.FC = () => {
   const navigate = useNavigate();
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
   const [formData, setFormData] = useState({
-    cardNumber: "",
-    cardHolder: "",
-    expirationDate: "",
-    cvv: "",
-    address: "",
+    cardNumber: '',
+    cardHolder: '',
+    expirationDate: '',
+    cvv: '',
+    address: '',
+    nombre: '', // Campo para el nombre completo
   });
   const [errors, setErrors] = useState({
-    cardNumber: "",
-    cardHolder: "",
-    expirationDate: "",
-    cvv: "",
-    address: "",
+    cardNumber: '',
+    cardHolder: '',
+    expirationDate: '',
+    cvv: '',
+    address: '',
+    nombre: '', // Error para el nombre completo
   });
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la visibilidad del modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Manejo del cambio de método de pago (tarjeta de crédito / débito)
   const handleMethodChange = (method: string) => {
     setSelectedMethod(method);
-    setErrors({ cardNumber: "", cardHolder: "", expirationDate: "", cvv: "" });
+    setErrors({
+      cardNumber: '',
+      cardHolder: '',
+      expirationDate: '',
+      cvv: '',
+      address: '',
+      nombre: '', // Resetea los errores del nombre
+    });
   };
 
-  // Manejo de los cambios en los campos del formulario
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -43,47 +68,54 @@ const Payment: React.FC = () => {
 
   const validateForm = () => {
     let valid = true;
-    let errors = {
-      cardNumber: "",
-      cardHolder: "",
-      expirationDate: "",
-      cvv: "",
-      address: "",
+    const errors = {
+      cardNumber: '',
+      cardHolder: '',
+      expirationDate: '',
+      cvv: '',
+      address: '',
+      nombre: '', // Validación para el nombre completo
     };
 
-    // Validación del número de tarjeta
+    if (!formData.nombre.trim()) {
+      errors.nombre = 'El nombre completo es obligatorio.'; // Mensaje de error para el nombre completo
+      valid = false;
+    }
+
+    if (!formData.address.trim()) {
+      errors.address = 'La dirección es obligatoria.';
+      valid = false;
+    }
+
     if (!formData.cardNumber.match(/^\d{16}$/)) {
-      errors.cardNumber = "El número de tarjeta debe tener 16 dígitos.";
+      errors.cardNumber = 'El número de tarjeta debe tener 16 dígitos.';
       valid = false;
     }
 
-    // Validación del nombre del titular
-    if (!formData.cardHolder) {
-      errors.cardHolder = "El nombre del titular es obligatorio.";
+    if (!formData.cardHolder.trim()) {
+      errors.cardHolder = 'El nombre del titular es obligatorio.';
       valid = false;
     }
 
-    // Validación de la fecha de vencimiento
-    const [month, year] = formData.expirationDate.split("/").map(Number);
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth() + 1;
-    const currentYear = currentDate.getFullYear() % 100;
-
-    if (!formData.expirationDate.match(/^(0[1-9]|1[0-2])\/\d{2}$/)) {
-      errors.expirationDate =
-        "Formato de fecha de vencimiento inválido (MM/AA).";
+    if (!formData.expirationDate.trim()) {
+      errors.expirationDate = 'La fecha de vencimiento es obligatoria.';
       valid = false;
-    } else if (
-      year < currentYear ||
-      (year === currentYear && month < currentMonth)
-    ) {
-      errors.expirationDate = "La tarjeta está vencida.";
+    } else if (!formData.expirationDate.match(/^(0[1-9]|1[0-2])\/\d{2}$/)) {
+      errors.expirationDate = 'Formato de fecha inválido (MM/AA).';
       valid = false;
+    } else {
+      const [month, year] = formData.expirationDate.split('/').map(Number);
+      const currentDate = new Date();
+      const currentMonth = currentDate.getMonth() + 1;
+      const currentYear = currentDate.getFullYear() % 100;
+      if (year < currentYear || (year === currentYear && month < currentMonth)) {
+        errors.expirationDate = 'La tarjeta está vencida.';
+        valid = false;
+      }
     }
 
-    // Validación del CVV
     if (!formData.cvv.match(/^\d{3}$/)) {
-      errors.cvv = "El CVV debe tener 3 dígitos.";
+      errors.cvv = 'El CVV debe tener 3 dígitos.';
       valid = false;
     }
 
@@ -91,55 +123,43 @@ const Payment: React.FC = () => {
     return valid;
   };
 
-  // Manejo del envío del formulario de pago
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      // Abrir el modal de confirmación
       setIsModalOpen(true);
     }
   };
 
-  // Confirmar el pago y realizar la lógica de actualización
   const handleConfirmPayment = async () => {
-    // Simula el procesamiento del pago
-    alert("Pago realizado con éxito");
-
-    // Actualizar las cantidades de productos en Firebase
     try {
+      alert('Pago realizado con éxito');
       for (const item of state.items) {
-        const productRef = doc(db, "products", item.id); // Asegúrate de que 'products' es tu colección en Firebase
+        const productRef = doc(db, 'products', item.id);
         await updateDoc(productRef, {
-          quantity: increment(-item.quantity), // Decrementa la cantidad según la cantidad en el carrito
+          quantity: increment(-item.quantity),
         });
       }
-
-      // Vaciar el carrito local después de procesar el pago
-      dispatch({ type: "CLEAR_CART" });
-
-      // Redirige al usuario a la página de inicio
-      navigate("/");
+      dispatch({ type: 'CLEAR_CART' });
+      navigate('/');
     } catch (error) {
-      console.error("Error actualizando las cantidades en Firebase: ", error);
+      console.error('Error al procesar el pago: ', error);
       alert(
-        "Hubo un error al procesar tu pago, inicie sesion para proceder con el pago."
+        'Hubo un error al procesar tu pago. Inicia sesión para proceder con el pago.'
       );
     } finally {
-      // Cerrar el modal después de procesar el pago
       setIsModalOpen(false);
     }
   };
 
-  // Cerrar el modal sin realizar el pago
   const handleCancelPayment = () => {
     setIsModalOpen(false);
   };
 
   return (
     <div className="payment-page">
-      <h2 className='payment'>Método de Pago</h2>
+      <h2 className="payment">Método de Pago</h2>
       <div className="cart-summary">
-        <h3 className='resumen-cart'>Resumen del Carrito</h3>
+        <h3 className="resumen-cart">Resumen del Carrito</h3>
         <ul>
           {state.items.map((item) => (
             <li key={item.id}>
@@ -152,22 +172,36 @@ const Payment: React.FC = () => {
       </div>
 
       <form onSubmit={handleSubmit} className="payment-options">
-      <div className="payment-direccion">
-            <div>
-              <label htmlFor="address">Dirección</label>
-                <input
-                type="text"
-                required
-                />
-                {errors.address && 
-                <p>{errors.address.message}</p>}
-              </div>
-            </div>
-            
-            <h3 className="payment-options-title">Opciones de Pago</h3>
+        {/* Campo para el nombre completo */}
+        <div className="payment-nombre">
+          <label htmlFor="nombre">Nombre Completo</label>
+          <input
+            id="nombre"
+            type="text"
+            name="nombre"
+            placeholder="Ingrese su nombre completo"
+            value={formData.nombre}
+            onChange={handleChange}
+            required
+          />
+          {errors.nombre && <p className="error">{errors.nombre}</p>}
+        </div>
 
+        <div className="payment-direccion">
+          <label htmlFor="address">Dirección</label>
+          <input
+            id="address"
+            type="text"
+            name="address"
+            placeholder="Dirección"
+            value={formData.address}
+            onChange={handleChange}
+            required
+          />
+          {errors.address && <p className="error">{errors.address}</p>}
+        </div>
 
-        {/* Selección de método de pago */}
+        <h3 className="payment-options-title">Opciones de Pago</h3>
         <div className="payment-method">
           <div>
             <input
@@ -175,62 +209,10 @@ const Payment: React.FC = () => {
               id="credit-card"
               name="payment-method"
               value="credit-card"
-              onChange={() => handleMethodChange("credit-card")}
-              checked={selectedMethod === "credit-card"}
+              onChange={() => handleMethodChange('credit-card')}
+              checked={selectedMethod === 'credit-card'}
             />
             <label htmlFor="credit-card">Tarjeta de Crédito</label>
-            {selectedMethod === "credit-card" && (
-              <div className="payment-details">
-                <input
-                  type="text"
-                  name="cardNumber"
-                  placeholder="Número de tarjeta"
-                  maxLength={16}
-                  value={formData.cardNumber}
-                  onChange={handleChange}
-                  required
-                />
-                {errors.cardNumber && (
-                  <p className="error">{errors.cardNumber}</p>
-                )}
-
-                <input
-                  type="text"
-                  name="cardHolder"
-                  placeholder="Nombre del titular"
-                  value={formData.cardHolder}
-                  onChange={handleChange}
-                  required
-                />
-                {errors.cardHolder && (
-                  <p className="error">{errors.cardHolder}</p>
-                )}
-
-                <input
-                  type="text"
-                  name="expirationDate"
-                  placeholder="Fecha de vencimiento (MM/AA)"
-                  maxLength={5}
-                  value={formData.expirationDate}
-                  onChange={handleChange}
-                  required
-                />
-                {errors.expirationDate && (
-                  <p className="error">{errors.expirationDate}</p>
-                )}
-
-                <input
-                  type="text"
-                  name="cvv"
-                  placeholder="CVV"
-                  maxLength={3}
-                  value={formData.cvv}
-                  onChange={handleChange}
-                  required
-                />
-                {errors.cvv && <p className="error">{errors.cvv}</p>}
-              </div>
-            )}
           </div>
 
           <div>
@@ -239,81 +221,72 @@ const Payment: React.FC = () => {
               id="debit-card"
               name="payment-method"
               value="debit-card"
-              onChange={() => handleMethodChange("debit-card")}
-              checked={selectedMethod === "debit-card"}
+              onChange={() => handleMethodChange('debit-card')}
+              checked={selectedMethod === 'debit-card'}
             />
             <label htmlFor="debit-card">Tarjeta de Débito</label>
-            {selectedMethod === "debit-card" && (
-              <div className="payment-details">
-                <input
-                  type="text"
-                  name="cardNumber"
-                  placeholder="Número de tarjeta"
-                  maxLength={16}
-                  value={formData.cardNumber}
-                  onChange={handleChange}
-                  required
-                />
-                {errors.cardNumber && (
-                  <p className="error">{errors.cardNumber}</p>
-                )}
-
-                <input
-                  type="text"
-                  name="cardHolder"
-                  placeholder="Nombre del titular"
-                  value={formData.cardHolder}
-                  onChange={handleChange}
-                  required
-                />
-                {errors.cardHolder && (
-                  <p className="error">{errors.cardHolder}</p>
-                )}
-
-                <input
-                  type="text"
-                  name="expirationDate"
-                  placeholder="Fecha de vencimiento (MM/AA)"
-                  maxLength={5}
-                  value={formData.expirationDate}
-                  onChange={handleChange}
-                  required
-                />
-                {errors.expirationDate && (
-                  <p className="error">{errors.expirationDate}</p>
-                )}
-
-                <input
-                  type="text"
-                  name="cvv"
-                  placeholder="CVV"
-                  maxLength={3}
-                  value={formData.cvv}
-                  onChange={handleChange}
-                  required
-                />
-                {errors.cvv && <p className="error">{errors.cvv}</p>}
-              </div>
-            )}
           </div>
         </div>
+
+        {selectedMethod && (
+          <div className="payment-details">
+            <input
+              type="text"
+              name="cardNumber"
+              placeholder="Número de tarjeta"
+              maxLength={16}
+              value={formData.cardNumber}
+              onChange={handleChange}
+              required
+            />
+            {errors.cardNumber && <p className="error">{errors.cardNumber}</p>}
+
+            <input
+              type="text"
+              name="cardHolder"
+              placeholder="Nombre del titular"
+              value={formData.cardHolder}
+              onChange={handleChange}
+              required
+            />
+            {errors.cardHolder && <p className="error">{errors.cardHolder}</p>}
+
+            <input
+              type="text"
+              name="expirationDate"
+              placeholder="Fecha de vencimiento (MM/AA)"
+              maxLength={5}
+              value={formData.expirationDate}
+              onChange={handleChange}
+              required
+            />
+            {errors.expirationDate && (
+              <p className="error">{errors.expirationDate}</p>
+            )}
+
+            <input
+              type="text"
+              name="cvv"
+              placeholder="CVV"
+              maxLength={3}
+              value={formData.cvv}
+              onChange={handleChange}
+              required
+            />
+            {errors.cvv && <p className="error">{errors.cvv}</p>}
+          </div>
+        )}
 
         <button type="submit" className="btn-confirm">
           Confirmar Pago
         </button>
       </form>
 
-      {/* Modal de confirmación de pago */}
-      {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <h3>¿Estás seguro de que deseas confirmar el pago?</h3>
-            <p>Total: ${total.toFixed(2)}</p>
-            <button onClick={handleConfirmPayment}>Confirmar</button>
-            <button onClick={handleCancelPayment}>Cancelar</button>
-          </div>
-        </div>
-      )}
+      <Modal
+        isOpen={isModalOpen}
+        onConfirm={handleConfirmPayment}
+        onCancel={handleCancelPayment}
+      />
     </div>
   );
 };

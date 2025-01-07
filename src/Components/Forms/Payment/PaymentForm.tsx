@@ -25,64 +25,115 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Formulario de Pago</h2>
 
+      {/* Campo Dirección */}
       <div>
         <label htmlFor="address">Dirección</label>
         <Controller
           name="address"
           control={control}
           render={({ field }) => (
-            <input {...field} id="address" placeholder="Ingrese su dirección" />
+            <input
+              {...field}
+              id="address"
+              placeholder="Ingrese su dirección"
+              aria-invalid={!!errors.address}
+            />
           )}
         />
-        {errors.address && <p>{errors.address.message}</p>}
+        {errors.address && <p className="error">{errors.address.message}</p>}
       </div>
 
+      {/* Campo Nombre */}
+      <div>
+        <label htmlFor="nombre">Nombre</label>
+        <Controller
+          name="nombre"
+          control={control}
+          render={({ field }) => (
+            <input
+              {...field}
+              id="nombre"
+              placeholder="Ingrese su nombre"
+              aria-invalid={!!errors.nombre}
+            />
+          )}
+        />
+        {errors.nombre && <p className="error">{errors.nombre.message}</p>}
+      </div>
+
+      {/* Campo Número de Tarjeta */}
       <div>
         <label htmlFor="cardNumber">Número de Tarjeta</label>
         <Controller
           name="cardNumber"
           control={control}
           render={({ field }) => (
-            <input {...field} id="cardNumber" placeholder="1234 5678 9012 3456" />
+            <input
+              {...field}
+              id="cardNumber"
+              placeholder="1234 5678 9012 3456"
+              aria-invalid={!!errors.cardNumber}
+            />
           )}
         />
-        {errors.cardNumber && <p>{errors.cardNumber.message}</p>}
+        {errors.cardNumber && <p className="error">{errors.cardNumber.message}</p>}
       </div>
 
+      {/* Campo Titular de la Tarjeta */}
       <div>
         <label htmlFor="cardHolder">Titular de la Tarjeta</label>
         <Controller
           name="cardHolder"
           control={control}
           render={({ field }) => (
-            <input {...field} id="cardHolder" placeholder="Nombre completo" />
+            <input
+              {...field}
+              id="cardHolder"
+              placeholder="Nombre completo"
+              aria-invalid={!!errors.cardHolder}
+            />
           )}
         />
-        {errors.cardHolder && <p>{errors.cardHolder.message}</p>}
+        {errors.cardHolder && <p className="error">{errors.cardHolder.message}</p>}
       </div>
 
+      {/* Campo Fecha de Vencimiento */}
       <div>
         <label htmlFor="expirationDate">Fecha de Vencimiento</label>
         <Controller
           name="expirationDate"
           control={control}
           render={({ field }) => (
-            <input {...field} id="expirationDate" placeholder="MM/AA" />
+            <input
+              {...field}
+              id="expirationDate"
+              placeholder="MM/AA"
+              aria-invalid={!!errors.expirationDate}
+            />
           )}
         />
-        {errors.expirationDate && <p>{errors.expirationDate.message}</p>}
+        {errors.expirationDate && (
+          <p className="error">{errors.expirationDate.message}</p>
+        )}
       </div>
 
+      {/* Campo CVV */}
       <div>
         <label htmlFor="cvv">CVV</label>
         <Controller
           name="cvv"
           control={control}
           render={({ field }) => (
-            <input {...field} id="cvv" placeholder="CVV" type="password" />
+            <input
+              {...field}
+              id="cvv"
+              placeholder="CVV"
+              type="password"
+              aria-invalid={!!errors.cvv}
+            />
           )}
         />
-        {errors.cvv && <p>{errors.cvv.message}</p>}
+        {errors.cvv && <p className="error">{errors.cvv.message}</p>}
       </div>
 
       <button type="submit">Confirmar Pago</button>

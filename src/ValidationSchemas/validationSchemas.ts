@@ -39,6 +39,7 @@ export type ProductFormData = z.infer<typeof AddproductSchema>;
 
 export const paymentSchema = z.object({
   address: z.string().min(5, "La dirección debe tener al menos 5 caracteres."),
+  nombre: z.string().nonempty("El nombre es requerido"),
   cardNumber: z.string().regex(/^\d{16}$/, "El número de tarjeta debe tener 16 dígitos."),
   cardHolder: z.string().min(3, "El nombre del titular es obligatorio."),
   expirationDate: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, "Formato válido: MM/AA."),

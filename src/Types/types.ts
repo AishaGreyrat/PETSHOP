@@ -46,6 +46,7 @@ export interface PaymentModalProps {
   /* Parte de Payment */
 
   export type PaymentFormData = {
+    nombre: string;
     address: string;         // Cambiado de Text a string
     cardNumber: string;      // Número de tarjeta
     cardHolder: string;      // Nombre del titular
