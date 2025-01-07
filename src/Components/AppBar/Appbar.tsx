@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { ShoppingCartIcon, UserIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
-import SearchBar from '@/Components/SearchBar/SearchBar';
-import LoginModal from '@/Components/Modal/LoginModal';
-import RegisterModal from "../Modal/RegisterModal";
-import AddProductModal from '@/Components/Modal/AddProductModal';
-import { AppBarProps } from '@/Types/types'
-import styles from './Appbar.module.css';
+import SearchBar from "@/Components/SearchBar/SearchBar";
+import LoginModal from "@/Components/Modal/LoginModal";
+import RegisterModal from "@/Components/Modal/RegisterModal";
+import AddProductModal from "@/Components/Modal/AddProductModal";
+import { AppBarProps } from "@/Types/props";
+import styles from "./AppBar.module.css";
 import { useUser } from "@/Contexts/UserContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
-import { useAdminCheck } from "../../Roles/useAdminCheck"
+import { useAdminCheck } from "../../Roles/useAdminCheck";
+import { AdminButtons, UserButtons, GuestButtons } from "./AppBarButtons";
 
 const AppBar: React.FC<AppBarProps> = ({
   searchTerm,
@@ -20,30 +20,26 @@ const AppBar: React.FC<AppBarProps> = ({
 }) => {
   const { user, setUser } = useUser();
   const { isAdmin } = useAdminCheck();
-  const handleSignOut = async () => {
-    await signOut(auth);
-    setUser(null);
-  };
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
 
+  const handleSignOut = async () => {
+    await signOut(auth);
+    setUser(null);
+  };
+
   return (
     <header className={styles["app-bar"]}>
-    
-
-      {/* Barra de navegación principal */}
       <div className={styles["app-bar-content"]}>
+        {/* Logo */}
         <div className={styles["logo-section"]}>
           <Link to="/">
-            <img
-              src="/assets/daysi.png"
-              alt="Daysi Logo"
-              className={styles["title-image"]}
-            />
+            <img src="/assets/daysi.png" alt="Daysi Logo" className={styles["title-image"]} />
           </Link>
         </div>
 
+        {/* Barra de búsqueda */}
         <SearchBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -51,63 +47,28 @@ const AppBar: React.FC<AppBarProps> = ({
           setSelectedCategory={setSelectedCategory}
         />
 
+        {/* Navegación */}
         <nav className={styles["navbar-icons"]}>
           <ul>
             {user ? (
               <>
-                {isAdmin && (
-                <li>
-                  <button>
-                    <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
-                      <PlusIcon className={styles.icon} />
-                    </a>
-                  </button>
-                </li>
-                )}
-                <li>
-                  <button>
-                    <Link to="/cart">
-                      <ShoppingCartIcon className={styles.icon} />
-                    </Link>
-                  </button>
-                </li>
-                <li>
-                <button className="sign-out-button" onClick={handleSignOut}>Cerrar sesión</button>
-
-                </li>
+                {isAdmin && <AdminButtons onAddProduct={() => setIsAddProductModalOpen(true)} />}
+                <UserButtons onSignOut={handleSignOut} />
               </>
             ) : (
-              <>
-                <li>
-                  <button>
-                    <a href="#" onClick={() => setIsLoginModalOpen(true)}>
-                      <UserIcon className={styles.icon} />
-                    </a>
-                  </button>
-                </li>
-                <li>
-                  <button className="register-button" onClick={() => setIsRegisterModalOpen(true)}>Regístrate</button>
-
-                </li>
-              </>
-            )
-          }
+              <GuestButtons
+                onLogin={() => setIsLoginModalOpen(true)}
+                onRegister={() => setIsRegisterModalOpen(true)}
+              />
+            )}
           </ul>
         </nav>
       </div>
 
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-      />
-      <RegisterModal
-        isOpen={isRegisterModalOpen}
-        onClose={() => setIsRegisterModalOpen(false)}
-      />
-      <AddProductModal
-        isOpen={isAddProductModalOpen}
-        onClose={() => setIsAddProductModalOpen(false)}
-      />
+      {/* Modales */}
+      <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
+      <RegisterModal isOpen={isRegisterModalOpen} onClose={() => setIsRegisterModalOpen(false)} />
+      <AddProductModal isOpen={isAddProductModalOpen} onClose={() => setIsAddProductModalOpen(false)} />
     </header>
   );
 };

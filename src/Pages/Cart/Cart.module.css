@@ -1,21 +1,90 @@
-.CartContent {
+/* Cart.module.css */
+.cartContainer {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .cartTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .cartEmptyContent {
+    text-align: center;
+  }
+  
+  .cartEmptyImage {
+    width: 200px;
+    margin-top: 20px;
+  }
+  
+  .productGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .productCard {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 60vh;
-}            
-
-.CartEmpty {
-        width: 200px;
-        height: 200px;
-        object-Fit: contain;
-        margin-Bottom: 20px;
-}
-
-h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  
+  .productImage {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+    object-fit: cover;
+  }
+  
+  .price {
     color: #555;
-}
-            
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  .removeButton {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .removeButton:hover {
+    background-color: #e63946;
+  }
+  
+  .total {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0;
+  }
+  
+  .actionsContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .clearCartButton, .payButton {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .clearCartButton:hover, .payButton:hover {
+    background-color: #2980b9;
+  }
+  

@@ -32,36 +32,6 @@
     margin-right: 20px;
   }
   
-  .navbar-search input {
-    width: 80%; /* Ajusta el ancho de la barra de búsqueda */
-    max-width: 400px; /* Tamaño máximo en pantallas grandes */
-    margin: 0 auto;
-  }
-  
-  .navbar-search input {
-    padding: 0.6rem 1rem; /* Tamaño compacto */
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    width: 300px; /* Ancho ajustado */
-    font-size: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .category-dropdown {
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    background-color: white;
-    cursor: pointer;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-  }
-  
-  .category-dropdown:hover {
-    border-color: #0052cc;
-    background-color: #f0f8ff;
-  }
-  
   .navbar-icons {
     display: flex;
   }

@@ -1,32 +1,32 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AppBar from './Components/AppBar';
-import ShopPage from './Pages/ShopPage/ShopPage';
-import { CartProvider } from './Contexts/CartContext';
-import Cart from './Pages/Cart/Cart';
-import PaymentPage from './Pages/Payment/Payment'; // Importa el componente de pago
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "@/Redux/store";
+import { UserProvider } from "@/Contexts/UserContext"; // Contexto del usuario
+import { ThemeProvider } from "@/Contexts/ThemeContext"; // Contexto del tema
+import AppBar from "./Components/AppBar";
+import ShopPage from "./Pages/ShopPage/ShopPage";
+import Cart from "./Pages/Cart/Cart";
+import PaymentPage from "./Pages/Payment/Payment";
 import Footer from "./Components/Footer/Footer";
-import { UserProvider } from './Contexts/UserContext';
-import ImageCarousel from './Components/ImageCarousel';
+import ImageCarousel from "./Components/ImageCarousel";
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
   return (
-    <div className="app-container"> {/* Contenedor principal */}
-      <UserProvider>
-        <CartProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <UserProvider>
           <Router>
-            {/* Barra de navegación siempre visible */}
             <AppBar
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
             />
-
-            <div className="main-content"> {/* Contenido principal */}
+            <div className="main-content">
               <Routes>
                 <Route
                   path="/"
@@ -44,13 +44,11 @@ const App: React.FC = () => {
                 <Route path="/payment" element={<PaymentPage />} />
               </Routes>
             </div>
-
-            {/* Footer siempre visible */}
             <Footer />
           </Router>
-        </CartProvider>
-      </UserProvider>
-    </div>
+        </UserProvider>
+      </ThemeProvider>
+    </Provider>
   );
 };
 

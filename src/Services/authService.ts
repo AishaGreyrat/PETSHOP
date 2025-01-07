@@ -1,17 +1,27 @@
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';  // Asegúrate de importar correctamente la configuración de Firebase
+import { signInWithPopup, signOut } from "firebase/auth";
+import { auth, provider } from "../../firebaseConfig";
 
-// Función para iniciar sesión con Google
-export const signInWithGoogle = async () => {
-  const provider = new GoogleAuthProvider();
-
+// Inicia sesión con Google
+export const loginWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
-    const user = result.user;
-    console.log('Usuario autenticado:', user);
-    return user;  // Retorna el usuario autenticado
+    return {
+      uid: result.user.uid,
+      email: result.user.email || "",
+      displayName: result.user.displayName || "",
+    };
   } catch (error) {
-    console.error('Error de autenticación:', error);
-    throw error;  // Propaga el error si algo falla
+    console.error("Error al iniciar sesión con Google:", error);
+    throw error;
+  }
+};
+
+// Cierra la sesión del usuario
+export const logout = async () => {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error("Error al cerrar sesión:", error);
+    throw error;
   }
 };
