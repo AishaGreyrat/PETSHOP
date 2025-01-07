@@ -3,6 +3,9 @@ import { useCart } from '@/Contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { handleRemove, handleClearCart } from '@/Utils/utils';
 
+import style from "./Cart.module.css";
+import "./Cart.module.css";
+
 import '@/Styles/AppBar.css';
 
 const Cart: React.FC = () => {

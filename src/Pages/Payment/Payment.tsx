@@ -1,9 +1,9 @@
 import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '@/Contexts/CartContext';
-import { db } from '../../firebaseConfig';
+import { db } from '../../../firebaseConfig';
 import { doc, updateDoc, increment } from 'firebase/firestore';
-import '@/Styles/AppBar.css';
+import './Payment.module.css';
 
 const Payment: React.FC = () => {
   const { state, dispatch } = useCart();
