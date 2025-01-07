@@ -1,385 +1,99 @@
-/* Ajuste del contenido principal */
-
 .app-bar {
-  background-color: #6439FF; /* Fondo púrpura */
-  padding: 10px 20px;
+  background-color: #6439FF;
+  padding: 1rem 1.5rem; /* Ajuste del padding para ahorrar espacio */
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%; /* Ocupa todo el ancho */
+  width: 100%;
   position: fixed;
-  top: 0; /* Pegado al borde superior */
-  left: 0; /* Pegado al borde izquierdo */
+  top: 0;
+  left: 0;
   z-index: 1000;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar el navbar */
 }
-
 
 .app-bar-content {
   display: flex;
-  align-items: center; /* Alinea verticalmente */
-  justify-content: space-between; /* Espacia el logo, barra de búsqueda y menú */
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   max-width: 1200px;
 }
 
 .logo-section {
   display: flex;
-  align-items: center; /* Centra verticalmente */
-  flex-shrink: 0; /* Evita que el logo cambie de tamaño */
-  margin-right: 20px; /* Espacio entre el logo y la barra de búsqueda */
+  align-items: center;
 }
 
 .title-image {
-  width: 100px; /* Tamaño del logo */
-  height: auto; /* Mantén la proporción */
-}
-
-.search-bar {
-  flex-grow: 1; /* Permite que la barra de búsqueda ocupe el espacio restante */
+  width: 150px; /* Tamaño ajustado para que no ocupe tanto espacio */
+  height: auto;
   margin-right: 20px;
+}
+/*menu-toggle */
+
+.navbar-icons {
+  display: flex;
+  gap: 1rem; /* Espaciado entre los íconos */
 }
 
 .navbar-icons ul {
-  display: flex;
-  gap: 15px; /* Espacio entre íconos */
   list-style: none;
-  margin: 0;
+  display: flex;
+  gap: 1rem;
   padding: 0;
+  margin: 0;
 }
 
-/* Media Queries para pantallas pequeñas */
-@media (max-width: 768px) {
-  .app-bar-content {
-    flex-direction: row; /* Mantén los elementos en una fila */
-    align-items: center;
-    justify-content: flex-start; /* Asegura la distribución horizontal */
-  }
-
-  .logo-section {
-    margin-right: 10px; /* Espacio ajustado entre el logo y los demás elementos */
-  }
-
-  .title-image {
-    width: 80px;
-    margin-top: 10px;
-  }
-  
-  .search-bar {
-    flex-grow: 1; /* La barra de búsqueda sigue ocupando el espacio restante */
-    margin-right: 10px;
-  }
-
-  .navbar-icons ul {
-    flex-direction: row; /* Los íconos permanecen en una fila */
-    gap: 10px;
-  }
+.navbar-icons li {
+  display: flex;
+  align-items: center;
 }
 
-  
-  .menu-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  /* Menú lateral móvil */
-  .mobile-menu {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    padding: 20px;
-    position: absolute;
-    top: 70px; /* Ajusta según el alto de tu AppBar */
-    right: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-  }
-  
-  /* Media Queries para pantallas pequeñas */
-  @media (max-width: 768px) {
-    .app-bar {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .app-bar-content {
-      flex-direction: column;
-    }
-  
-    .logo-section {
-      margin-bottom: 10px;
-    }
-  
-    .navbar-icons ul {
-      flex-direction: column; /* Apila los íconos verticalmente */
-      align-items: center;
-    }
+.icon {
+  height: 24px; /* Tamaño del ícono */
+  width: 24px;
+  color: #fff; /* Color blanco para destacar en fondo azul */
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
 
-    .search-bar {
-      margin: 10px 0;
-      width: 100%; /* Asegura que la barra ocupe todo el ancho disponible */
-    }
-  }
-  
-  .navbar-icons li {
-    display: flex;
-    align-items: center;
-  }
-  
-  .icon {
-    height: 24px; /* Tamaño del ícono */
-    width: 24px;
-    color: #fff; /* Color blanco para destacar en fondo azul */
-    cursor: pointer;
-    transition: transform 0.2s ease, color 0.2s ease;
-  }
-  
-  .icon:hover {
-    transform: scale(1.2); /* Efecto de agrandamiento al pasar el mouse */
-    color: #ffcc00; /* Cambio de color en hover */
-  }
+.icon:hover {
+  transform: scale(1.2); /* Efecto de agrandamiento al pasar el mouse */
+  color: #ffcc00; /* Cambio de color en hover */
+}
+/*sign-out-button*/
+.sign-out-button {
+  border-radius: 35px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  background-color: #e94282;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.15s;
+}
 
+button:hover {
+  background-color: #8f0360;
+}
+/*register-button*/
+.register-button {
+  border-radius: 35px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  background-color: #e94282;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.15s;
+}
 
-  @media (max-width: 768px) {
-    .app-bar-content {
-      flex-direction: column; /* Coloca los elementos en una columna */
-      align-items: center; /* Centra los elementos */
-    }
-  
-    .navbar-icons ul {
-      flex-direction: column; /* Cambia los íconos a una columna */
-      gap: 0.5rem; /* Reduce el espacio entre los íconos */
-    }
-  
-    .title-image {
-      width: 120px; /* Ajusta el tamaño del logo */
-      margin: 0 auto; /* Centra el logo */
-    }
-  
-    .navbar-search input {
-      width: 90%; /* Haz que el input ocupe el ancho disponible */
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .navbar-icons {
-      flex-direction: column;
-      gap: 10px; /* Reduce el espacio entre íconos */
-    }
-  
-    .icon {
-      height: 20px; /* Reduce el tamaño de los íconos */
-    }
-  }
-  
-  
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Centrado vertical */
-    z-index: 1000; /* Asegura que el modal esté sobre otros elementos */
-  }
-  
-  /* Modal container */
-  .modal-content {
-    background-color: #fff;
-    border-radius: 16px; /* Bordes redondeados */
-    width: 90%;
-    max-width: 450px; /* Ancho máximo ajustado */
-    padding: 2rem;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra moderna */
-    animation: scaleUp 0.3s ease-in-out; /* Animación de entrada */
-    position: relative; /* Posicionamiento relativo para el botón de cerrar */
-  }
-  
-  /* Animación */
-  @keyframes scaleUp {
-    from {
-      transform: scale(0.8);
-      opacity: 0;
-    }
-    to {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-  
- 
-  
-  /* Botón de acción */
-  .confirmar-button {
-    padding: 0.8rem 1.5rem;
-    background-color: #8c08e4;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 10px;
-    margin-left: -16px;
-  }
-  
-  .confirmar-button:hover {
-    background-color: #075514;
-    transform: scale(1.05); /* Efecto de aumento */
-  }
-  
- 
-  .element.style {
-    width: 99px;
-    margin-top: 20px;
-    margin-left: -24px;
-  }
+button:hover {
+  background-color: #8f0360;
+}
 
-  .menu-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    font-size: 1.5rem;
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    background-color: #f56a79; /* Color del botón */
-    color: white;
-    transition: background-color 0.3s ease;
-  }
-  
-  .menu-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    font-size: 1.5rem;
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    background-color: #f56a79; /* Color del botón */
-    color: white;
-    transition: background-color 0.3s ease;
-    margin-left: 1rem; /* Espaciado entre botones */
-  }
-  
-  .menu-toggle:hover {
-    background-color: #d43b5f;
-  }
-  
-  .mobile-menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 100%;
-    background-color: #f4f4f4;
-    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-  }
-  
-  .mobile-menu.open {
-    transform: translateX(0);
-  }
-  
-  .mobile-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .mobile-menu li {
-    margin: 1rem 0;
-  }
-  
-  .mobile-menu button,
-  .mobile-menu a {
-    display: block;
-    width: 100%;
-    text-align: left;
-    background: none;
-    border: none;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .mobile-menu button:hover,
-  .mobile-menu a:hover {
-    background-color: #e0e0e0;
-  }
-
-
-  .side-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 300px; /* Ancho de la modal */
-    height: 100%;
-    background-color: #fff;
-    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
-    z-index: 1100;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    transform: translateX(-100%); /* Oculta la modal inicialmente */
-    transition: transform 0.3s ease;
-  }
-  
-  .side-modal.open {
-    transform: translateX(0); /* Muestra la modal */
-  }
-  
-  .close-modal {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #333;
-    align-self: flex-end;
-    cursor: pointer;
-  }
-  
-  .modal-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .modal-menu li button {
-    width: 100%;
-    text-align: left;
-    padding: 10px;
-    font-size: 1rem;
-    border: none;
-    background-color: #f4f4f4;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .modal-menu li button:hover {
-    background-color: #e0e0e0;
-  }
-  
+/*mobile-menu*/
+/*mobile-menu*/
