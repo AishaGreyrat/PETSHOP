@@ -164,7 +164,8 @@ const Payment: React.FC = () => {
               </div>
             </div>
             
-        <h3>Opciones de Pago</h3>
+            <h3 className="payment-options-title">Opciones de Pago</h3>
+
 
         {/* Selección de método de pago */}
         <div className="payment-method">

@@ -328,13 +328,14 @@ h3.resumen-cart{
 
 /* Cart summary section */
 .cart-summary {
-  margin-top: 20px; /* Ajusta el espacio superior */
+  margin-top: 65px; /* Ajusta el espacio superior */
   padding: 10px; /* Reduce el padding interno */
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #f9f9f9;
   max-width: 400px; /* Limita el ancho del cuadro */
   font-size: 14px; /* Reduce el tamaño de fuente */
+  margin-left: 500px;
 }
 
 .cart-summary h3 {
@@ -372,14 +373,19 @@ h3.resumen-cart{
   font-size: 14px;
   color: #333;
   margin-bottom: 5px;
+  margin-left: 675px;
+  margin-top: 35px;
 }
 
 .payment-direccion input {
   width: 100%;
   padding: 8px;
   font-size: 14px;
-  border: 1px solid #ddd;
+  border: 1px solid #9d9d9d;
   border-radius: 5px;
+  margin-left: 500px;
+  margin-top: 15px;
+  background-color: #d7dbdb;
 }
 
 .payment-method {
@@ -451,4 +457,37 @@ h3.resumen-cart{
   padding: 20px;
   border-radius: 10px;
   text-align: center;
+}
+
+.payment-options-title {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
+}
+
+.label-address
+{
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+  margin-left: 675px;
+  margin-top: 35px;
+}
+
+
+.payment-direccion input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #9d9d9d;
+  border-radius: 5px;
+  margin-left: 500px;
+  margin-top: 15px;
+  background-color: #d7dbdb;
 }
