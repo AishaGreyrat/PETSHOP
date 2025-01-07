@@ -73,7 +73,6 @@ const AppBar: React.FC<AppBarProps> = ({
                 </li>
                 <li>
                 <button className="sign-out-button" onClick={handleSignOut}>Cerrar sesión</button>
-
                 </li>
               </>
             ) : (

@@ -3,12 +3,12 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { paymentSchema } from "../../../ValidationSchemas/validationSchemas";
 import { PaymentFormData } from "../../../Types/types";
-
-
+import "./Paymentform.css"; // Importación de los estilos
 
 const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const { control, handleSubmit, formState: { errors } } = useForm<PaymentFormData>({
     resolver: zodResolver(paymentSchema),
+    mode: "onChange", // Configuración para reducir errores excesivos
   });
 
   const onSubmit = (data: PaymentFormData) => {
@@ -17,9 +17,10 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>Formulario de Pago</h2>
-      <div>
+    <form className="payment-page" onSubmit={handleSubmit(onSubmit)}>
+      <h2 className="payment">Formulario de Pago</h2>
+
+      <div className="payment-direccion">
         <label htmlFor="address">Dirección</label>
         <Controller
           name="address"
@@ -30,6 +31,7 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
               id="address"
               placeholder="Ingrese su dirección"
               type="text"
+              value={field.value || ""} // Asegurar que el valor sea string
             />
           )}
         />
@@ -47,6 +49,7 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
               id="cardNumber"
               placeholder="Ingrese el número de la tarjeta"
               type="text"
+              value={field.value || ""} // Asegurar que el valor sea string
             />
           )}
         />
@@ -64,6 +67,7 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
               id="cardHolder"
               placeholder="Nombre del titular"
               type="text"
+              value={field.value || ""} // Asegurar que el valor sea string
             />
           )}
         />
@@ -81,6 +85,7 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
               id="expirationDate"
               placeholder="MM/AA"
               type="text"
+              value={field.value || ""} // Asegurar que el valor sea string
             />
           )}
         />
@@ -98,13 +103,14 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
               id="cvv"
               placeholder="CVV"
               type="text"
+              value={field.value || ""} // Asegurar que el valor sea string
             />
           )}
         />
         {errors.cvv && <p>{errors.cvv.message}</p>}
       </div>
 
-      <button type="submit">Confirmar Pago</button>
+      <button className="btn-confirm" type="submit">Confirmar Pago</button>
     </form>
   );
 };

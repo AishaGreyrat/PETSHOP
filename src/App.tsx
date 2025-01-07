@@ -4,7 +4,7 @@ import AppBar from './Components/AppBar/Appbar';
 import ImageCarousel from './Components/ImageCarousel/ImageCarousel';
 import ShopPage from './Pages/ShopPage';
 import { CartProvider } from './Contexts/CartContext';
-import Cart from './Pages/Cart';
+import Cart from './Pages/Cart/Cart';
 import PaymentPage from './Pages/Payment'; // Importa el componente de pago
 import Footer from "./Components/Footer/Footer";
 import './Styles/AppBar.css';

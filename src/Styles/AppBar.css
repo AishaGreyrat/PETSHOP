@@ -63,7 +63,17 @@
   color: #ffcc00; /* Cambio de color en hover */
 }
 
+
+
+
+
+
+
+
+
 /* Footer Styles */
+
+
 .footer {
   width: 95.8%;
   background-color: #6439FF;
@@ -177,7 +187,6 @@
   padding: 1.5rem;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilo para las etiquetas */

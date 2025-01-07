@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductList from '@/Pages/ProductList';
-import Cart from '@/Pages/Cart';
+import Cart from '@/Pages/Cart/Cart';
 import AppBar from '@/Components/AppBar/Appbar';
 import AddProductForm from '@/Components/Forms/AddProduct/AddProductForm';
 import LoginForm from '@/Components/Forms/Login/LoginForm';
