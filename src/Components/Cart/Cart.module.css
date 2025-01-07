@@ -1,16 +1,16 @@
 .add-to-cart-button {
-    background-color: #e94282;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .add-to-cart-button:hover {
-    background-color: #d0356d;
-  }
+  background-color: #e94282;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-to-cart-button:hover {
+  background-color: #d0356d;
+}
 
   .cart {
     margin-top: 2rem;
