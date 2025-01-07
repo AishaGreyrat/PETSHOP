@@ -2,37 +2,36 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { paymentSchema } from "../../../ValidationSchemas/validationSchemas";
-import { PaymentFormData } from "../../../Types/types";
-import "./Paymentform.css"; // Importación de los estilos
+import * as z from "zod";
+
+type PaymentFormData = z.infer<typeof paymentSchema>;
 
 const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
-  const { control, handleSubmit, formState: { errors } } = useForm<PaymentFormData>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<PaymentFormData>({
     resolver: zodResolver(paymentSchema),
-    mode: "onChange", // Configuración para reducir errores excesivos
+    mode: "onChange",
   });
 
   const onSubmit = (data: PaymentFormData) => {
-    console.log("Datos de pago enviados", data);
-    closeModal(); // Cerrar el modal después de enviar el formulario
+    console.log("Datos de pago enviados:", data);
+    closeModal();
   };
 
   return (
-    <form className="payment-page" onSubmit={handleSubmit(onSubmit)}>
-      <h2 className="payment">Formulario de Pago</h2>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <h2>Formulario de Pago</h2>
 
-      <div className="payment-direccion">
+      <div>
         <label htmlFor="address">Dirección</label>
         <Controller
           name="address"
           control={control}
           render={({ field }) => (
-            <input
-              {...field}
-              id="address"
-              placeholder="Ingrese su dirección"
-              type="text"
-              value={field.value || ""} // Asegurar que el valor sea string
-            />
+            <input {...field} id="address" placeholder="Ingrese su dirección" />
           )}
         />
         {errors.address && <p>{errors.address.message}</p>}
@@ -44,13 +43,7 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
           name="cardNumber"
           control={control}
           render={({ field }) => (
-            <input
-              {...field}
-              id="cardNumber"
-              placeholder="Ingrese el número de la tarjeta"
-              type="text"
-              value={field.value || ""} // Asegurar que el valor sea string
-            />
+            <input {...field} id="cardNumber" placeholder="1234 5678 9012 3456" />
           )}
         />
         {errors.cardNumber && <p>{errors.cardNumber.message}</p>}
@@ -62,13 +55,7 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
           name="cardHolder"
           control={control}
           render={({ field }) => (
-            <input
-              {...field}
-              id="cardHolder"
-              placeholder="Nombre del titular"
-              type="text"
-              value={field.value || ""} // Asegurar que el valor sea string
-            />
+            <input {...field} id="cardHolder" placeholder="Nombre completo" />
           )}
         />
         {errors.cardHolder && <p>{errors.cardHolder.message}</p>}
@@ -80,13 +67,7 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
           name="expirationDate"
           control={control}
           render={({ field }) => (
-            <input
-              {...field}
-              id="expirationDate"
-              placeholder="MM/AA"
-              type="text"
-              value={field.value || ""} // Asegurar que el valor sea string
-            />
+            <input {...field} id="expirationDate" placeholder="MM/AA" />
           )}
         />
         {errors.expirationDate && <p>{errors.expirationDate.message}</p>}
@@ -98,19 +79,13 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
           name="cvv"
           control={control}
           render={({ field }) => (
-            <input
-              {...field}
-              id="cvv"
-              placeholder="CVV"
-              type="text"
-              value={field.value || ""} // Asegurar que el valor sea string
-            />
+            <input {...field} id="cvv" placeholder="CVV" type="password" />
           )}
         />
         {errors.cvv && <p>{errors.cvv.message}</p>}
       </div>
 
-      <button className="btn-confirm" type="submit">Confirmar Pago</button>
+      <button type="submit">Confirmar Pago</button>
     </form>
   );
 };
