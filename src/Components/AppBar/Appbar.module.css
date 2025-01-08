@@ -1,4 +1,31 @@
 /* Ajuste del contenido principal */
+/* Estilo de la barra superior */
+.top-header {
+  background-color: #4a2c82; /* Color morado */
+  color: #ffffff; /* Texto en blanco */
+  text-align: center; /* Centrar texto */
+  padding: 10px 0; /* Espaciado vertical */
+  font-size: 14px; /* Tamaño de fuente */
+  font-weight: bold; /* Texto en negrita */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  z-index: 100; /* Asegurar que esté encima de otros elementos */
+  position: sticky; /* Fijar la barra superior */
+  top: 0; /* Siempre visible al principio */
+}
+
+/* Animación para la transición suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.top-header p {
+  animation: fadeIn 1s ease-in-out;
+}
 
 .app-bar {
   background-color: #6439FF; /* Fondo púrpura */

@@ -82,3 +82,22 @@
     font-size: 1.5rem;
   }
 }
+
+.message-carousel {
+  background-color: #4a2c82; /* Color morado */
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: bold;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

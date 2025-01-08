@@ -5,6 +5,7 @@ import SearchBar from "@/Components/SearchBar/SearchBar";
 import LoginModal from "@/Components/Modal/LoginModal";
 import RegisterModal from "../Modal/RegisterModal";
 import AddProductModal from "@/Components/Modal/AddProductModal";
+import MessageCarousel from "../ImageCarousel/MessageCarousel";
 import { AppBarProps } from "@/Types/types";
 import { useUser } from "@/Contexts/UserContext";
 import { signOut } from "firebase/auth";
@@ -12,6 +13,7 @@ import { auth } from "../../../firebaseConfig";
 import { useAdminCheck } from "@/Roles/useAdminCheck";
 import styles from "./Appbar.module.css";
 import useMediaQuery from "@/Hooks/useMediaQuery";
+import messages from "../ImageCarousel/messages";
 
 const AppBar: React.FC<AppBarProps> = ({
   searchTerm,
@@ -35,6 +37,12 @@ const AppBar: React.FC<AppBarProps> = ({
 
   return (
     <header className={styles["app-bar"]}>
+      {/* Header Superior */}
+      <div className={styles["top-header"]}>
+        <MessageCarousel messages={messages} interval={5000} />
+      </div>
+
+      {/* Contenido Principal */}
       <div className={styles["app-bar-content"]}>
         {/* Logo */}
         <div className={styles["logo-section"]}>
