@@ -1,23 +1,96 @@
+/* Estilo general del formulario */
 .register-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 1.5rem;
-    background-color: #fff;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Estilo del título */
+.register-form h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Estilo para los campos de entrada */
+.register-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.register-form input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* Estilo para las etiquetas */
+.register-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Estilo para mensajes de error */
+.register-form span {
+  display: block;
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+/* Botón de registro */
+.register {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #3498db;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.register:hover {
+  background-color: #2980b9;
+}
+
+/* Modal body */
+.modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Estilo responsivo */
+@media (max-width: 768px) {
+  .register-form {
+    padding: 15px;
   }
-  
-  .register-form label {
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 0.3rem;
-    color: #333;
+
+  .register-form h2 {
+    font-size: 1.5rem;
   }
-  
-  .register-form input:focus {
-    outline: none;
-    border-color: #6439FF;
-    box-shadow: 0 0 5px rgba(100, 57, 255, 0.5);
+
+  .register {
+    font-size: 14px;
   }
-  
+}
