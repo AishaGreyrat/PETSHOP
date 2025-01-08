@@ -140,6 +140,10 @@
       max-width: 90%; /* Más ancho en pantallas pequeñas */
       padding: 15px;
     }
+
+    .closeButton {
+      right: 1rem;
+    }
   }
   
   

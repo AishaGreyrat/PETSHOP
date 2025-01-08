@@ -118,7 +118,7 @@ const AppBar: React.FC<AppBarProps> = ({
 
       {/* Menú lateral móvil */}
       {!isAboveMediumScreens && isMenuOpen && (
-        <div className={styles["mobile-menu"]}>
+        <div className={`${styles["mobile-menu"]} ${isMenuOpen ? styles["open"] : ""}`}>
           <ul>
             {user ? (
               <>
@@ -130,7 +130,9 @@ const AppBar: React.FC<AppBarProps> = ({
                   </li>
                 )}
                 <li>
-                  <Link to="/cart">Carrito</Link>
+                  <button>
+                    <Link to="/cart">Carrito</Link>
+                  </button>
                 </li>
                 <li>
                   <button className="sign-out-button" onClick={handleSignOut}>
@@ -145,7 +147,6 @@ const AppBar: React.FC<AppBarProps> = ({
                     <UserIcon className={styles.icon} />
                   </button>
                   <button onClick={() => setIsLoginModalOpen(true)}>
-                    Iniciar sesión
                   </button>
                 </li>
                 <li>
