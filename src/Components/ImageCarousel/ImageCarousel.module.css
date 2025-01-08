@@ -39,6 +39,7 @@
 @media (max-width: 768px) {
   .image-Carousel {
     height: 300px; /* Reducir altura en pantallas pequeñas */
+    margin-top: 30%;
   }
 
   .carousel-Image {
