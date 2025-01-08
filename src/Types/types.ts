@@ -42,6 +42,28 @@ export interface PaymentModalProps {
     onCancel: () => void;
     total: number;
   }
+export interface EditProductModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  productData: Product | null;
+  onSave: (updatedProduct: Product) => void;
+}
+  
+
+export interface ConfirmModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  message: string;
+  onConfirm: () => void;
+}
+
+export interface EditProductFormProps {
+  productData: Product; // Tipo Product ya existente
+  onSubmit: (updatedProduct: Product) => void; // Para enviar los datos actualizados
+  onCancel: () => void; // Para cerrar el formulario sin guardar cambios
+}
+
+  
 
   /* Parte de Payment */
 
@@ -82,6 +104,7 @@ export interface Product {
   quantity: number;
   category?: string;
   image?: string;
+  newImage?: File | null;
 };
 
 export interface ProductListProps {

@@ -2,22 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '@/Services/productoService';
 import { useCart } from '@/Contexts/CartContext';
 import { Product, ShopPageProps } from '@/Types/types';
-import { db, storage } from '../../../firebaseConfig';
-import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { useAdminCheck } from '../../Roles/useAdminCheck';  // Para verificar si el usuario es administrador
+import { db } from '../../../firebaseConfig';
+import { doc, deleteDoc } from 'firebase/firestore';
+import { useAdminCheck } from '../../Roles/useAdminCheck';
+import { EditProductModal, ConfirmModal } from '../../Components/Modal';
 import styles from './ShopPage.module.css';
 
-const ShopPage: React.FC<ShopPageProps> = ({
-  searchTerm,
-  selectedCategory,
-}) => {
+const ShopPage: React.FC<ShopPageProps> = ({ searchTerm, selectedCategory }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const { dispatch } = useCart();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [newImage, setNewImage] = useState<File | null>(null); // Estado para manejar la imagen
-  const { isAdmin, loading } = useAdminCheck(); // Verificación de administrador
+  const [confirmationMessage, setConfirmationMessage] = useState('');
+  const [onConfirmAction, setOnConfirmAction] = useState<(() => void) | null>(null);
+  const { isAdmin, loading } = useAdminCheck();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -50,74 +49,30 @@ const ShopPage: React.FC<ShopPageProps> = ({
   const openEditModal = (product: Product) => {
     if (!isAdmin) return alert('No tienes permisos para editar productos');
     setSelectedProduct(product);
-    setNewImage(null); // Limpiar imagen cargada al abrir el modal
-    setIsModalOpen(true);
+    setIsEditModalOpen(true);
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null;
-    if (file) {
-      setNewImage(file);
-    }
+  const handleDeleteClick = (product: Product) => {
+    setConfirmationMessage(`¿Estás seguro de que deseas eliminar el producto "${product.name}"?`);
+    setOnConfirmAction(() => () => handleDelete(product));
+    setIsConfirmationModalOpen(true);
   };
 
-  const handleEdit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedProduct) return;
-
-    let updatedProduct = {
-      ...selectedProduct,
-      image: newImage ? URL.createObjectURL(newImage) : selectedProduct.image,
-    };
-
-    // Si se seleccionó una nueva imagen, subirla a Firebase Storage
-    if (newImage) {
-      const imageRef = ref(storage, `product-images/${newImage.name}`);
-      await uploadBytes(imageRef, newImage);
-      const imageUrl = await getDownloadURL(imageRef);
-      updatedProduct = {
-        ...updatedProduct,
-        image: imageUrl,
-      };
-    }
-
-    try {
-      // Intentar actualizar el producto en Firestore
-      const productRef = doc(db, 'products', selectedProduct.id);
-      await updateDoc(productRef, updatedProduct);
-      console.log('Producto actualizado en Firebase');
-      const updatedProducts = products.map((product) =>
-        product.id === selectedProduct.id ? updatedProduct : product
-      );
-      setProducts(updatedProducts);
-      closeModal();
-    } catch (error) {
-      console.error('Error al actualizar el producto:', error);
-      alert('Hubo un error al actualizar el producto');
-    }
-  };
-
-  const handleDelete = async () => {
-    if (!selectedProduct) return;
-
-    const productRef = doc(db, 'products', selectedProduct.id);
+  const handleDelete = async (product: Product) => {
+    const productRef = doc(db, 'products', product.id);
     try {
       await deleteDoc(productRef);
-      const updatedProducts = products.filter(
-        (product) => product.id !== selectedProduct.id
-      );
-      setProducts(updatedProducts);
-      closeModal();
+      setProducts(products.filter((p) => p.id !== product.id));
+      alert(`Producto "${product.name}" eliminado exitosamente`);
     } catch (error) {
       console.error('Error al eliminar el producto:', error);
       alert('Hubo un error al eliminar el producto');
     }
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
     setSelectedProduct(null);
-    setNewImage(null);
   };
 
   if (loading) return <p>Cargando...</p>;
@@ -133,86 +88,38 @@ const ShopPage: React.FC<ShopPageProps> = ({
             <p className={styles.quantity}>Cantidad: {product.quantity}</p>
             <button className={styles["add-to-cart-button"]} onClick={() => addToCart(product)}>Agregar al carrito</button>
 
-
-            {/* Solo mostrar los botones de editar y eliminar si el usuario es administrador */}
             {isAdmin && (
               <>
                 <button className={styles["edit-button"]} onClick={() => openEditModal(product)}>Editar</button>
-                <button className={styles["delete-button"]} onClick={handleDelete}>Eliminar</button>
+                <button className={styles["delete-button"]} onClick={() => handleDeleteClick(product)}>Eliminar</button>
               </>
             )}
           </div>
         ))}
       </div>
 
-      {isModalOpen && selectedProduct && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>Editar Producto</h2>
-            <form onSubmit={handleEdit}>
-              <label>
-                Nombre:
-                <input
-                  type="text"
-                  value={selectedProduct.name}
-                  onChange={(e) =>
-                    setSelectedProduct({
-                      ...selectedProduct,
-                      name: e.target.value,
-                    })
-                  }
-                />
-              </label>
-              <label>
-                Precio:
-                <input
-                  type="number"
-                  value={selectedProduct.price}
-                  onChange={(e) =>
-                    setSelectedProduct({
-                      ...selectedProduct,
-                      price: parseFloat(e.target.value),
-                    })
-                  }
-                />
-              </label>
-              <label>
-                Cantidad:
-                <input
-                  type="number"
-                  value={selectedProduct.quantity}
-                  onChange={(e) =>
-                    setSelectedProduct({
-                      ...selectedProduct,
-                      quantity: parseInt(e.target.value),
-                    })
-                  }
-                />
-              </label>
-              <label>
-                Imagen:
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                />
-                {newImage && (
-                  <div>
-                    <p>Imagen seleccionada:</p>
-                    <img
-                      src={URL.createObjectURL(newImage)}
-                      alt="Imagen seleccionada"
-                      style={{ width: '100px', height: 'auto' }}
-                    />
-                  </div>
-                )}
-              </label>
-              <button type="submit">Guardar cambios</button>
-            </form>
-            <button onClick={closeModal}>Cerrar</button>
-          </div>
-        </div>
-      )}
+      <EditProductModal
+        isOpen={isEditModalOpen}
+        onClose={closeEditModal}
+        productData={selectedProduct}
+        onSave={(updatedProduct) => {
+          const updatedProducts = products.map((product) =>
+            product.id === updatedProduct.id ? updatedProduct : product
+          );
+          setProducts(updatedProducts);
+          alert(`Producto "${updatedProduct.name}" actualizado exitosamente`);
+        }}
+      />
+
+      <ConfirmModal
+        isOpen={isConfirmationModalOpen}
+        onClose={() => setIsConfirmationModalOpen(false)}
+        message={confirmationMessage}
+        onConfirm={() => {
+          if (onConfirmAction) onConfirmAction();
+          setIsConfirmationModalOpen(false);
+        }}
+      />
     </div>
   );
 };
