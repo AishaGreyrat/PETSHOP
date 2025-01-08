@@ -1,12 +1,12 @@
 
 /*   Estilos globales body, tipografia, responsividad   */
 html{
-
+  width: auto;
 }
 body {
   font-family: 'PT Sans', sans-serif;
   box-sizing: border-box;
-
+  width: auto;
 }
 html, body {
   margin: 0;
