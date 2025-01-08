@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod'; 
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { addProduct } from '@/Services/productoService';
 import { AddProductFormProps } from '@/Types/types';
 import { AddproductSchema, ProductFormData } from '@/ValidationSchemas/validationSchemas';  
 import { useAdminCheck } from '../../../Roles/useAdminCheck'; // Hook para verificar si el usuario es administrador
-
+import styles from "./AddProductForm.module.css";
 import '../../AppBar/Appbar.module.css';
 
 const AddProductForm: React.FC<AddProductFormProps> = ({ closeModal }) => {
@@ -72,7 +72,7 @@ const AddProductForm: React.FC<AddProductFormProps> = ({ closeModal }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)} className="add-product-form">
+      <form onSubmit={handleSubmit(onSubmit)} className={styles["add-product-form"]}>
         <div>
           <h2>Agregar Producto</h2>
           <label htmlFor="name">Nombre del producto: </label>
@@ -124,12 +124,12 @@ const AddProductForm: React.FC<AddProductFormProps> = ({ closeModal }) => {
             <img
               src={imageBase64}
               alt="Vista previa"
-              className="ImagePrev"
+              className={styles.ImagePrev}
             />
           )}
         </div>
 
-        <button className="añadir" type="submit">
+        <button className={styles.añadir} type="submit">
           Añadir producto
         </button>
       </form>
