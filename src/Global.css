@@ -1,9 +1,17 @@
 
 /*   Estilos globales body, tipografia, responsividad   */
+html{
 
+}
+body {
+  font-family: 'PT Sans', sans-serif;
+  box-sizing: border-box;
 
-
-
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}
 
 
 a {
@@ -19,17 +27,7 @@ li {
   list-style: none;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'PT Sans', sans-serif;
-  box-sizing: border-box;
-}
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
+
 
 
 .app-container {
@@ -131,7 +129,7 @@ button:focus-visible {
 
 .main-content {
   flex-grow: 0;
-  width: 100%;
+  width: 99%;
 }
 
 
