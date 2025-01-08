@@ -1,34 +1,70 @@
-.image-Carousel {
-  position: relative;
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #F8F8F9;
-  margin-top: 10em;
-}
-
+/* Contenedor del carrusel */
+/* Imágenes del carrusel */
 .carousel-Image {
-  position: absolute;
-  width: auto;
-  max-width: 100%;
-  height: auto;
-  max-height: 150%;
-  object-fit: contain;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  margin-top: 15%;
+  flex-shrink: 0;
+  width: 100vw; 
+  height: 50vh; 
+  object-fit: cover; 
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease;
+  opacity: 0; 
+  position: absolute; 
 }
 
+/* Imagen activa */
+.carousel-Image.active {
+  opacity: 1; 
+}
+
+/* Contenedor del carrusel */
+.image-Carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Oculta cualquier desbordamiento */
+  position: relative;
+  width: 100vw; /* Ocupa todo el ancho */
+  height: 60vh; /* Ajusta la altura para pantallas grandes */
+  margin: 0 auto; /* Centrado */
+  background-color: #f8f8f8; /* Color de fondo neutro */
+}
+
+/* Imagen activa */
 .carousel-Image.active {
   opacity: 1;
+  position: relative;
 }
 
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .image-Carousel {
+    height: 300px; /* Reducir altura en pantallas pequeñas */
+  }
+
+  .carousel-Image {
+    object-fit: cover;
+    width: 100%; /* Asegurar ancho completo */
+  }
+
+  .carousel-Button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-Carousel {
+    height: 200px;
+  }
+
+}
+
+/* Botones del carrusel */
 .carousel-Button {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 65%; /* Centrar verticalmente */
+  transform: translateY(-50%); /* Ajuste para centrado vertical */
   background-color: rgba(0, 0, 0, 0.6);
   border: none;
   color: white;
@@ -45,40 +81,39 @@
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+/* Botón izquierdo */
+.carousel-Button.left {
+  left: 10px; /* Posicionarlo cerca del borde izquierdo */
+}
+
+/* Botón derecho */
+.carousel-Button.right {
+  right: 10px; /* Posicionarlo cerca del borde derecho */
+}
+
+/* Hover para los botones */
 .carousel-Button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+/* Efecto al presionar los botones */
 .carousel-Button:active {
   transform: translateY(-50%) scale(0.9);
 }
 
-.left {
-  left: 20px;
-}
-
-.right {
-  right: 20px;
-}
-
+/* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
-  .image-Carousel {
-    height: 300px;
-    margin-top: 5em;
-  }
-
-  .carousel-Image {
-    object-fit: contain;
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: 100%;
-    margin-top: 3em;
-  }
-
   .carousel-Button {
     width: 40px;
     height: 40px;
     font-size: 1.5rem;
+  }
+
+  .carousel-Button.left {
+    left: 5px; /* Ajustar posición en pantallas pequeñas */
+  }
+
+  .carousel-Button.right {
+    right: 5px; /* Ajustar posición en pantallas pequeñas */
   }
 }

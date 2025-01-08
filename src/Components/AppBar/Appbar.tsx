@@ -12,6 +12,8 @@ import { auth } from "../../../firebaseConfig";
 import { useAdminCheck } from "@/Roles/useAdminCheck";
 import styles from "./Appbar.module.css";
 import useMediaQuery from "@/Hooks/useMediaQuery";
+import MessageCarousel from "../ImageCarousel/MessageCarousel";
+import messages from "../ImageCarousel/messages";
 
 const AppBar: React.FC<AppBarProps> = ({
   searchTerm,
@@ -35,6 +37,12 @@ const AppBar: React.FC<AppBarProps> = ({
 
   return (
     <header className={styles["app-bar"]}>
+      {/* Header Superior */}
+      <div className={styles["top-header"]}>
+        <MessageCarousel messages={messages} interval={5000} />
+      </div>
+
+      {/* Contenido Principal */}
       <div className={styles["app-bar-content"]}>
         {/* Logo */}
         <div className={styles["logo-section"]}>

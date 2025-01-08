@@ -1,29 +1,46 @@
-.app-bar {
-  background-color: #6439FF;
-  padding: 1rem 1.5rem; /* Ajuste del padding para ahorrar espacio */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 99%;
+.top-header {
+  background-color: #ffff;
+  color: #4a2c82;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
   z-index: 1000;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para destacar el navbar */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0; /* Ajusta el padding para un diseño compacto */
+}
+
+.app-bar {
+  background-color: #6439FF;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between; /* Asegura espacio entre los elementos */
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 50px; /* Ajusta esta propiedad para que quede debajo de `top-header` */
+  left: 0;
+  z-index: 999; /* Asegúrate de que tenga una menor prioridad que `top-header` */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .app-bar-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
+  width: 100%;
   max-width: 1200px;
+  margin: 0 auto; /* Centra el contenido */
 }
 
-.logo-section {
-  display: flex;
-  align-items: center;
+.logo-section img {
+  height: 80px;
+  object-fit: contain;
 }
+
 
 .title-image {
   width: 100px; /* Tamaño ajustado para que no ocupe tanto espacio */
@@ -32,9 +49,12 @@
 }
 /*menu-toggle */
 
-.navbar-icons {
+.navbar-icons ul {
   display: flex;
-  gap: 1rem; /* Espaciado entre los íconos */
+  gap: 1rem; /* Espacio entre los íconos */
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .navbar-icons ul {
