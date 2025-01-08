@@ -7,7 +7,7 @@ import { auth } from '../../../../firebaseConfig';
 import { useNavigate } from "react-router-dom";
 import { LoginFormProps } from '@/Types/types';
 
-import '../../AppBar/Appbar.module.css';
+import '@/Styles/AppBar.css';
 import { signInWithGoogle } from '@/Services/authService';
 
 const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {
@@ -18,7 +18,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {
 
   const handleLogin = async (data: LoginFormData) => {
     try {
-      // Aquí iría la lógica para iniciar sesión
       await signInWithEmailAndPassword(auth, data.email, data.password);
       alert("Inicio de sesión exitoso");
       

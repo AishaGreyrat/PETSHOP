@@ -5,6 +5,7 @@ import App from './App.tsx'
 import './Global.css'
 import { Provider } from 'react-redux'
 import { store } from './Redux/store.ts'
+import 'core-js/stable';  // Polyfills para las nuevas características de JS
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

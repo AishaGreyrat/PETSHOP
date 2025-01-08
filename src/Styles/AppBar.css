@@ -1,0 +1,192 @@
+
+
+h2 {
+  text-align: center;
+}
+
+img.ImagePrev {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* General layout for the payment page */
+.payment-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h2.payment {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+h3.resumen-cart{
+  margin-top: 6rem;
+}
+
+/* Cart summary section */
+.cart-summary {
+  margin-top: 65px; /* Ajusta el espacio superior */
+  padding: 10px; /* Reduce el padding interno */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  max-width: 400px; /* Limita el ancho del cuadro */
+  font-size: 14px; /* Reduce el tamaño de fuente */
+  margin-left: 500px;
+}
+
+.cart-summary h3 {
+  margin-bottom: 10px;
+  font-size: 18px; /* Ajusta el tamaño del título */
+  color: #555;
+}
+
+.cart-summary ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cart-summary ul li {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #444;
+}
+
+.cart-summary h4 {
+  margin-top: 6rem;
+  font-size: 16px; /* Reduce el tamaño del total */
+  font-weight: bold;
+  color: #222;
+}
+
+/* Payment options form */
+.payment-options {
+  margin-top: 20px; /* Añade espacio entre el resumen y las opciones */
+  max-width: 400px;
+}
+
+.payment-direccion label {
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+  margin-left: 675px;
+  margin-top: 35px;
+}
+
+.payment-direccion input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #9d9d9d;
+  border-radius: 5px;
+  margin-left: 500px;
+  margin-top: 15px;
+  background-color: #d7dbdb;
+}
+
+.payment-method {
+  margin-top: 15px;
+}
+
+.payment-method div {
+  margin-bottom: 15px;
+}
+
+.payment-method input[type="radio"] {
+  margin-right: 10px;
+}
+
+.payment-method label {
+  font-size: 14px;
+  color: #333;
+}
+
+.payment-details input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.payment-details .error {
+  color: #d9534f;
+  font-size: 12px;
+}
+
+/* Confirmation button */
+.btn-confirm {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #5cb85c;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.btn-confirm:hover {
+  background-color: #4cae4c;
+}
+
+/* Modal (if applicable) */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.payment-options-title {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
+}
+
+.label-address
+{
+  display: block;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+  margin-left: 675px;
+  margin-top: 35px;
+}
+
+
+.payment-direccion input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #9d9d9d;
+  border-radius: 5px;
+  margin-left: 500px;
+  margin-top: 15px;
+  background-color: #d7dbdb;
+}

@@ -1,3 +1,4 @@
+// src/Components/AppBar/AppBar.tsx
 import React, { useState } from "react";
 import { ShoppingCartIcon, UserIcon, PlusIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
