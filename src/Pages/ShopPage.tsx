@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '@/Services/productoService';
 import { useCart } from '@/Contexts/CartContext';
-import '@/Styles/ProductGrid.css';
 import { Product, ShopPageProps } from '@/Types/types';
 import { db, storage } from '../../firebaseConfig';
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { useAdminCheck } from '../Roles/useAdminCheck';  // Para verificar si el usuario es administrador
+import { useAdminCheck } from '../Roles/useAdminCheck';
+import ConfirmSaveChangesModal from '@/Components/Modal/ConfirmSaveChangesModal';
+import SaveChangesSuccessModal from '@/Components/Modal/SaveChangesSuccessModal';
+import AddToCartSuccessModal from '@/Components/Modal/AddToCartSuccessModal';
 
 const ShopPage: React.FC<ShopPageProps> = ({
   searchTerm,
@@ -16,8 +18,11 @@ const ShopPage: React.FC<ShopPageProps> = ({
   const { dispatch } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [newImage, setNewImage] = useState<File | null>(null); // Estado para manejar la imagen
-  const { isAdmin, loading } = useAdminCheck(); // Verificación de administrador
+  const [newImage, setNewImage] = useState<File | null>(null);
+  const [isSaveChangesModalOpen, setIsSaveChangesModalOpen] = useState(false);
+  const [isSaveChangesSuccessModalOpen, setIsSaveChangesSuccessModalOpen] = useState(false);
+  const [isAddToCartSuccessModalOpen, setIsAddToCartSuccessModalOpen] = useState(false);
+  const { isAdmin, loading } = useAdminCheck();
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -44,13 +49,13 @@ const ShopPage: React.FC<ShopPageProps> = ({
 
   const addToCart = (product: Product) => {
     dispatch({ type: "ADD_ITEM", payload: product });
-    alert(`${product.name} ha sido añadido al carrito`);
+    setIsAddToCartSuccessModalOpen(true); // Mostrar el modal de éxito
   };
 
   const openEditModal = (product: Product) => {
     if (!isAdmin) return alert('No tienes permisos para editar productos');
     setSelectedProduct(product);
-    setNewImage(null); // Limpiar imagen cargada al abrir el modal
+    setNewImage(null);
     setIsModalOpen(true);
   };
 
@@ -61,8 +66,8 @@ const ShopPage: React.FC<ShopPageProps> = ({
     }
   };
 
-  const handleEdit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleEdit = async () => {  // Elimina (e: React.FormEvent)
+    setIsSaveChangesModalOpen(true); // Abrir modal de confirmación de guardado
     if (!selectedProduct) return;
 
     let updatedProduct = {
@@ -70,7 +75,6 @@ const ShopPage: React.FC<ShopPageProps> = ({
       image: newImage ? URL.createObjectURL(newImage) : selectedProduct.image,
     };
 
-    // Si se seleccionó una nueva imagen, subirla a Firebase Storage
     if (newImage) {
       const imageRef = ref(storage, `product-images/${newImage.name}`);
       await uploadBytes(imageRef, newImage);
@@ -82,7 +86,6 @@ const ShopPage: React.FC<ShopPageProps> = ({
     }
 
     try {
-      // Intentar actualizar el producto en Firestore
       const productRef = doc(db, 'products', selectedProduct.id);
       await updateDoc(productRef, updatedProduct);
       console.log('Producto actualizado en Firebase');
@@ -90,7 +93,8 @@ const ShopPage: React.FC<ShopPageProps> = ({
         product.id === selectedProduct.id ? updatedProduct : product
       );
       setProducts(updatedProducts);
-      closeModal();
+      setIsSaveChangesModalOpen(false);
+      setIsSaveChangesSuccessModalOpen(true); // Mostrar modal de éxito al guardar cambios
     } catch (error) {
       console.error('Error al actualizar el producto:', error);
       alert('Hubo un error al actualizar el producto');
@@ -131,10 +135,9 @@ const ShopPage: React.FC<ShopPageProps> = ({
             <h3>{product.name}</h3>
             <p className="price">Precio: ${product.price.toFixed(2)}</p>
             <p className="quantity">Cantidad: {product.quantity}</p>
-            <button className="add-to-cart-button" onClick={() => addToCart(product)}>Agregar al carrito</button>
-
-
-            {/* Solo mostrar los botones de editar y eliminar si el usuario es administrador */}
+            <button onClick={() => addToCart(product)}>
+              Agregar al carrito
+            </button>
             {isAdmin && (
               <>
                 <button className="edit-button" onClick={() => openEditModal(product)}>Editar</button>
@@ -145,6 +148,19 @@ const ShopPage: React.FC<ShopPageProps> = ({
           </div>
         ))}
       </div>
+
+      {/* Modales */}
+      <ConfirmSaveChangesModal
+        isOpen={isSaveChangesModalOpen}
+        onClose={() => setIsSaveChangesModalOpen(false)}
+        onConfirm={handleEdit} // Ahora solo invoca handleEdit sin pasar el evento
+      />
+      <SaveChangesSuccessModal
+        isOpen={isSaveChangesSuccessModalOpen}
+        onClose={() => setIsSaveChangesSuccessModalOpen(false)} children={undefined}      />
+      <AddToCartSuccessModal
+        isOpen={isAddToCartSuccessModalOpen}
+        onClose={() => setIsAddToCartSuccessModalOpen(false)} children={undefined}      />
 
       {isModalOpen && selectedProduct && (
         <div className="modal">

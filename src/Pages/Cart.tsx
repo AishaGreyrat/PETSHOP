@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCart } from '@/Contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { handleRemove, handleClearCart } from '@/Utils/utils';
-
-import '@/Styles/AppBar.css';
+import ClearCartModal from '@/Components/Modal/ClearCartModal'; // Importamos el modal
 
 const Cart: React.FC = () => {
   const { state, dispatch } = useCart();
@@ -12,6 +11,21 @@ const Cart: React.FC = () => {
     0
   );
   const navigate = useNavigate();
+
+  const [isClearCartModalOpen, setIsClearCartModalOpen] = useState(false);
+
+  const openClearCartModal = () => {
+    setIsClearCartModalOpen(true);
+  };
+
+  const closeClearCartModal = () => {
+    setIsClearCartModalOpen(false);
+  };
+
+  const confirmClearCart = () => {
+    handleClearCart(dispatch); // Limpiar carrito
+    setIsClearCartModalOpen(false); // Cerrar el modal
+  };
 
   return (
     <div style={{ textAlign: 'center', padding: '20px' }}>
@@ -30,7 +44,7 @@ const Cart: React.FC = () => {
             Tu carrito está vacío
           </h2>
           <img
-            src="/assets/gatitriste.png" // URL relativa para imágenes en "public"
+            src="/assets/gatitriste.png"
             alt="Carrito vacío"
             style={{
               width: '200px',
@@ -86,13 +100,18 @@ const Cart: React.FC = () => {
               marginTop: '20px',
             }}
           >
-            <button onClick={() => handleClearCart(dispatch)}>
-              Limpiar carrito
-            </button>
+            <button onClick={openClearCartModal}>Limpiar carrito</button>
             <button onClick={() => navigate('/payment')}>Pagar</button>
           </div>
         </>
       )}
+
+      {/* Modal de confirmar limpieza del carrito */}
+      <ClearCartModal
+        isOpen={isClearCartModalOpen}
+        onClose={closeClearCartModal}
+        onConfirm={confirmClearCart}
+      />
     </div>
   );
 };

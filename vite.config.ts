@@ -11,4 +11,7 @@ export default defineConfig({
       { find: 'firebaseConfig', replacement: path.resolve(__dirname, 'src/path/to/firebaseConfig') },
     ],
   },
+  build: {
+    target: 'es2015',  // Garantiza la compatibilidad con navegadores.
+  },
 });

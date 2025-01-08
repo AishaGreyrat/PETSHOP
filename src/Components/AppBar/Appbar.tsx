@@ -1,3 +1,4 @@
+// src/Components/AppBar/AppBar.tsx
 import React, { useState } from "react";
 import { ShoppingCartIcon, UserIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
@@ -5,12 +6,13 @@ import SearchBar from '@/Components/SearchBar/SearchBar';
 import LoginModal from '@/Components/Modal/LoginModal';
 import RegisterModal from "../Modal/RegisterModal";
 import AddProductModal from '@/Components/Modal/AddProductModal';
-import { AppBarProps } from '@/Types/types'
+import SignOutModal from '@/Components/Modal/SignOutModal'; // Importa el modal
+import { AppBarProps } from '@/Types/types';
 import styles from './Appbar.module.css';
 import { useUser } from "@/Contexts/UserContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
-import { useAdminCheck } from "../../Roles/useAdminCheck"
+import { useAdminCheck } from "../../Roles/useAdminCheck";
 
 const AppBar: React.FC<AppBarProps> = ({
   searchTerm,
@@ -20,19 +22,20 @@ const AppBar: React.FC<AppBarProps> = ({
 }) => {
   const { user, setUser } = useUser();
   const { isAdmin } = useAdminCheck();
-  const handleSignOut = async () => {
-    await signOut(auth);
-    setUser(null);
-  };
+  
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
+  const [isSignOutModalOpen, setIsSignOutModalOpen] = useState(false); // Estado para abrir el modal de cerrar sesión
+
+  const handleSignOut = async () => {
+    await signOut(auth);
+    setUser(null);
+    setIsSignOutModalOpen(false); // Cierra el modal después de cerrar sesión
+  };
 
   return (
     <header className={styles["app-bar"]}>
-    
-
-      {/* Barra de navegación principal */}
       <div className={styles["app-bar-content"]}>
         <div className={styles["logo-section"]}>
           <Link to="/">
@@ -56,13 +59,13 @@ const AppBar: React.FC<AppBarProps> = ({
             {user ? (
               <>
                 {isAdmin && (
-                <li>
-                  <button>
-                    <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
-                      <PlusIcon className={styles.icon} />
-                    </a>
-                  </button>
-                </li>
+                  <li>
+                    <button>
+                      <a href="#" onClick={() => setIsAddProductModalOpen(true)}>
+                        <PlusIcon className={styles.icon} />
+                      </a>
+                    </button>
+                  </li>
                 )}
                 <li>
                   <button>
@@ -72,8 +75,7 @@ const AppBar: React.FC<AppBarProps> = ({
                   </button>
                 </li>
                 <li>
-                <button className="sign-out-button" onClick={handleSignOut}>Cerrar sesión</button>
-
+                  <button onClick={() => setIsSignOutModalOpen(true)}>Cerrar sesión</button>
                 </li>
               </>
             ) : (
@@ -90,11 +92,17 @@ const AppBar: React.FC<AppBarProps> = ({
 
                 </li>
               </>
-            )
-          }
+            )}
           </ul>
         </nav>
       </div>
+
+      {/* Modal de cerrar sesión */}
+      <SignOutModal
+        isOpen={isSignOutModalOpen}
+        onClose={() => setIsSignOutModalOpen(false)}
+        onConfirm={handleSignOut}
+      />
 
       <LoginModal
         isOpen={isLoginModalOpen}
