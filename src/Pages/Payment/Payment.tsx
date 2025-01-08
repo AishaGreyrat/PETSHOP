@@ -32,7 +32,7 @@ const Payment: React.FC = () => {
   // Manejo del cambio de método de pago (tarjeta de crédito / débito)
   const handleMethodChange = (method: string) => {
     setSelectedMethod(method);
-    setErrors({ cardNumber: "", cardHolder: "", expirationDate: "", cvv: "" });
+    setErrors({ cardNumber: "", cardHolder: "", expirationDate: "", cvv: "", address: "" });
   };
 
   // Manejo de los cambios en los campos del formulario
@@ -160,7 +160,7 @@ const Payment: React.FC = () => {
                 required
                 />
                 {errors.address && 
-                <p>{errors.address.message}</p>}
+                <p>{errors.address}</p>}
               </div>
             </div>
             
