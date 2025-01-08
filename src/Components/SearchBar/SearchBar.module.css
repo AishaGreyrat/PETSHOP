@@ -9,7 +9,7 @@
     padding: 0.6rem 1rem; /* Tamaño compacto */
     border-radius: 8px;
     border: 1px solid #ccc;
-    width: 300px; /* Ancho ajustado */
+    width: 100%; /* Ancho ajustado */
     font-size: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
@@ -60,3 +60,4 @@
   .dropdown-menu li:hover {
     background-color: #f0f0f0;
   }
+

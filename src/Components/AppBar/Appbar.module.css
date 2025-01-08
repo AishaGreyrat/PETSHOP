@@ -16,7 +16,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 99%;
+  width: 90%;
   max-width: 1200px;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .title-image {
-  width: 150px; /* Tamaño ajustado para que no ocupe tanto espacio */
+  width: 100px; /* Tamaño ajustado para que no ocupe tanto espacio */
   height: auto;
   margin-right: 20px;
 }
@@ -95,5 +95,82 @@ button:hover {
   background-color: #8f0360;
 }
 
-/*mobile-menu*/
-/*mobile-menu*/
+
+
+/* Estilos para el menú lateral */
+.mobile-menu {
+  display: none; /* Ocultamos el menú lateral por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #3498db;
+  color: white;
+  padding: 20px;
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu.open {
+  transform: translateX(0); /* Mostramos el menú cuando está abierto */
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.mobile-menu li {
+  margin: 10px 0;
+}
+
+.mobile-menu li button,
+.mobile-menu li a {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Estilos responsivos */
+@media (max-width: 1099px) {
+  .app-bar-content {
+    justify-content: space-between;
+  }
+
+  .navbar-icons {
+    display: none; /* Ocultamos los íconos de navegación en pantallas pequeñas */
+  }
+
+  .menu-toggle {
+    display: block; /* Mostramos el botón de menú */
+  }
+
+  .mobile-menu {
+    display: flex; /* Hacemos visible el menú lateral */
+    flex-direction: column;
+  }
+
+  .title-image {
+    width: 95px; /* Tamaño ajustado para que no ocupe tanto espacio */
+    height: auto;
+    margin-right: 20px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .mobile-menu {
+    display: none; /* Ocultamos el menú lateral en pantallas grandes */
+  }
+
+  .menu-toggle {
+    display: none; /* Ocultamos el botón de menú en pantallas grandes */
+  }
+
+  .navbar-icons {
+    display: flex; /* Mostramos los íconos de navegación */
+  }
+}

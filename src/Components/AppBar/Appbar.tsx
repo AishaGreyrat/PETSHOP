@@ -31,7 +31,7 @@ const AppBar: React.FC<AppBarProps> = ({
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isAboveMediumScreens = useMediaQuery("(min-width: 768px)");
+  const isAboveMediumScreens = useMediaQuery("(min-width: 1100px)");
 
   return (
     <header className={styles["app-bar"]}>
