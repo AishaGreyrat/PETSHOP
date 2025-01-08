@@ -25,20 +25,15 @@ h2 {
     align-items: 'center';
     justify-content: 'center';
     height: '60vh';
+    margin-top: 234px;
+    margin-left: 900px
   }
 .Carrito-vacío
 {
-    width: '200px';
-    height: '200px';
-    object-Fit: 'contain';
-    margin-Bottom: '20px';
+    
+    margin-top: 99px;
+    margin-left: 830px;
   }
-
-.empty-cart-container
-{
-text-Align: 'center';
- padding: '20px';
-}
 
 
   .product-card
@@ -75,13 +70,14 @@ text-Align: 'center';
 
   .cat 
   {
-    width: 200px;
-  height: 200px;
-  object-fit: contain; /* Ajusta la imagen sin recortarla */
-  margin-bottom: 20px;
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombras ligeras */
-  }
+    width: 530px;
+    height: 405px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    margin-left: 727px;
+}
+  
 
   /* price
   boton de remover
