@@ -62,9 +62,9 @@
 }
 
 @media (max-width: 768px) {
-  .imageCarousel {
+  .image-Carousel {
     height: 300px;
-    margin-top: 10em;
+    margin-top: 5em;
   }
 
   .carousel-Image {
@@ -73,7 +73,7 @@
     max-width: 100%;
     height: auto;
     max-height: 100%;
-    margin-top: 8em;
+    margin-top: 3em;
   }
 
   .carousel-Button {

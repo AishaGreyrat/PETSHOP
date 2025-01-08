@@ -10,7 +10,7 @@
   }
   
   .cart-summary {
-    margin-top: 65px; /* Ajusta el espacio superior */
+    margin-top: 230px; /* Ajusta el espacio superior */
     padding: 10px; /* Reduce el padding interno */
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -27,8 +27,9 @@
   }
   
   .payment-options {
-    margin-top: 20px; /* Añade espacio entre el resumen y las opciones */
-    max-width: 400px;
+    margin-top: 105px;
+    max-width: 393px;
+    margin-left: 500px;
   }
   
   .payment-direccion label {
@@ -62,3 +63,88 @@
     font-size: 12px;
   }
   
+  .payment-options-title
+  {
+    margin-top: 100px;
+  }
+
+
+  .payment-details
+  {
+    margin-top: 20px;
+  }
+  .debit-card
+  {
+    margin-top: 20px;
+  }
+
+  .btn-confirm
+  {
+    margin-top: 40px;
+    margin-left: -4px;
+  }
+
+  /* Responsivo */
+@media (max-width: 768px) {
+  .cart-summary {
+    margin-top: 20px;
+    font-size: 12px; /* Texto más pequeño en pantallas pequeñas */
+    padding: 15px;
+    max-width: 90%;
+  }
+
+  .payment-options {
+    margin-top: 20px;
+    max-width: 90%;
+  }
+
+  .payment-direccion input {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  .payment-details input {
+    font-size: 13px;
+    padding: 6px;
+  }
+
+  h2.payment {
+    font-size: 20px;
+  }
+
+  .btn-confirm {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-summary {
+    margin-top: 10px;
+    font-size: 11px; /* Texto más pequeño en dispositivos muy pequeños */
+  }
+
+  .payment-options {
+    margin-top: 10px;
+    max-width: 95%;
+  }
+
+  .payment-direccion input {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .payment-details input {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  h2.payment {
+    font-size: 18px;
+  }
+
+  .btn-confirm {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
