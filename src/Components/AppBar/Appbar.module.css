@@ -1,16 +1,17 @@
 /* Ajuste del contenido principal */
-/* Estilo de la barra superior */
+/* Estilo para la barra superior */
 .top-header {
-  background-color: #4a2c82; /* Color morado */
-  color: #ffffff; /* Texto en blanco */
+  background-color: #ffff; /* Fondo morado */
+  color: #4a2c82; /* Texto blanco */
   text-align: center; /* Centrar texto */
-  padding: 10px 0; /* Espaciado vertical */
   font-size: 14px; /* Tamaño de fuente */
   font-weight: bold; /* Texto en negrita */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  z-index: 100; /* Asegurar que esté encima de otros elementos */
-  position: sticky; /* Fijar la barra superior */
-  top: 0; /* Siempre visible al principio */
+  position: fixed; /* Fijar la barra en la parte superior */
+  top: 0; /* Posición superior */
+  left: 0; /* Asegurarse de que comience desde el borde izquierdo */
+  width: 100vw; /* Ocupar todo el ancho de la ventana */
+  z-index: 1000; /* Asegurar que esté encima de otros elementos */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
 /* Animación para la transición suave */
@@ -42,6 +43,7 @@
 }
 
 .app-bar-content {
+  margin-top: 35px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,7 +57,7 @@
 }
 
 .title-image {
-  width: 150px; /* Tamaño ajustado para que no ocupe tanto espacio */
+  width: 120px; /* Tamaño ajustado para que no ocupe tanto espacio */
   height: auto;
   margin-right: 20px;
 }

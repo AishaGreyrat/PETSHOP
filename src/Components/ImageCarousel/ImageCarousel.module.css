@@ -84,10 +84,9 @@
 }
 
 .message-carousel {
-  background-color: #4a2c82; /* Color morado */
-  color: #fff;
+  background-color: #ffff; /* Color morado */
+  color: #4a2c82;
   text-align: center;
-  padding: 10px 0;
   font-size: 14px;
   font-weight: bold;
   animation: fadeIn 1s ease-in-out;
