@@ -1,9 +1,9 @@
 import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '@/Contexts/CartContext';
-import { db } from '../../firebaseConfig';
+import { db } from '../../../firebaseConfig';
 import { doc, updateDoc, increment } from 'firebase/firestore';
-import '@/Styles/AppBar.css';
+import './Payment.module.css';
 
 const Payment: React.FC = () => {
   const { state, dispatch } = useCart();
@@ -32,7 +32,7 @@ const Payment: React.FC = () => {
   // Manejo del cambio de método de pago (tarjeta de crédito / débito)
   const handleMethodChange = (method: string) => {
     setSelectedMethod(method);
-    setErrors({ cardNumber: "", cardHolder: "", expirationDate: "", cvv: "" });
+    setErrors({ cardNumber: "", cardHolder: "", expirationDate: "", cvv: "", address: "" });
   };
 
   // Manejo de los cambios en los campos del formulario
@@ -160,11 +160,12 @@ const Payment: React.FC = () => {
                 required
                 />
                 {errors.address && 
-                <p>{errors.address.message}</p>}
+                <p>{errors.address}</p>}
               </div>
             </div>
             
-        <h3>Opciones de Pago</h3>
+            <h3 className="payment-options-title">Opciones de Pago</h3>
+
 
         {/* Selección de método de pago */}
         <div className="payment-method">
