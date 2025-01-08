@@ -2,7 +2,7 @@
   background-color: #6439FF;
   padding: 1rem 1.5rem; /* Ajuste del padding para ahorrar espacio */
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   position: fixed;
