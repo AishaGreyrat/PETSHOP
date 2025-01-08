@@ -173,6 +173,7 @@ button:hover {
   .mobile-menu {
     display: flex; /* Hacemos visible el menú lateral */
     flex-direction: column;
+    max-width: 15%;
   }
 
   .title-image {
