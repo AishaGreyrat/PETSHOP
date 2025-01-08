@@ -1,9 +1,9 @@
 import React, { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '@/Contexts/CartContext';
-import { db } from '../../firebaseConfig';
+import { db } from '../../../firebaseConfig';
 import { doc, updateDoc, increment } from 'firebase/firestore';
-import '@/Styles/AppBar.css';
+import styles from './Payment.module.css';
 
 const Payment: React.FC = () => {
   const { state, dispatch } = useCart();
@@ -18,19 +18,21 @@ const Payment: React.FC = () => {
     cardHolder: "",
     expirationDate: "",
     cvv: "",
+    address: "",
   });
   const [errors, setErrors] = useState({
     cardNumber: "",
     cardHolder: "",
     expirationDate: "",
     cvv: "",
+    address: "",
   });
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la visibilidad del modal
 
   // Manejo del cambio de método de pago (tarjeta de crédito / débito)
   const handleMethodChange = (method: string) => {
     setSelectedMethod(method);
-    setErrors({ cardNumber: "", cardHolder: "", expirationDate: "", cvv: "" });
+    setErrors({ cardNumber: "", cardHolder: "", expirationDate: "", cvv: "", address: "" });
   };
 
   // Manejo de los cambios en los campos del formulario
@@ -46,6 +48,7 @@ const Payment: React.FC = () => {
       cardHolder: "",
       expirationDate: "",
       cvv: "",
+      address: "",
     };
 
     // Validación del número de tarjeta
@@ -133,10 +136,10 @@ const Payment: React.FC = () => {
   };
 
   return (
-    <div className="payment-page">
-      <h2>Método de Pago</h2>
-      <div className="cart-summary">
-        <h3>Resumen del Carrito</h3>
+    <div className={styles["payment-page"]}>
+      <h2 className={styles.payment}>Método de Pago</h2>
+      <div className={styles["cart-summary"]}>
+        <h3 className={styles['resumen-cart']}>Resumen del Carrito</h3>
         <ul>
           {state.items.map((item) => (
             <li key={item.id}>
@@ -148,20 +151,24 @@ const Payment: React.FC = () => {
         <h4>Total: ${total.toFixed(2)}</h4>
       </div>
 
-      <form onSubmit={handleSubmit} className="payment-options">
-      <div classname="payment-direccion">
-              <div>
+      <form onSubmit={handleSubmit} className={styles["payment-options"]}>
+      <div className={styles["payment-direccion"]}>
+            <div>
               <label htmlFor="address">Dirección</label>
                 <input
                 type="text"
+                required
                 />
+                {errors.address && 
+                <p>{errors.address}</p>}
               </div>
             </div>
             
-        <h3>Opciones de Pago</h3>
+            <h3 className={styles["payment-options-title"]}>Opciones de Pago</h3>
+
 
         {/* Selección de método de pago */}
-        <div className="payment-method">
+        <div className={styles["payment-method"]}>
           <div>
             <input
               type="radio"
@@ -173,7 +180,7 @@ const Payment: React.FC = () => {
             />
             <label htmlFor="credit-card">Tarjeta de Crédito</label>
             {selectedMethod === "credit-card" && (
-              <div className="payment-details">
+              <div className={styles["payment-details"]}>
                 <input
                   type="text"
                   name="cardNumber"
@@ -184,7 +191,7 @@ const Payment: React.FC = () => {
                   required
                 />
                 {errors.cardNumber && (
-                  <p className="error">{errors.cardNumber}</p>
+                  <p className={styles.error}>{errors.cardNumber}</p>
                 )}
 
                 <input
@@ -196,7 +203,7 @@ const Payment: React.FC = () => {
                   required
                 />
                 {errors.cardHolder && (
-                  <p className="error">{errors.cardHolder}</p>
+                  <p className={styles.error}>{errors.cardHolder}</p>
                 )}
 
                 <input
@@ -209,7 +216,7 @@ const Payment: React.FC = () => {
                   required
                 />
                 {errors.expirationDate && (
-                  <p className="error">{errors.expirationDate}</p>
+                  <p className={styles.error}>{errors.expirationDate}</p>
                 )}
 
                 <input
@@ -221,7 +228,7 @@ const Payment: React.FC = () => {
                   onChange={handleChange}
                   required
                 />
-                {errors.cvv && <p className="error">{errors.cvv}</p>}
+                {errors.cvv && <p className={styles.error}>{errors.cvv}</p>}
               </div>
             )}
           </div>
@@ -237,7 +244,7 @@ const Payment: React.FC = () => {
             />
             <label htmlFor="debit-card">Tarjeta de Débito</label>
             {selectedMethod === "debit-card" && (
-              <div className="payment-details">
+              <div className={styles["payment-details"]}>
                 <input
                   type="text"
                   name="cardNumber"
@@ -248,7 +255,7 @@ const Payment: React.FC = () => {
                   required
                 />
                 {errors.cardNumber && (
-                  <p className="error">{errors.cardNumber}</p>
+                  <p className={styles.error}>{errors.cardNumber}</p>
                 )}
 
                 <input
@@ -260,7 +267,7 @@ const Payment: React.FC = () => {
                   required
                 />
                 {errors.cardHolder && (
-                  <p className="error">{errors.cardHolder}</p>
+                  <p className={styles.error}>{errors.cardHolder}</p>
                 )}
 
                 <input
@@ -273,7 +280,7 @@ const Payment: React.FC = () => {
                   required
                 />
                 {errors.expirationDate && (
-                  <p className="error">{errors.expirationDate}</p>
+                  <p className={styles.error}>{errors.expirationDate}</p>
                 )}
 
                 <input
@@ -285,21 +292,21 @@ const Payment: React.FC = () => {
                   onChange={handleChange}
                   required
                 />
-                {errors.cvv && <p className="error">{errors.cvv}</p>}
+                {errors.cvv && <p className={styles.error}>{errors.cvv}</p>}
               </div>
             )}
           </div>
         </div>
 
-        <button type="submit" className="btn-confirm">
+        <button type="submit" className={styles["btn-confirm"]}>
           Confirmar Pago
         </button>
       </form>
 
       {/* Modal de confirmación de pago */}
       {isModalOpen && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className={styles.modal}>
+          <div className={styles["modal-content"]}>
             <h3>¿Estás seguro de que deseas confirmar el pago?</h3>
             <p>Total: ${total.toFixed(2)}</p>
             <button onClick={handleConfirmPayment}>Confirmar</button>

@@ -1,55 +1,22 @@
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    padding-left: 85px;
-    padding-right: 85px;
-    margin-top: 50px;
-}
+
+/* Cuando el ancho de la pantalla sea menor a 768px (tablet o móvil) */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: 1fr; /* Una sola columna */
+    padding: 10px; /* Reduce el padding si es necesario */
+  }
+
   .product-card {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 auto; /* Centra los productos horizontalmente */
+    width: 90%; /* Ajusta el ancho de cada tarjeta */
   }
-  
-  .product-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  .product-card img {
-    width: 179px;
-    height: 209px;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border-radius: 34px;
-    background-color: #c9c9c90f;
-    border: 2px solid #77747929;
-    box-shadow: 0 2px 4px rgb(38 104 143 / 32%);
 }
+
+
   
-  .product-card h3 {
-    font-size: 1.2rem;
-    margin: 10px 0;
-  }
-  
-  .price {
-    font-size: 1.1rem;
-    color: #e94282;
-    font-weight: bold;
-  }
-  
-  .quantity {
-    font-size: 0.9rem;
-    color: #777;
-  }
-  
-  button {
+
+
+  .sign-out-button {
     border-radius: 35px;
     border: 1px solid transparent;
     padding: 0.6em 1.2em;
@@ -65,3 +32,67 @@
     background-color: #8f0360;
   }
   
+  .register-button {
+    border-radius: 35px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    background-color: #e94282;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.25s, transform 0.15s;
+  }
+  
+  button:hover {
+    background-color: #8f0360;
+  }
+
+  .add-to-cart-button{
+    border-radius: 35px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    background-color: #e94282;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.25s, transform 0.15s;
+  }
+  
+  button:hover {
+    background-color: #8f0360;
+  }
+
+  .delete-button{
+    border-radius: 35px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    background-color: #e94282;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.25s, transform 0.15s;
+  }
+  
+  button:hover {
+    background-color: #8f0360;
+  }
+
+  .edit-button{
+    border-radius: 35px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    background-color: #e94282;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.25s, transform 0.15s;
+    margin-top: 8px;
+  }
+  
+  button:hover {
+    background-color: #8f0360;
+  }

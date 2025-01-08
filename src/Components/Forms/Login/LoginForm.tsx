@@ -6,8 +6,9 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../../firebaseConfig';
 import { useNavigate } from "react-router-dom";
 import { LoginFormProps } from '@/Types/types';
+import { signInWithGoogle } from '@/Services/authService';
+import styles from "./LoginForm.module.css";
 
-import '@/Styles/AppBar.css';
 
 const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {
   const navigate = useNavigate();
@@ -17,7 +18,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {
 
   const handleLogin = async (data: LoginFormData) => {
     try {
-      // Aquí iría la lógica para iniciar sesión
       await signInWithEmailAndPassword(auth, data.email, data.password);
       alert("Inicio de sesión exitoso");
       
@@ -33,7 +33,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {
   return (
     <div>
         <h2>Iniciar Sesión</h2>
-        <form onSubmit={handleSubmit(handleLogin)} className="login-form">
+        <form onSubmit={handleSubmit(handleLogin)} className={styles["login-form"]}>
             <div>
                 <label htmlFor="email">Email</label>
                 <input
@@ -56,6 +56,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {
                 {errors.password && <span>{errors.password.message}</span>} {/* Mostrar errores */}
             </div>
             <button type="submit">Iniciar sesión</button>
+
+            <button onClick={signInWithGoogle}>Iniciar sesion con Google</button>
         </form>
     </div>
   );

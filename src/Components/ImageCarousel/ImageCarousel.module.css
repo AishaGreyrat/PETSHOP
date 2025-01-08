@@ -61,4 +61,24 @@
   right: 20px;
 }
 
+@media (max-width: 768px) {
+  .imageCarousel {
+    height: 300px;
+    margin-top: 10em;
+  }
 
+  .carousel-Image {
+    object-fit: contain;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    margin-top: 8em;
+  }
+
+  .carousel-Button {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+}

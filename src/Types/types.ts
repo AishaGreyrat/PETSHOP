@@ -45,14 +45,14 @@ export interface PaymentModalProps {
 
   /* Parte de Payment */
 
-export type PaymentFormData = {
-    address: Text;
-    cardNumber: string;
-    cardHolder: string;
-    expirationDate: string;
-    cvv: string;
+  export type PaymentFormData = {
+    address: string;         // Cambiado de Text a string
+    cardNumber: string;      // Número de tarjeta
+    cardHolder: string;      // Nombre del titular
+    expirationDate: string;  // Fecha de vencimiento en formato MM/AA
+    cvv: string;             // Código de seguridad
   };
-
+  
 /* -------------------------------------- Props Forms -------------------------------------- */
 
 

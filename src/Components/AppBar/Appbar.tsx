@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Bars3Icon, XMarkIcon, UserIcon, PlusIcon, ShoppingCartIcon } from '@heroicons/react/24/solid';
-import SearchBar from '@/Components/SearchBar/SearchBar';
-import LoginModal from '@/Components/Modal/LoginModal';
-import RegisterModal from '@/Components/Modal/RegisterModal';
-import LogoutButton from '../Forms/logout/LogoutButton';
-import AddProductModal from '@/Components/Modal/AddProductModal';
-import useMediaQuery from '@/Hooks/useMediaQuery';
-import { AppBarProps } from '@/Types/types';
-import styles from './Appbar.module.css';
+import React, { useState } from "react";
+import { ShoppingCartIcon, UserIcon, PlusIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
+import SearchBar from "@/Components/SearchBar/SearchBar";
+import LoginModal from "@/Components/Modal/LoginModal";
+import RegisterModal from "../Modal/RegisterModal";
+import AddProductModal from "@/Components/Modal/AddProductModal";
+import { AppBarProps } from "@/Types/types";
+import { useUser } from "@/Contexts/UserContext";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../firebaseConfig";
+import { useAdminCheck } from "@/Roles/useAdminCheck";
+import styles from "./Appbar.module.css";
+import useMediaQuery from "@/Hooks/useMediaQuery";
 
 const AppBar: React.FC<AppBarProps> = ({
   searchTerm,
@@ -16,90 +19,162 @@ const AppBar: React.FC<AppBarProps> = ({
   selectedCategory,
   setSelectedCategory,
 }) => {
-  const isAboveMediumScreens = useMediaQuery("(min-width: 768px)");
-  const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
+  const { user, setUser } = useUser();
+  const { isAdmin } = useAdminCheck();
+
+  const handleSignOut = async () => {
+    await signOut(auth);
+    setUser(null);
+  };
+
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
-  
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isAboveMediumScreens = useMediaQuery("(min-width: 768px)");
+
   return (
     <header className={styles["app-bar"]}>
-      {/* Header superior */}
-      <div className={styles["top-header"]}>
-        <p>Envío gratis en todo México en compras mayores a $1500.</p>
-      </div>
-
-      {/* Navbar principal */}
       <div className={styles["app-bar-content"]}>
+        {/* Logo */}
         <div className={styles["logo-section"]}>
           <Link to="/">
             <img src="/assets/daysi.png" alt="Daysi Logo" className={styles["title-image"]} />
           </Link>
         </div>
 
-      {/* Barra de búsqueda: Una sola versión con clases adaptativas */}
-      <div className={isAboveMediumScreens ? styles["search-bar"] : styles["mobile-search"]}>
+        {/* Barra de búsqueda */}
         <SearchBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
-      </div>
 
-        {/* Menú de navegación para pantallas grandes */}
-        {isAboveMediumScreens ? (
-          <nav className={styles["navbar-icons"]}>
-            <ul>
-              <li>
-                <button onClick={() => setIsLoginModalOpen(true)}>
-                  <UserIcon className={styles.icon} />
-                </button>
-              </li>
-              <li>
-                <button onClick={() => setIsAddProductModalOpen(true)}>
-                  <PlusIcon className={styles.icon} />
-                </button>
-              </li>
-              <li>
-                <Link to="/cart">
-                  <ShoppingCartIcon className={styles.icon} />
-                </Link>
-              </li>
-              <button className={styles["registrar"]} onClick={() => setIsRegisterModalOpen(true)}>
-                Regístrate
-              </button>
-              <LogoutButton />
-            </ul>
-          </nav>
-        ) : (
-          /* Botón hamburguesa para pantallas pequeñas */
+        {/* Botón de menú responsivo */}
+        {!isAboveMediumScreens && (
           <button
             className={styles["menu-toggle"]}
-            onClick={() => setIsMenuToggled(!isMenuToggled)}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <Bars3Icon className={styles["menu-icon"]} />
+            {isMenuOpen ? (
+              <XMarkIcon className={styles.icon} />
+            ) : (
+              <Bars3Icon className={styles.icon} />
+            )}
           </button>
+        )}
+
+        {/* Menú de navegación */}
+        {isAboveMediumScreens && (
+          <nav className={styles["navbar-icons"]}>
+            <ul>
+              {user ? (
+                <>
+                  {isAdmin && (
+                    <li>
+                      <button onClick={() => setIsAddProductModalOpen(true)}>
+                        <PlusIcon className={styles.icon} />
+                      </button>
+                    </li>
+                  )}
+                  <li>
+                    <Link to="/cart">
+                      <button>
+                        <ShoppingCartIcon className={styles.icon} />
+                      </button>
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      className="sign-out-button"
+                      onClick={handleSignOut}
+                    >
+                      Cerrar sesión
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <button onClick={() => setIsLoginModalOpen(true)}>
+                      <UserIcon className={styles.icon} />
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="register-button"
+                      onClick={() => setIsRegisterModalOpen(true)}
+                    >
+                      Regístrate
+                    </button>
+                  </li>
+                </>
+              )}
+            </ul>
+          </nav>
         )}
       </div>
 
       {/* Menú lateral móvil */}
-      {!isAboveMediumScreens && isMenuToggled && (
+      {!isAboveMediumScreens && isMenuOpen && (
         <div className={styles["mobile-menu"]}>
-          <div className={styles["menu-header"]}>
-            <button className={styles["menu-close"]} onClick={() => setIsMenuToggled(false)}>
-              <XMarkIcon className={styles["menu-icon"]} />
-            </button>
-          </div>
-          <div className={styles["menu-items"]}>
-            <a href="#" onClick={() => setIsLoginModalOpen(true)}>Iniciar sesión</a>
-            <a href="#" onClick={() => setIsRegisterModalOpen(true)}>Regístrate</a>
-            <Link to="/cart">Carrito</Link>
-            <a href="#" onClick={() => setIsAddProductModalOpen(true)}>Agregar producto</a>
-            <LogoutButton />
-          </div>
+          <ul>
+            {user ? (
+              <>
+                {isAdmin && (
+                  <li>
+                    <button onClick={() => setIsAddProductModalOpen(true)}>
+                      Agregar Producto
+                    </button>
+                  </li>
+                )}
+                <li>
+                  <Link to="/cart">Carrito</Link>
+                </li>
+                <li>
+                  <button className="sign-out-button" onClick={handleSignOut}>
+                    Cerrar sesión
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <button onClick={() => setIsLoginModalOpen(true)}>
+                    <UserIcon className={styles.icon} />
+                  </button>
+                  <button onClick={() => setIsLoginModalOpen(true)}>
+                    Iniciar sesión
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="register-button"
+                    onClick={() => setIsRegisterModalOpen(true)}
+                  >
+                    Regístrate
+                  </button>
+                </li>
+              </>
+            )}
+          </ul>
         </div>
       )}
+
+      {/* Modales */}
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+      />
+      <RegisterModal
+        isOpen={isRegisterModalOpen}
+        onClose={() => setIsRegisterModalOpen(false)}
+      />
+      <AddProductModal
+        isOpen={isAddProductModalOpen}
+        onClose={() => setIsAddProductModalOpen(false)}
+      />
     </header>
   );
 };
