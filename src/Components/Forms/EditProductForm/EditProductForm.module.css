@@ -1,0 +1,30 @@
+.previewImage{
+    max-width: 30%;
+    display: flex;
+    margin: auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  
+  .add-product-form label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    color: #333;
+  }
+  
+  .add-product-form input:focus {
+    outline: none;
+    border-color: #6439FF;
+    box-shadow: 0 0 5px rgba(100, 57, 255, 0.5);
+  }
+  
