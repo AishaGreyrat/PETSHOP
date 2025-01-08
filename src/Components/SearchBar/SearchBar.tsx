@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import styles from "./SearchBar.module.css";
 import useMediaQuery from "@/Hooks/useMediaQuery";
@@ -30,9 +30,27 @@ const SearchBar: React.FC<SearchBarProps> = ({
   setSelectedCategory,
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Detectar si la pantalla es mayor o igual a 768px
   const isAboveMediumScreens = useMediaQuery("(min-width: 768px)");
+
+  // Cerrar el menú desplegable al hacer clic fuera de él
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className={styles.navbarsearch}>
@@ -47,7 +65,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
       {/* Botón de categorías visible solo en pantallas grandes */}
       {isAboveMediumScreens && (
-        <div className={styles["dropdown-container"]}>
+        <div className={styles["dropdown-container"]} ref={dropdownRef}>
           <button
             className={styles["dropdown-button"]}
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
