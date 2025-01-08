@@ -2,15 +2,9 @@ import React, { useState } from 'react';
 import { useCart } from '@/Contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { handleRemove, handleClearCart } from '@/Utils/utils';
-<<<<<<< HEAD:src/Pages/Cart.tsx
 import ClearCartModal from '@/Components/Modal/ClearCartModal'; // Importamos el modal
-=======
-
-import style from "./Cart.module.css";
-import "./Cart.module.css";
-
-import '@/Styles/AppBar.css';
->>>>>>> 0be6c39261925c93c5446d6c80f23aa47ce7343c:src/Pages/Cart/Cart.tsx
+import styles from "@/Pages/Cart/Cart.module.css"; // Ajuste para usar CSS modules
+import '@/Styles/AppBar.css'; // Estilos adicionales
 
 const Cart: React.FC = () => {
   const { state, dispatch } = useCart();
@@ -37,7 +31,7 @@ const Cart: React.FC = () => {
 
   return (
     <div style={{ textAlign: 'center', padding: '20px' }}>
-      <h2 className="carritotitle">Tu carrito</h2>
+      <h2 className={styles.carritotitle || 'carritotitle'}>Tu carrito</h2>
       {state.items.length === 0 ? (
         <div
           style={{
@@ -64,11 +58,11 @@ const Cart: React.FC = () => {
         </div>
       ) : (
         <>
-          <ul className="product-grid">
+          <ul className={styles.productGrid || 'product-grid'}>
             {state.items.map((item) => (
               <li
                 key={item.id}
-                className="product-card"
+                className={styles.productCard || 'product-card'}
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
@@ -89,17 +83,22 @@ const Cart: React.FC = () => {
                 )}
                 <div>
                   <h3>{item.name}</h3>
-                  <p className="price">
+                  <p className={styles.price || 'price'}>
                     ${item.price} x {item.quantity}
                   </p>
-                  <button onClick={() => handleRemove(item.id, dispatch)}>
+                  <button
+                    className={styles.removeButton || 'remove-button'}
+                    onClick={() => handleRemove(item.id, dispatch)}
+                  >
                     Remover
                   </button>
                 </div>
               </li>
             ))}
           </ul>
-          <h3 className="total">Total: ${total.toFixed(2)}</h3>
+          <h3 className={styles.total || 'total'}>
+            Total: ${total.toFixed(2)}
+          </h3>
           <div
             style={{
               display: 'flex',
@@ -108,8 +107,18 @@ const Cart: React.FC = () => {
               marginTop: '20px',
             }}
           >
-            <button onClick={openClearCartModal}>Limpiar carrito</button>
-            <button onClick={() => navigate('/payment')}>Pagar</button>
+            <button
+              className={styles.clearCartButton || 'clear-cart-button'}
+              onClick={openClearCartModal}
+            >
+              Limpiar carrito
+            </button>
+            <button
+              className={styles.paymentButton || 'payment-button'}
+              onClick={() => navigate('/payment')}
+            >
+              Pagar
+            </button>
           </div>
         </>
       )}

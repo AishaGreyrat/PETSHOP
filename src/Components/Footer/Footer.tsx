@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import TermsModal from '../Modal/TermsModal';
 import ContactModal from '../Modal/ContactModal';
+import styles from './Footer.module.css';
+
 
 const Footer: React.FC = () => {
-<<<<<<< HEAD
+
   const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
@@ -14,7 +16,7 @@ const Footer: React.FC = () => {
   const closeContactModal = () => setIsContactModalOpen(false);
 
   return (
-    <footer className="footer">
+    <footer className={styles.footer}>
       <div className="footerContent">
         <p className="footerText">&copy; 2024 Peekeshop. Todos los derechos reservados.</p>
 
@@ -23,6 +25,7 @@ const Footer: React.FC = () => {
             <a
               href="#terms"
               aria-label="Términos de servicio"
+              className={styles['footer-link']}
               onClick={(e) => {
                 e.preventDefault();
                 openTermsModal();
@@ -35,6 +38,7 @@ const Footer: React.FC = () => {
             <a
               href="#contact"
               aria-label="Contáctanos"
+              className={styles['footer-link']}
               onClick={(e) => {
                 e.preventDefault();
                 openContactModal();
@@ -57,16 +61,7 @@ const Footer: React.FC = () => {
         isOpen={isContactModalOpen}
         onClose={closeContactModal}
       />
-=======
-  return (
-    <footer className={styles.footer}>
-      <ul>
-        <li><a href="#about" className={styles['footer-link']}>Acerca de</a></li>
-        <li><a href="#contact" className={styles['footer-link']}>Contacto</a></li>
-        <li><a href="#privacy" className={styles['footer-link']}>Privacidad</a></li>
-      </ul>
-      <p>© 2025 Mi E-commerce</p>
->>>>>>> 0be6c39261925c93c5446d6c80f23aa47ce7343c
+
     </footer>
   );
 };

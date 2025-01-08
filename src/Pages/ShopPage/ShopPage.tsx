@@ -5,15 +5,12 @@ import { Product, ShopPageProps } from '@/Types/types';
 import { db, storage } from '../../../firebaseConfig';
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-<<<<<<< HEAD:src/Pages/ShopPage.tsx
-import { useAdminCheck } from '../Roles/useAdminCheck';
+import { useAdminCheck } from '../../Roles/useAdminCheck';
 import ConfirmSaveChangesModal from '@/Components/Modal/ConfirmSaveChangesModal';
 import SaveChangesSuccessModal from '@/Components/Modal/SaveChangesSuccessModal';
 import AddToCartSuccessModal from '@/Components/Modal/AddToCartSuccessModal';
-=======
-import { useAdminCheck } from '../../Roles/useAdminCheck';  // Para verificar si el usuario es administrador
+import ConfirmDeleteModal from '@/Components/Modal/ConfirmDeleteModal';
 import './ShopPage.module.css';
->>>>>>> 0be6c39261925c93c5446d6c80f23aa47ce7343c:src/Pages/ShopPage/ShopPage.tsx
 
 const ShopPage: React.FC<ShopPageProps> = ({
   searchTerm,
@@ -24,9 +21,11 @@ const ShopPage: React.FC<ShopPageProps> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [newImage, setNewImage] = useState<File | null>(null);
-  const [isSaveChangesModalOpen, setIsSaveChangesModalOpen] = useState(false);
+  const [isConfirmSaveModalOpen, setIsConfirmSaveModalOpen] = useState(false);
   const [isSaveChangesSuccessModalOpen, setIsSaveChangesSuccessModalOpen] = useState(false);
   const [isAddToCartSuccessModalOpen, setIsAddToCartSuccessModalOpen] = useState(false);
+  const [isConfirmDeleteModalOpen, setIsConfirmDeleteModalOpen] = useState(false);
+  const [productToDelete, setProductToDelete] = useState<string | null>(null);
   const { isAdmin, loading } = useAdminCheck();
 
   useEffect(() => {
@@ -53,13 +52,8 @@ const ShopPage: React.FC<ShopPageProps> = ({
   });
 
   const addToCart = (product: Product) => {
-<<<<<<< HEAD:src/Pages/ShopPage.tsx
     dispatch({ type: "ADD_ITEM", payload: product });
     setIsAddToCartSuccessModalOpen(true); // Mostrar el modal de éxito
-=======
-    dispatch({ type: 'ADD_ITEM', payload: product });
-    alert(`${product.name} ha sido añadido al carrito`);
->>>>>>> 0be6c39261925c93c5446d6c80f23aa47ce7343c:src/Pages/ShopPage/ShopPage.tsx
   };
 
   const openEditModal = (product: Product) => {
@@ -76,8 +70,11 @@ const ShopPage: React.FC<ShopPageProps> = ({
     }
   };
 
-  const handleEdit = async () => {  // Elimina (e: React.FormEvent)
-    setIsSaveChangesModalOpen(true); // Abrir modal de confirmación de guardado
+  const handleSaveChangesClick = () => {
+    setIsConfirmSaveModalOpen(true); // Mostrar modal de confirmación
+  };
+
+  const handleConfirmSaveChanges = async () => {
     if (!selectedProduct) return;
 
     let updatedProduct = {
@@ -85,43 +82,54 @@ const ShopPage: React.FC<ShopPageProps> = ({
       image: newImage ? URL.createObjectURL(newImage) : selectedProduct.image,
     };
 
-    if (newImage) {
-      const imageRef = ref(storage, `product-images/${newImage.name}`);
-      await uploadBytes(imageRef, newImage);
-      const imageUrl = await getDownloadURL(imageRef);
-      updatedProduct = {
-        ...updatedProduct,
-        image: imageUrl,
-      };
-    }
-
     try {
+      if (newImage) {
+        const imageRef = ref(storage, `product-images/${newImage.name}`);
+        await uploadBytes(imageRef, newImage);
+        const imageUrl = await getDownloadURL(imageRef);
+        updatedProduct = {
+          ...updatedProduct,
+          image: imageUrl,
+        };
+      }
+
       const productRef = doc(db, 'products', selectedProduct.id);
       await updateDoc(productRef, updatedProduct);
+
       const updatedProducts = products.map((product) =>
         product.id === selectedProduct.id ? updatedProduct : product
       );
       setProducts(updatedProducts);
-      setIsSaveChangesModalOpen(false);
-      setIsSaveChangesSuccessModalOpen(true); // Mostrar modal de éxito al guardar cambios
+
+      setIsSaveChangesSuccessModalOpen(true); // Mostrar modal de éxito
+      setIsModalOpen(false);
+      setIsConfirmSaveModalOpen(false); // Cerrar modal de confirmación
     } catch (error) {
       console.error('Error al actualizar el producto:', error);
       alert('Hubo un error al actualizar el producto');
     }
   };
 
-  const handleDelete = async (productId: string) => {
-    if (!window.confirm('¿Estás seguro de que deseas eliminar este producto?')) return;
+  const handleDeleteClick = (productId: string) => {
+    setProductToDelete(productId);
+    setIsConfirmDeleteModalOpen(true); // Mostrar modal de confirmación de eliminación
+  };
 
-    const productRef = doc(db, 'products', productId);
+  const handleConfirmDelete = async () => {
+    if (!productToDelete) return;
+
+    const productRef = doc(db, 'products', productToDelete);
     try {
       await deleteDoc(productRef);
-      const updatedProducts = products.filter((product) => product.id !== productId);
+      const updatedProducts = products.filter((product) => product.id !== productToDelete);
       setProducts(updatedProducts);
       alert('Producto eliminado correctamente');
     } catch (error) {
       console.error('Error al eliminar el producto:', error);
       alert('Hubo un error al eliminar el producto');
+    } finally {
+      setIsConfirmDeleteModalOpen(false);
+      setProductToDelete(null);
     }
   };
 
@@ -142,11 +150,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
             <h3>{product.name}</h3>
             <p className="price">Precio: ${product.price.toFixed(2)}</p>
             <p className="quantity">Cantidad: {product.quantity}</p>
-<<<<<<< HEAD:src/Pages/ShopPage.tsx
-            <button onClick={() => addToCart(product)}>
-=======
             <button className="add-to-cart-button" onClick={() => addToCart(product)}>
->>>>>>> 0be6c39261925c93c5446d6c80f23aa47ce7343c:src/Pages/ShopPage/ShopPage.tsx
               Agregar al carrito
             </button>
             {isAdmin && (
@@ -154,10 +158,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
                 <button className="edit-button" onClick={() => openEditModal(product)}>
                   Editar
                 </button>
-                <button
-                  className="delete-button"
-                  onClick={() => handleDelete(product.id)}
-                >
+                <button className="delete-button" onClick={() => handleDeleteClick(product.id)}>
                   Eliminar
                 </button>
               </>
@@ -168,22 +169,29 @@ const ShopPage: React.FC<ShopPageProps> = ({
 
       {/* Modales */}
       <ConfirmSaveChangesModal
-        isOpen={isSaveChangesModalOpen}
-        onClose={() => setIsSaveChangesModalOpen(false)}
-        onConfirm={handleEdit} // Ahora solo invoca handleEdit sin pasar el evento
+        isOpen={isConfirmSaveModalOpen}
+        onClose={() => setIsConfirmSaveModalOpen(false)}
+        onConfirm={handleConfirmSaveChanges}
       />
       <SaveChangesSuccessModal
         isOpen={isSaveChangesSuccessModalOpen}
-        onClose={() => setIsSaveChangesSuccessModalOpen(false)} children={undefined}      />
+        onClose={() => setIsSaveChangesSuccessModalOpen(false)}
+      />
       <AddToCartSuccessModal
         isOpen={isAddToCartSuccessModalOpen}
-        onClose={() => setIsAddToCartSuccessModalOpen(false)} children={undefined}      />
+        onClose={() => setIsAddToCartSuccessModalOpen(false)}
+      />
+      <ConfirmDeleteModal
+        isOpen={isConfirmDeleteModalOpen}
+        onClose={() => setIsConfirmDeleteModalOpen(false)}
+        onConfirm={handleConfirmDelete}
+      />
 
       {isModalOpen && selectedProduct && (
         <div className="modal">
           <div className="modal-content">
             <h2>Editar Producto</h2>
-            <form onSubmit={handleEdit}>
+            <form>
               <label>
                 Nombre:
                 <input
@@ -226,18 +234,10 @@ const ShopPage: React.FC<ShopPageProps> = ({
               <label>
                 Imagen:
                 <input type="file" accept="image/*" onChange={handleImageChange} />
-                {newImage && (
-                  <div>
-                    <p>Imagen seleccionada:</p>
-                    <img
-                      src={URL.createObjectURL(newImage)}
-                      alt="Imagen seleccionada"
-                      style={{ width: '100px', height: 'auto' }}
-                    />
-                  </div>
-                )}
               </label>
-              <button type="submit">Guardar cambios</button>
+              <button type="button" onClick={handleSaveChangesClick}>
+                Guardar cambios
+              </button>
             </form>
             <button onClick={closeModal}>Cerrar</button>
           </div>
