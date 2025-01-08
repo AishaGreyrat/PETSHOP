@@ -1,23 +1,8 @@
-.CartContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 60vh;
-}            
-
-.CartEmpty {
-        width: 200px;
-        height: 200px;
-        object-Fit: contain;
-        margin-Bottom: 20px;
+.cartContainer {
+  padding: 20px;
+  text-align: center;
 }
 
-h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #555;
-}
 .carritotitle
 {
     display: 'flex';
@@ -26,62 +11,128 @@ h2 {
     justify-content: 'center';
     height: '60vh';
     margin-top: 234px;
-    margin-left: 900px
+    margin-left: 15px
   }
-.Carrito-vacío
-{
-    
-    margin-top: 99px;
-    margin-left: 830px;
-  }
-
-
-  .product-card
+  .Carrito-vacío
   {
-    display: 'flex';
-    flex-Direction: 'column';
-    align-Items: 'center';
-  }
-  .cart-item-image
-  {
-    width: '150px';
-    height: '150px';
-    margin-bottom: '10px';
-    object-fit: 'cover';
-  }
-  
-  .total{
-    display: 'flex';
-    justify-content: 'center';
-    gap: '10px';
-    margin-top: '20px';
-  }
-
-  .empty-cart-container
-  {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .cat 
-  {
-    width: 530px;
-    height: 405px;
-    object-fit: contain;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    margin-left: 727px;
+      
+      margin-top: 99px;
+      margin-left: 830px;
+    }
+.emptyCart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
 }
-  
 
-  /* price
-  boton de remover
-  limpiar carrito
-  pagar
-  */
-  /*product-grid */
+.cat 
+{
+  width: 530px;
+  height: 405px;
+  object-fit: contain;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  margin-left: 37px;
+}
+
+.productGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.productCard {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.productCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cartItemImage {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 1.1rem;
+  color: #e94282;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.removeButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #e94282;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.removeButton:hover {
+  background-color: #d23672;
+}
+
+.total {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 67px;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 67px;
+}
+
+.clearCartButton,
+.payButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.clearCartButton {
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.clearCartButton:hover {
+  background-color: #ec971f;
+}
+
+.payButton {
+  background-color: #5cb85c;
+  color: white;
+}
+
+.payButton:hover {
+  background-color: #4cae4c;
+}
