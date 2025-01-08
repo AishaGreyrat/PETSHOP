@@ -6,7 +6,7 @@ import { db, storage } from '../../../firebaseConfig';
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useAdminCheck } from '../../Roles/useAdminCheck';  // Para verificar si el usuario es administrador
-import './ShopPage.module.css';
+import styles from './ShopPage.module.css';
 
 const ShopPage: React.FC<ShopPageProps> = ({
   searchTerm,
@@ -124,22 +124,21 @@ const ShopPage: React.FC<ShopPageProps> = ({
 
   return (
     <div>
-      <div className="product-grid">
+      <div className={styles["product-grid"]}>
         {filteredProducts.map((product) => (
-          <div className="product-card" key={product.id}>
+          <div className={styles["product-card"]} key={product.id}>
             {product.image && <img src={product.image} alt={product.name} />}
             <h3>{product.name}</h3>
-            <p className="price">Precio: ${product.price.toFixed(2)}</p>
-            <p className="quantity">Cantidad: {product.quantity}</p>
-            <button className="add-to-cart-button" onClick={() => addToCart(product)}>Agregar al carrito</button>
+            <p className={styles.price}>Precio: ${product.price.toFixed(2)}</p>
+            <p className={styles.quantity}>Cantidad: {product.quantity}</p>
+            <button className={styles["add-to-cart-button"]} onClick={() => addToCart(product)}>Agregar al carrito</button>
 
 
             {/* Solo mostrar los botones de editar y eliminar si el usuario es administrador */}
             {isAdmin && (
               <>
-                <button className="edit-button" onClick={() => openEditModal(product)}>Editar</button>
-                <button className="delete-button" onClick={handleDelete}>Eliminar</button>
-
+                <button className={styles["edit-button"]} onClick={() => openEditModal(product)}>Editar</button>
+                <button className={styles["delete-button"]} onClick={handleDelete}>Eliminar</button>
               </>
             )}
           </div>

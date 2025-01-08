@@ -178,6 +178,9 @@
 }
 
 /* Estilo general para el formulario */
+/*  Formulario de productos en componentens */
+
+
 .add-product-form {
   display: flex;
   flex-direction: column;
