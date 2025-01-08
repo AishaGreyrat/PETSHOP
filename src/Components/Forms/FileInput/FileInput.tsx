@@ -1,5 +1,6 @@
 import React from 'react';
 import { uploadFile } from 'firebaseConfig';
+import styles from "./Fileinput.module.css";
 
 const FileInput: React.FC = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -9,7 +10,7 @@ const FileInput: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={styles["FileInputContent"]}>
       <input type="file" onChange={handleFileChange} />
     </div>
   );
