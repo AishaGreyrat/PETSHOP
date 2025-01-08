@@ -22,3 +22,12 @@
     box-shadow: 0 0 5px rgba(100, 57, 255, 0.5);
   }
   
+  /* Vista previa de la imagen */
+.ImagePrev {
+  width: 100px;
+  height: 100px;
+  object-fit: cover; /* Mantén la proporción */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 10px;
+}
