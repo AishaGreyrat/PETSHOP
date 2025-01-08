@@ -6,8 +6,8 @@ import { auth } from '../../../../firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { RegisterFormProps } from '@/Types/types';
 import { registerSchema, RegisterFormData } from '@/ValidationSchemas/validationSchemas';  // Correcto para importar el esquema y tipo
+import styles from "./RegisterForm.module.css";
 
-import '../../AppBar/Appbar.module.css';
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ closeModal }) => {
   const navigate = useNavigate();
@@ -35,8 +35,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ closeModal }) => {
   return (
     <div>
       <h2>Registro</h2>
-      <form onSubmit={handleSubmit(handleRegister)} className="register-form">
-        <div className="modal-body">
+      <form onSubmit={handleSubmit(handleRegister)} className={styles["register-form"]}>
+        <div className={styles["modal-body"]}>
           <label htmlFor="email">Email</label>
           <input
             id="email"
@@ -65,7 +65,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ closeModal }) => {
           {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>} {/* Mostrar errores */}
         </div>
 
-        <button className="register" type="submit">
+        <button className={styles.register} type="submit">
           Registrarse
         </button>
       </form>

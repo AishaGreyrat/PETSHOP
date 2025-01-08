@@ -7,7 +7,6 @@ import { AddProductFormProps } from '@/Types/types';
 import { AddproductSchema, ProductFormData } from '@/ValidationSchemas/validationSchemas';  
 import { useAdminCheck } from '../../../Roles/useAdminCheck'; // Hook para verificar si el usuario es administrador
 import styles from "./AddProductForm.module.css";
-import '../../AppBar/Appbar.module.css';
 
 const AddProductForm: React.FC<AddProductFormProps> = ({ closeModal }) => {
   const { isAdmin, loading } = useAdminCheck(); // Hook para verificar si el usuario es admin

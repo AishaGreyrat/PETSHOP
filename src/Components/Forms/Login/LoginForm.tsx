@@ -6,9 +6,9 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../../firebaseConfig';
 import { useNavigate } from "react-router-dom";
 import { LoginFormProps } from '@/Types/types';
-
-import '@/Styles/AppBar.css';
 import { signInWithGoogle } from '@/Services/authService';
+import styles from "./LoginForm.module.css";
+
 
 const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {
   return (
     <div>
         <h2>Iniciar Sesión</h2>
-        <form onSubmit={handleSubmit(handleLogin)} className="login-form">
+        <form onSubmit={handleSubmit(handleLogin)} className={styles["login-form"]}>
             <div>
                 <label htmlFor="email">Email</label>
                 <input
