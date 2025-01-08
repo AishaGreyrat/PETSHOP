@@ -18,7 +18,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ closeModal }) => {
 
   const handleLogin = async (data: LoginFormData) => {
     try {
-      // Aquí iría la lógica para iniciar sesión
       await signInWithEmailAndPassword(auth, data.email, data.password);
       alert("Inicio de sesión exitoso");
       

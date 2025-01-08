@@ -1,0 +1,33 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+  }
+  
+  .login-form label {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    color: #333;
+  }
+  
+  .login-form input {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .login-form input:focus {
+    outline: none;
+    border-color: #6439FF;
+    box-shadow: 0 0 5px rgba(100, 57, 255, 0.5);
+  }
+  

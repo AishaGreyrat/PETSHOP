@@ -2,7 +2,15 @@ import React, { useState } from 'react';
 import { useCart } from '@/Contexts/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { handleRemove, handleClearCart } from '@/Utils/utils';
+<<<<<<< HEAD:src/Pages/Cart.tsx
 import ClearCartModal from '@/Components/Modal/ClearCartModal'; // Importamos el modal
+=======
+
+import style from "./Cart.module.css";
+import "./Cart.module.css";
+
+import '@/Styles/AppBar.css';
+>>>>>>> 0be6c39261925c93c5446d6c80f23aa47ce7343c:src/Pages/Cart/Cart.tsx
 
 const Cart: React.FC = () => {
   const { state, dispatch } = useCart();

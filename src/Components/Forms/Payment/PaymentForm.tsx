@@ -2,21 +2,30 @@ import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { paymentSchema } from "../../../ValidationSchemas/validationSchemas";
-import { PaymentFormData } from "../../../Types/types";
+import * as z from "zod";
+
+type PaymentFormData = z.infer<typeof paymentSchema>;
 
 const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
-  const { control, handleSubmit, formState: { errors } } = useForm<PaymentFormData>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<PaymentFormData>({
     resolver: zodResolver(paymentSchema),
+    mode: "onChange",
   });
 
   const onSubmit = (data: PaymentFormData) => {
-    console.log("Datos de pago enviados", data);
-    closeModal(); // Cerrar el modal después de enviar el formulario
+    console.log("Datos de pago enviados:", data);
+    closeModal();
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h2>Formulario de Pago</h2>
+
+      {/* Campo Dirección */}
       <div>
         <label htmlFor="address">Dirección</label>
         <Controller
@@ -27,13 +36,32 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
               {...field}
               id="address"
               placeholder="Ingrese su dirección"
-              type="text"
+              aria-invalid={!!errors.address}
             />
           )}
         />
-        {errors.address && <p>{errors.address.message}</p>}
+        {errors.address && <p className="error">{errors.address.message}</p>}
       </div>
 
+      {/* Campo Nombre */}
+      <div>
+        <label htmlFor="nombre">Nombre</label>
+        <Controller
+          name="nombre"
+          control={control}
+          render={({ field }) => (
+            <input
+              {...field}
+              id="nombre"
+              placeholder="Ingrese su nombre"
+              aria-invalid={!!errors.nombre}
+            />
+          )}
+        />
+        {errors.nombre && <p className="error">{errors.nombre.message}</p>}
+      </div>
+
+      {/* Campo Número de Tarjeta */}
       <div>
         <label htmlFor="cardNumber">Número de Tarjeta</label>
         <Controller
@@ -43,14 +71,15 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
             <input
               {...field}
               id="cardNumber"
-              placeholder="Ingrese el número de la tarjeta"
-              type="text"
+              placeholder="1234 5678 9012 3456"
+              aria-invalid={!!errors.cardNumber}
             />
           )}
         />
-        {errors.cardNumber && <p>{errors.cardNumber.message}</p>}
+        {errors.cardNumber && <p className="error">{errors.cardNumber.message}</p>}
       </div>
 
+      {/* Campo Titular de la Tarjeta */}
       <div>
         <label htmlFor="cardHolder">Titular de la Tarjeta</label>
         <Controller
@@ -60,14 +89,15 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
             <input
               {...field}
               id="cardHolder"
-              placeholder="Nombre del titular"
-              type="text"
+              placeholder="Nombre completo"
+              aria-invalid={!!errors.cardHolder}
             />
           )}
         />
-        {errors.cardHolder && <p>{errors.cardHolder.message}</p>}
+        {errors.cardHolder && <p className="error">{errors.cardHolder.message}</p>}
       </div>
 
+      {/* Campo Fecha de Vencimiento */}
       <div>
         <label htmlFor="expirationDate">Fecha de Vencimiento</label>
         <Controller
@@ -78,13 +108,16 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
               {...field}
               id="expirationDate"
               placeholder="MM/AA"
-              type="text"
+              aria-invalid={!!errors.expirationDate}
             />
           )}
         />
-        {errors.expirationDate && <p>{errors.expirationDate.message}</p>}
+        {errors.expirationDate && (
+          <p className="error">{errors.expirationDate.message}</p>
+        )}
       </div>
 
+      {/* Campo CVV */}
       <div>
         <label htmlFor="cvv">CVV</label>
         <Controller
@@ -95,11 +128,12 @@ const PaymentForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
               {...field}
               id="cvv"
               placeholder="CVV"
-              type="text"
+              type="password"
+              aria-invalid={!!errors.cvv}
             />
           )}
         />
-        {errors.cvv && <p>{errors.cvv.message}</p>}
+        {errors.cvv && <p className="error">{errors.cvv.message}</p>}
       </div>
 
       <button type="submit">Confirmar Pago</button>

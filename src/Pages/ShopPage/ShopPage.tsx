@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '@/Services/productoService';
 import { useCart } from '@/Contexts/CartContext';
 import { Product, ShopPageProps } from '@/Types/types';
-import { db, storage } from '../../firebaseConfig';
+import { db, storage } from '../../../firebaseConfig';
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+<<<<<<< HEAD:src/Pages/ShopPage.tsx
 import { useAdminCheck } from '../Roles/useAdminCheck';
 import ConfirmSaveChangesModal from '@/Components/Modal/ConfirmSaveChangesModal';
 import SaveChangesSuccessModal from '@/Components/Modal/SaveChangesSuccessModal';
 import AddToCartSuccessModal from '@/Components/Modal/AddToCartSuccessModal';
+=======
+import { useAdminCheck } from '../../Roles/useAdminCheck';  // Para verificar si el usuario es administrador
+import './ShopPage.module.css';
+>>>>>>> 0be6c39261925c93c5446d6c80f23aa47ce7343c:src/Pages/ShopPage/ShopPage.tsx
 
 const ShopPage: React.FC<ShopPageProps> = ({
   searchTerm,
@@ -30,7 +35,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
         const fetchedProducts = await fetchProducts();
         setProducts(fetchedProducts);
       } catch (error) {
-        console.error("Error al obtener los productos:", error);
+        console.error('Error al obtener los productos:', error);
       }
     };
 
@@ -48,8 +53,13 @@ const ShopPage: React.FC<ShopPageProps> = ({
   });
 
   const addToCart = (product: Product) => {
+<<<<<<< HEAD:src/Pages/ShopPage.tsx
     dispatch({ type: "ADD_ITEM", payload: product });
     setIsAddToCartSuccessModalOpen(true); // Mostrar el modal de éxito
+=======
+    dispatch({ type: 'ADD_ITEM', payload: product });
+    alert(`${product.name} ha sido añadido al carrito`);
+>>>>>>> 0be6c39261925c93c5446d6c80f23aa47ce7343c:src/Pages/ShopPage/ShopPage.tsx
   };
 
   const openEditModal = (product: Product) => {
@@ -88,7 +98,6 @@ const ShopPage: React.FC<ShopPageProps> = ({
     try {
       const productRef = doc(db, 'products', selectedProduct.id);
       await updateDoc(productRef, updatedProduct);
-      console.log('Producto actualizado en Firebase');
       const updatedProducts = products.map((product) =>
         product.id === selectedProduct.id ? updatedProduct : product
       );
@@ -101,17 +110,15 @@ const ShopPage: React.FC<ShopPageProps> = ({
     }
   };
 
-  const handleDelete = async () => {
-    if (!selectedProduct) return;
+  const handleDelete = async (productId: string) => {
+    if (!window.confirm('¿Estás seguro de que deseas eliminar este producto?')) return;
 
-    const productRef = doc(db, 'products', selectedProduct.id);
+    const productRef = doc(db, 'products', productId);
     try {
       await deleteDoc(productRef);
-      const updatedProducts = products.filter(
-        (product) => product.id !== selectedProduct.id
-      );
+      const updatedProducts = products.filter((product) => product.id !== productId);
       setProducts(updatedProducts);
-      closeModal();
+      alert('Producto eliminado correctamente');
     } catch (error) {
       console.error('Error al eliminar el producto:', error);
       alert('Hubo un error al eliminar el producto');
@@ -135,14 +142,24 @@ const ShopPage: React.FC<ShopPageProps> = ({
             <h3>{product.name}</h3>
             <p className="price">Precio: ${product.price.toFixed(2)}</p>
             <p className="quantity">Cantidad: {product.quantity}</p>
+<<<<<<< HEAD:src/Pages/ShopPage.tsx
             <button onClick={() => addToCart(product)}>
+=======
+            <button className="add-to-cart-button" onClick={() => addToCart(product)}>
+>>>>>>> 0be6c39261925c93c5446d6c80f23aa47ce7343c:src/Pages/ShopPage/ShopPage.tsx
               Agregar al carrito
             </button>
             {isAdmin && (
               <>
-                <button className="edit-button" onClick={() => openEditModal(product)}>Editar</button>
-                <button className="delete-button" onClick={handleDelete}>Eliminar</button>
-
+                <button className="edit-button" onClick={() => openEditModal(product)}>
+                  Editar
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(product.id)}
+                >
+                  Eliminar
+                </button>
               </>
             )}
           </div>
@@ -208,11 +225,7 @@ const ShopPage: React.FC<ShopPageProps> = ({
               </label>
               <label>
                 Imagen:
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                />
+                <input type="file" accept="image/*" onChange={handleImageChange} />
                 {newImage && (
                   <div>
                     <p>Imagen seleccionada:</p>

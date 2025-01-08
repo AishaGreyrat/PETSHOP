@@ -1,3 +1,7 @@
+
+/*   Estilos globales body, tipografia, responsividad   */
+
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -51,10 +55,12 @@ button {
   color: white;
   margin-left: 10px;
 }
+
 button:hover {
   background-color:#8f0360 ;
   border-color: #8f0360;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
